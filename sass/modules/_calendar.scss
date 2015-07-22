@@ -1,0 +1,14 @@
+.breakpicker-container {
+    position: relative;
+    
+    input {
+        border: solid 1px red;
+    }
+
+    .breakpicker {
+        position: absolute;
+        width: 200px;
+        height: 150px;
+        background: #ccc;
+    }
+}

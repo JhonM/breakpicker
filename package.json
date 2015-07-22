@@ -1,0 +1,23 @@
+{
+  "name": "breakpicker",
+  "version": "0.0.0",
+  "description": "A datepicker based on moment.js",
+  "main": "breakpicker.js",
+  "dependencies": {
+    "express": "^4.13.0"
+  },
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "mocha": "^2.2.5",
+    "moment": "^2.10.3"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "keywords": [
+    "datepicker",
+    "package"
+  ],
+  "author": "Jhon Majoor <jhonmajoor@gmail.com> (http://blancframe.com)",
+  "license": "MIT"
+}

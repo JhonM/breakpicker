@@ -1,0 +1,22 @@
+# JS tests / coverage / bower
+node_modules/*
+npm-debug.log
+
+# sample files
+sample*.js
+
+# Mac stuff
+.DS\_Store
+
+# SASS
+.sass-cache
+
+
+# compiled css files
+public/*.css
+public/*.map
+
+# ignore Bourbon and Neat
+sass/lib/bourbon
+sass/lib/neat
+
