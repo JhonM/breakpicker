@@ -1,10 +1,14 @@
 {
   "name": "breakpicker",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A datepicker based on moment.js",
   "main": "breakpicker.js",
   "dependencies": {
     "express": "^4.13.0"
+  },
+  "repository": {
+  "type": "git",
+  "url": "git@github.com:JhonM/breakpicker.git"
   },
   "devDependencies": {
     "chai": "^3.0.0",
