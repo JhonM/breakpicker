@@ -7,8 +7,12 @@
 
     .breakpicker {
         position: absolute;
-        width: 200px;
-        height: 150px;
+        // width: 200px;
+        // height: 150px;
         background: #ccc;
     }
+}
+
+td.not-current {
+color: red;
 }
