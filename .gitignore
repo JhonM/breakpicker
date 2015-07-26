@@ -15,6 +15,7 @@ sample*.js
 # compiled css files
 public/*.css
 public/*.map
+public/compiled.js
 
 # ignore Bourbon and Neat
 sass/lib/bourbon

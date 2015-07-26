@@ -42,6 +42,27 @@ Breakpicker = {
 
     },
 
+    hide: function(elm) {
+        var nodeToBeRemoved;
+
+        var calendar = elm.parentElement.firstChild;
+
+        nodeToBeRemoved = elm.parentElement;
+
+        // remove breakpicker calendar
+        nodeToBeRemoved.removeChild(calendar);
+
+        // remove breakpicker container
+        while (nodeToBeRemoved.firstChild)
+        {
+            nodeToBeRemoved.parentNode.insertBefore(nodeToBeRemoved.firstChild, nodeToBeRemoved);
+        }
+
+        nodeToBeRemoved.parentNode.removeChild(nodeToBeRemoved);
+
+        this.setting.showed = false;
+    },
+
     buildCal: function() {
         var element = document.getElementById(this.setting.element_id)
             style = {
@@ -73,12 +94,20 @@ Breakpicker = {
     },
 
     addPickerDate: function() {
-        var testElm = document.querySelectorAll('.active-picker');
+        var activeDatesMonth = document.querySelectorAll('.active-picker'),
+            element = document.getElementById(this.setting.element_id),
+            _this = this;
 
-        for (var i = 0; i < testElm.length; i++) {
+        for (var i = 0; i < activeDatesMonth.length; i++) {
 
-            testElm[i].onclick = function(e) {
+            activeDatesMonth[i].onclick = function(e) {
                 e.preventDefault();
+                var dateData = this.getElementsByTagName('a')[0],
+                    getDate = dateData.dataset.date;
+
+                element.value = getDate;
+
+                _this.hide(element);
             }
         }
 
@@ -133,8 +162,7 @@ Breakpicker = {
             var dataDateObject = this.setMonthOptions(i);
 
             // Write the current day in the loop
-            html += '<td class="active-picker"><a data-date-' + '="{date:'+ dataDateObject.date + ', month:'+ 
-                    dataDateObject.month + ', year:'+ dataDateObject.year + '}" data-date-id="'+ i +'">' 
+            html += '<td class="active-picker"><a data-date="' + dataDateObject.day + '-' + dataDateObject.month + '-'+ dataDateObject.year + '" data-date-id="'+ i +'">' 
                     + i + '</a></td>';
 
             // If Saturday, closes the row
@@ -160,12 +188,11 @@ Breakpicker = {
 
     setMonthOptions: function(day) {
         var dateOptions = {
-            date: Moment().date(day).get('date'),
+            day: Moment().date(day).get('date'),
             month: Moment().date(day).get('month'),
             year: Moment().date(day).get('year')
         };
 
-        // debugger
         return dateOptions;
     },
 
