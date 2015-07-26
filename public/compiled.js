@@ -24,6 +24,7 @@ Breakpicker = {
 
     set: function(id) {
         var element = document.getElementById(id);
+
         if (!element) return;
 
         var _this = this;
@@ -33,18 +34,28 @@ Breakpicker = {
             _this.setting.element_id = id;
             _this.show();
         }
+    },
 
-        // element.onblur = function() {
-        //     _this.hide(element);
-        // }
+    previousMonth: function(year, month) {
+        this.hide(document.getElementById(this.setting.element_id));
+        this.showCurrentMonth(year, month);
+    },
+
+    nextMonth: function(year, month) {
+        this.hide(document.getElementById(this.setting.element_id));
+        this.showCurrentMonth(year, month)
     },
 
     show: function() {
         if (this.setting.showed) return;
 
         this.setting.showed = true;
-        this.buildCal();
+        this.buildCal('2014', '5');
 
+    },
+
+    showCurrentMonth: function(year, month) {
+        this.buildCal(year, month);
     },
 
     hide: function(elm) {
@@ -68,21 +79,30 @@ Breakpicker = {
         this.setting.showed = false;
     },
 
-    buildCal: function() {
+    buildCal: function(year, month) {
         var element = document.getElementById(this.setting.element_id)
             style = {
                 w: element.offsetWidth,
                 h: element.offsetHeight
             },
+            _this = this,
             xy = this.getPosition(element),
             breakpickerContainer = document.createElement('div'),
-            breakpicker = document.createElement('div');
+            breakpicker = document.createElement('div'),
+            prevBtn = document.createElement('a'),
+            nextBtn = document.createElement('a');
 
         breakpickerContainer.className = 'breakpicker-container';
         breakpickerContainer.style.width = style.w + 'px';
         breakpickerContainer.style.height = style.h + 'px';
 
         document.getElementsByTagName('body')[0].insertBefore(breakpickerContainer, document.getElementsByTagName('body')[0].firstChild);
+
+        prevBtn.className = 'breakpicker-prev';
+        prevBtn.innerHTML = 'Previous';
+
+        nextBtn.className = 'breakpicker-next';
+        nextBtn.innerHTML = 'Next';
 
         breakpicker.className = 'breakpicker';
         breakpicker.style.left = style.w + 'px';
@@ -92,9 +112,41 @@ Breakpicker = {
 
         this.wrapElement(breakpickerContainer, element);
 
-        breakpicker.innerHTML = this.showMonth();
+        breakpicker.innerHTML = this.showMonth(year, month);
+        
+        breakpicker.appendChild(prevBtn);
+        breakpicker.appendChild(nextBtn);
 
         this.addPickerDate();
+        
+        var previousBtn = breakpicker.getElementsByClassName('breakpicker-prev')[0],
+            nextBtn = breakpicker.getElementsByClassName('breakpicker-next')[0];
+
+        previousBtn.onclick = function(e) {
+            e.preventDefault();
+            year = Number(year);
+            month = Number(month);
+            if (month == 0) {
+                month = 11;
+                year = year - 1;
+            } else {
+                month = month - 1;
+            }
+            _this.previousMonth(year.toString(), month.toString());
+        }
+
+        nextBtn.onclick = function(e) {
+            e.preventDefault();
+            year = Number(year);
+            month = Number(month);
+            if (month == 11) {
+                month = 0;
+                year = year + 1;
+            } else {
+                month = month + 1;
+            }
+            _this.nextMonth(year.toString(), month.toString());
+        }
 
     },
 
@@ -118,10 +170,9 @@ Breakpicker = {
 
     },
 
-    showMonth: function() {
-        var year = this.currentYear(),
-            month = this.currentMonth(),
-            firstDayOfmonth = Moment(year, month).startOf('month').day(),
+    showMonth: function(year, month) {
+
+        var firstDayOfmonth = Moment(year, month).startOf('month').day(),
             lastDayOfMonth = Moment(year, month).endOf('month').date(),
             lastDayOfPreviousMonth = Moment(year, month).subtract(1, 'month').endOf('month').date();
 
@@ -198,7 +249,6 @@ Breakpicker = {
             year: Moment().date(day).get('year')
         };
 
-        // debugger
         return dateOptions;
     },
 
