@@ -1,5 +1,7 @@
-// function add(a: number, b: number) {
-//   return a + b;
-// }
+import { Breakpicker as Calendar } from "./core/calendar"
+console.log('Jhon majoosdsr')
 
-// console.log(add(2, 3), "add function");
+export const Breakpicker = Calendar;
+(window as any).Breakpicker = Breakpicker;
+
+export default Calendar;

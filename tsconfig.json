@@ -1,19 +1,22 @@
 {
   "compilerOptions": {
+    "rootDir": "src/",
+    "outDir": "dist/",
+    "declaration": true,
+    "declarationDir": "types/",
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
     "esModuleInterop": true,
-    "lib": ["ES2021", "dom"],
-    "module": "commonjs",
+    "lib": ["esnext", "dom"],
+    "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "outDir": "dist",
     "sourceMap": true,
     "strict": true,
-    "target": "ES2021",
-    "types": ["node", "mocha"],
+    "target": "esnext",
+    "types": ["node", "jest"],
     "resolveJsonModule": true
   },
-  "include": ["**/*", "../common/**/*"],
-  "exclude": ["node_modules", "**/*.test.tsx"]
+  "include": ["src/**/*ts"],
+  "exclude": ["node_modules",  "types", "**/*.test.ts"]
 }
