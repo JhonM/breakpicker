@@ -25,6 +25,7 @@
   },
   "scripts": {
     "build": "parcel build",
+    "watch": "parcel watch",
     "test": "jest",
     "test:watch": "jest --watchAll"
   },
