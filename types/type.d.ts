@@ -1,6 +1,9 @@
-declare class _Breakpicker1 {
-    name: string;
-    constructor();
+interface ICalendar {
+    selector: HTMLElement;
+}
+declare class Calendar {
+    constructor(options: ICalendar);
+    open(): void;
 }
 export const Breakpicker: typeof Calendar;
 export default Calendar;
