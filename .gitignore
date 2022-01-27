@@ -10,7 +10,9 @@ sample*.js
 
 # SASS
 .sass-cache
-
+.parcel-cache
+dist/
+types/*
 
 # compiled css files
 public/*.css

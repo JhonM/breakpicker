@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Breakpicker</title>
+
+    <script type="module" src="dist/module.js"></script>
+  </head>
+  <body>
+    <input id="input" />
+    <script>
+      window.onload = () => {
+        const bp = new Breakpicker({ selector: document.getElementById("input") });
+        console.log(bp, "breakpicker")
+      };
+    </script>
+  </body>
+</html>
