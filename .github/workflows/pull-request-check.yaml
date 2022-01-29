@@ -1,0 +1,19 @@
+name: Pull-Request Check
+
+on: [pull_request]
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: install yarn and dependencies
+        run: |
+          npm install -g yarn
+          yarn install
+      - name: run test
+        run: |
+          yarn test
