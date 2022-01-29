@@ -36,5 +36,5 @@ test("it opens the picker", () => {
   new Calendar({ ...options });
 
   fireEvent.click(input);
-  expect(screen.getByText("Calendar container")).toBeTruthy();
+  expect(screen.getByText("January 2022")).toBeTruthy();
 });

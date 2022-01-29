@@ -1,4 +1,6 @@
 import { ICalendar } from "../interfaces/calendar";
+import { getCurrentYear, getCurrentMonthName } from "../helpers/dates";
+import { compose } from "../helpers/compose-helpers";
 
 export class Calendar {
   private selector: HTMLElement;
@@ -29,7 +31,15 @@ export class Calendar {
 
   private buildCal() {
     const container = document.createElement("div");
-    container.innerHTML = "Calendar container";
+    const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
+    const template = `
+      <div>
+        <div data-calendar-type="head">
+          ${todayDate}
+        </div>
+      </div>
+    `;
+    container.innerHTML = template;
     document.body.append(container);
   }
 }
