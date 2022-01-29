@@ -10,6 +10,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16
+      - name: install yarn
         run: npm install -g yarn
       - name: run test
         run: |
