@@ -14,19 +14,30 @@ beforeEach(() => {
 
 afterEach(() => {
   const input = document.getElementById("input") as HTMLElement;
-  console.log(document.body.innerHTML, "...before");
+  const calendars = document.querySelectorAll("div[data-breakpicker-id]");
+  calendars.forEach((cal) => {
+    if (cal) {
+      cal.remove();
+    }
+  });
   document.body.removeChild(input);
-  console.log(document.body.innerHTML, "...after");
 });
 
-test("it renders unique id's", () => {
+test("it renders with an unique id", () => {
   const input = screen.getByTestId("input");
   const optionsInput = {
     selector: input,
   };
   new Calendar({ ...optionsInput });
-  const inputId = input.querySelector('[data-breakpicker-type="container"]');
-  console.log(inputId);
+
+  fireEvent.click(input);
+
+  const container = document.querySelector(
+    '[data-breakpicker-type="container"]'
+  );
+  expect(
+    container?.parentElement?.getAttribute("data-breakpicker-id")
+  ).toBeTruthy();
 });
 
 test("it renders with a selection option", () => {
@@ -40,7 +51,6 @@ test("it renders with a selection option", () => {
 });
 
 test("it opens the picker", () => {
-  // const input = document.getElementById("input") as HTMLElement;
   const input = screen.getByTestId("input");
   const options = {
     selector: input,
