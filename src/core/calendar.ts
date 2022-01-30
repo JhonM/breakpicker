@@ -1,6 +1,6 @@
 import { ICalendar } from "../interfaces/calendar";
 import { getCurrentYear, getCurrentMonthName } from "../helpers/dates";
-import { compose } from "../helpers/compose-helpers";
+import { guid } from "../helpers/random";
 
 export class Calendar {
   private selector: HTMLElement;
@@ -33,13 +33,19 @@ export class Calendar {
     const container = document.createElement("div");
     const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
     const template = `
-      <div>
+      <div data-breakpicker-type="container">
         <div data-calendar-type="head">
           ${todayDate}
         </div>
       </div>
     `;
+    container.setAttribute("data-breakpicker-id", guid());
+    container.setAttribute(
+      "data-breakpicker-open",
+      this.isOpen ? "true" : "false"
+    );
     container.innerHTML = template;
+
     document.body.append(container);
   }
 }

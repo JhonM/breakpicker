@@ -14,7 +14,19 @@ beforeEach(() => {
 
 afterEach(() => {
   const input = document.getElementById("input") as HTMLElement;
+  console.log(document.body.innerHTML, "...before");
   document.body.removeChild(input);
+  console.log(document.body.innerHTML, "...after");
+});
+
+test("it renders unique id's", () => {
+  const input = screen.getByTestId("input");
+  const optionsInput = {
+    selector: input,
+  };
+  new Calendar({ ...optionsInput });
+  const inputId = input.querySelector('[data-breakpicker-type="container"]');
+  console.log(inputId);
 });
 
 test("it renders with a selection option", () => {
