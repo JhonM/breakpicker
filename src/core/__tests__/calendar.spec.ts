@@ -3,6 +3,7 @@
  */
 import { screen } from "@testing-library/dom";
 import fireEvent from "@testing-library/user-event";
+import { getCurrentMonthName, getCurrentYear } from "../../helpers/dates";
 import { Calendar } from "../calendar";
 
 beforeEach(() => {
@@ -55,8 +56,10 @@ test("it opens the picker", () => {
   const options = {
     selector: input,
   };
+  const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
+
   new Calendar({ ...options });
 
   fireEvent.click(input);
-  expect(screen.getByText("January 2022")).toBeTruthy();
+  expect(screen.getByText(todayDate)).toBeTruthy();
 });
