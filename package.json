@@ -35,7 +35,8 @@
     "watch": "parcel watch",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "docs": "typedoc"
+    "docs": "typedoc",
+    "verify": "tsc"
   },
   "keywords": [
     "datepicker",
