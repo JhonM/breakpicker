@@ -1,3 +1,9 @@
+type SetPropsType = {
+  target: any;
+  name: string;
+  value: string;
+};
+
 export const h = (type: any, props: any, ...children: any[]) => {
   return { type, props: props || {}, children };
 };
@@ -26,23 +32,23 @@ export const changed = (node1: any, node2: any) => {
 
 export const setProps = (target: any, props: any) => {
   Object.keys(props).forEach((name) => {
-    setProp(target, name, props[name]);
+    setProp({ target, name, value: props[name] });
   });
 };
 
-export const setProp = (target: any, name: any, value: any) => {
+export const setProp = ({ target, name, value }: SetPropsType) => {
   if (isCustomProp(name)) {
     return;
   } else if (name === "className") {
     target.setAttribute("class", value);
   } else if (name === "boolean") {
-    setBooleanProp(target, name, value);
+    setBooleanProp({ target, name, value });
   } else {
     target.setAttribute(name, value);
   }
 };
 
-export const setBooleanProp = (target: any, name: any, value: any) => {
+export const setBooleanProp = ({ target, name, value }: SetPropsType) => {
   if (value) {
     target.setAttribute(name, value);
     target[name] = true;
@@ -51,6 +57,7 @@ export const setBooleanProp = (target: any, name: any, value: any) => {
   }
 };
 
+// TODO: need to make this work, now its just redundant code
 export const isCustomProp = (name: any) => {
   return false;
 };

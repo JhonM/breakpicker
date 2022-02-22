@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-import { screen } from "@testing-library/dom";
 import { h, createElement } from "../";
 import { changed, setProps, setProp, setBooleanProp } from "../vdom";
 
@@ -71,33 +70,33 @@ describe("internal functions", () => {
 
   test("setProp with classname", () => {
     const target = createElement("div") as HTMLElement;
-    setProp(target, "className", "a-classname");
+    setProp({ target, name: "className", value: "a-classname" });
     expect(target.className).toBe("a-classname");
   });
 
   test("setProp with a data-title", () => {
     const target = createElement("div") as HTMLElement;
-    setProp(target, "id", "data-title");
+    setProp({ target, name: "id", value: "data-title" });
     expect(target.id).toBe("data-title");
   });
 
   test("setProp with boolean", () => {
     const target = createElement("div") as HTMLElement;
-    setProp(target, "boolean", "true");
+    setProp({ target, name: "boolean", value: "true" });
     expect(target.attributes.item(0)?.name).toEqual("boolean");
     expect(target.attributes.item(0)?.value).toEqual("true");
   });
 
   test("setBooleanProp on true", () => {
     const target = createElement("div") as HTMLElement;
-    setBooleanProp(target, "boolean", "true");
+    setBooleanProp({ target, name: "boolean", value: "true" });
     expect(target.attributes.item(0)?.name).toEqual("boolean");
     expect(target.attributes.item(0)?.value).toEqual("true");
   });
 
   test("setBooleanProp on false", () => {
     const target = createElement("div") as any; // use a better type or different kind of test
-    setBooleanProp(target, "boolean", false);
+    setBooleanProp({ target, name: "boolean", value: "" });
     expect(target.boolean).toEqual(false);
   });
 });
