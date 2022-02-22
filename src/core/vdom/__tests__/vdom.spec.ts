@@ -3,7 +3,7 @@
  */
 import { screen } from "@testing-library/dom";
 import { h, createElement } from "../";
-import { changed, setProps, setProp } from "../vdom";
+import { changed, setProps, setProp, setBooleanProp } from "../vdom";
 
 describe("h function", () => {
   test("it renders the h function with required arguments", () => {
@@ -86,5 +86,18 @@ describe("internal functions", () => {
     setProp(target, "boolean", "true");
     expect(target.attributes.item(0)?.name).toEqual("boolean");
     expect(target.attributes.item(0)?.value).toEqual("true");
+  });
+
+  test("setBooleanProp on true", () => {
+    const target = createElement("div") as HTMLElement;
+    setBooleanProp(target, "boolean", "true");
+    expect(target.attributes.item(0)?.name).toEqual("boolean");
+    expect(target.attributes.item(0)?.value).toEqual("true");
+  });
+
+  test("setBooleanProp on false", () => {
+    const target = createElement("div") as any; // use a better type or different kind of test
+    setBooleanProp(target, "boolean", false);
+    expect(target.boolean).toEqual(false);
   });
 });
