@@ -3,6 +3,7 @@
  */
 import { screen } from "@testing-library/dom";
 import { h, createElement } from "../";
+import { changed, setProps } from "../vdom";
 
 describe("h function", () => {
   test("it renders the h function with required arguments", () => {
@@ -41,5 +42,30 @@ describe("createElement", () => {
     const textNode = createElement(node);
 
     expect(textNode.nodeType).toBe(3);
+  });
+});
+
+describe("internal functions", () => {
+  test("changed function", () => {
+    const node1 = h("div", { id: "one" }, "Node 1");
+    const node2 = h("button", { id: "two" }, "Node 2");
+
+    expect(changed(node1, node1)).toEqual(false);
+    expect(changed(node1, node2)).toEqual(true);
+    expect(changed(createElement("div"), node1)).toEqual(true);
+  });
+
+  test("setProps", () => {
+    const props = {
+      id: "foo",
+      className: "some-classname",
+      title: "some title",
+    };
+    const anchor = createElement("a") as HTMLAnchorElement;
+    setProps(anchor, props);
+
+    expect(anchor.id).toBe("foo");
+    expect(anchor.title).toBe("some title");
+    expect(anchor.className).toBe("some-classname");
   });
 });
