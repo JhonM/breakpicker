@@ -16,4 +16,5 @@ jobs:
           yarn install
       - name: run test
         run: |
+          yarn verify
           yarn test
