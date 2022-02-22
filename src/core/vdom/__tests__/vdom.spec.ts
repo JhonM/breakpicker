@@ -3,7 +3,7 @@
  */
 import { screen } from "@testing-library/dom";
 import { h, createElement } from "../";
-import { changed, setProps } from "../vdom";
+import { changed, setProps, setProp } from "../vdom";
 
 describe("h function", () => {
   test("it renders the h function with required arguments", () => {
@@ -67,5 +67,24 @@ describe("internal functions", () => {
     expect(anchor.id).toBe("foo");
     expect(anchor.title).toBe("some title");
     expect(anchor.className).toBe("some-classname");
+  });
+
+  test("setProp with classname", () => {
+    const target = createElement("div") as HTMLElement;
+    setProp(target, "className", "a-classname");
+    expect(target.className).toBe("a-classname");
+  });
+
+  test("setProp with a data-title", () => {
+    const target = createElement("div") as HTMLElement;
+    setProp(target, "id", "data-title");
+    expect(target.id).toBe("data-title");
+  });
+
+  test("setProp with boolean", () => {
+    const target = createElement("div") as HTMLElement;
+    setProp(target, "boolean", "true");
+    expect(target.attributes.item(0)?.name).toEqual("boolean");
+    expect(target.attributes.item(0)?.value).toEqual("true");
   });
 });
