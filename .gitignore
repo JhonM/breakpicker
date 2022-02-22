@@ -22,4 +22,4 @@ public/compiled.js
 # ignore Bourbon and Neat
 sass/lib/bourbon
 sass/lib/neat
-
+.vimspector.json
