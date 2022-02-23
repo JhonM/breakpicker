@@ -1,6 +1,7 @@
 import { ICalendar } from "../interfaces/calendar";
 import { getCurrentYear, getCurrentMonthName } from "../helpers/dates";
 import { guid } from "../helpers/random";
+import { h, render } from "../core/vdom";
 import { template as compiler } from "./compilers";
 import { html as hbs } from "./compilers";
 
@@ -64,6 +65,14 @@ export class Calendar {
       this.isOpen ? "true" : "false"
     );
     container.innerHTML = template;
+
+    const node = h(
+      "div",
+      { id: "id-name" },
+      h("button", { className: "button" }, "Button text")
+    );
+
+    const rendered = render(node);
 
     document.body.append(container);
   }

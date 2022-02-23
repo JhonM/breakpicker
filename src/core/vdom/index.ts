@@ -1,1 +1,1 @@
-export { h, createElement } from "./vdom";
+export { h, render } from "./vdom";

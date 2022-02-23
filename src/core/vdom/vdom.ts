@@ -8,18 +8,21 @@ export const h = (type: any, props: any, ...children: any[]) => {
   return { type, props: props || {}, children };
 };
 
-export const createElement = (node: any) => {
-  if (typeof node === "string") {
-    return document.createElement(node);
-  }
+export const render = (vnode: any) => {
+  // convert strings to text nodes
+  if (vnode.split) return document.createTextNode(vnode);
 
-  const element = document.createElement(node.type);
-  setProps(element, node.props);
-  node.children.map(createElement).forEach((element: any) => {
-    element.appendChild.bind(element);
-    return element;
-  });
-  return document.createTextNode(node.type);
+  // create DOM element with nodeName
+  let node = document.createElement(vnode.type);
+
+  // copy props onto new node
+  let props = vnode.props || {};
+  setProps(node, props);
+
+  // render and append child nodes
+  (vnode.children || []).forEach((child: any) => node.append(render(child)));
+
+  return node;
 };
 
 export const changed = (node1: any, node2: any) => {
