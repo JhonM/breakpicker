@@ -1,6 +1,7 @@
 import { ICalendar } from "../interfaces/calendar";
 import { getCurrentYear, getCurrentMonthName } from "../helpers/dates";
 import { guid } from "../helpers/random";
+import { h, render } from "../core/vdom";
 import { template as compiler } from "./compilers";
 import { html as hbs } from "./compilers";
 
@@ -32,40 +33,23 @@ export class Calendar {
   }
 
   private buildCal() {
-    // const fn = compiler(`<h1 class="hello">hello {{jhon}}</h1>`);
-    // const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
-    // const template = hbs`
-    //   <div data-breakpicker-type="container">
-    //     <div data-calendar-type="head">
-    //       ${(m: any) => m.todayDate}
-    //       ${fn({ jhon: "jhon" })}
-    //     </div>
-    //   </div>
-    // `;
-    // container.setAttribute("data-breakpicker-id", guid());
-    // container.setAttribute(
-    //   "data-breakpicker-open",
-    //   this.isOpen ? "true" : "false"
-    // );
-    // container.innerHTML = template({ todayDate });
-
-    const container = document.createElement("div");
     const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
-    const template = `
-      <div data-breakpicker-type="container">
-        <div data-calendar-type="head">
-          ${todayDate}
-        </div>
-      </div>
-    `;
-    container.setAttribute("data-breakpicker-id", guid());
-    container.setAttribute(
-      "data-breakpicker-open",
-      this.isOpen ? "true" : "false"
+    const containerNode = h(
+      "div",
+      {
+        "data-breakpicker-id": `${guid()}`,
+        "data-breakpicker-open": `${this.isOpen ? "true" : "false"}`,
+      },
+      h(
+        "div",
+        { "data-breakpicker-type": "container" },
+        h("div", { "data-calendar-type": "head" }, `${todayDate}`)
+      )
     );
-    container.innerHTML = template;
 
-    document.body.append(container);
+    const renderedView = render(containerNode);
+
+    document.body.append(renderedView);
   }
 
   private renderHeader() {

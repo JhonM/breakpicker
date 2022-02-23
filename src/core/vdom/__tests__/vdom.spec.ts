@@ -1,8 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { h, createElement } from "../";
-import { changed, setProps, setProp, setBooleanProp } from "../vdom";
+import { h, changed, render, setProps, setProp, setBooleanProp } from "../vdom";
 
 describe("h function", () => {
   test("it renders the h function with required arguments", () => {
@@ -28,19 +27,31 @@ describe("h function", () => {
   });
 });
 
-describe("createElement", () => {
+describe("render", () => {
   test("it creates a div element based on string", () => {
-    const element = createElement("div");
-    const resultDiv = document.createElement("div");
+    const element = render("div");
+    const resultDiv = document.createTextNode("div");
 
     expect(element).toEqual(resultDiv);
   });
 
   test("it should create a text node", () => {
     const node = h("div", { id: "foo" }, "Hello");
-    const textNode = createElement(node);
+    const textNode = render(node);
 
-    expect(textNode.nodeType).toBe(3);
+    expect(textNode?.nodeType).toBe(1);
+  });
+});
+
+describe("Update element", () => {
+  test("it update", () => {
+    const node = h(
+      "div",
+      { id: "id-name" },
+      h("button", { className: "button" }, "Button text")
+    );
+
+    render(node);
   });
 });
 
@@ -51,7 +62,7 @@ describe("internal functions", () => {
 
     expect(changed(node1, node1)).toEqual(false);
     expect(changed(node1, node2)).toEqual(true);
-    expect(changed(createElement("div"), node1)).toEqual(true);
+    expect(changed(render("div"), node1)).toEqual(true);
   });
 
   test("setProps", () => {
@@ -60,7 +71,7 @@ describe("internal functions", () => {
       className: "some-classname",
       title: "some title",
     };
-    const anchor = createElement("a") as HTMLAnchorElement;
+    const anchor = document.createElement("a");
     setProps(anchor, props);
 
     expect(anchor.id).toBe("foo");
@@ -69,33 +80,33 @@ describe("internal functions", () => {
   });
 
   test("setProp with classname", () => {
-    const target = createElement("div") as HTMLElement;
+    const target = document.createElement("div");
     setProp({ target, name: "className", value: "a-classname" });
     expect(target.className).toBe("a-classname");
   });
 
   test("setProp with a data-title", () => {
-    const target = createElement("div") as HTMLElement;
+    const target = document.createElement("div");
     setProp({ target, name: "id", value: "data-title" });
     expect(target.id).toBe("data-title");
   });
 
   test("setProp with boolean", () => {
-    const target = createElement("div") as HTMLElement;
+    const target = document.createElement("div");
     setProp({ target, name: "boolean", value: "true" });
     expect(target.attributes.item(0)?.name).toEqual("boolean");
     expect(target.attributes.item(0)?.value).toEqual("true");
   });
 
   test("setBooleanProp on true", () => {
-    const target = createElement("div") as HTMLElement;
+    const target = document.createElement("div");
     setBooleanProp({ target, name: "boolean", value: "true" });
     expect(target.attributes.item(0)?.name).toEqual("boolean");
     expect(target.attributes.item(0)?.value).toEqual("true");
   });
 
   test("setBooleanProp on false", () => {
-    const target = createElement("div") as any; // use a better type or different kind of test
+    const target = document.createElement("div") as any; // use a better type or different kind of test
     setBooleanProp({ target, name: "boolean", value: "" });
     expect(target.boolean).toEqual(false);
   });
