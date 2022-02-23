@@ -33,48 +33,23 @@ export class Calendar {
   }
 
   private buildCal() {
-    // const fn = compiler(`<h1 class="hello">hello {{jhon}}</h1>`);
-    // const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
-    // const template = hbs`
-    //   <div data-breakpicker-type="container">
-    //     <div data-calendar-type="head">
-    //       ${(m: any) => m.todayDate}
-    //       ${fn({ jhon: "jhon" })}
-    //     </div>
-    //   </div>
-    // `;
-    // container.setAttribute("data-breakpicker-id", guid());
-    // container.setAttribute(
-    //   "data-breakpicker-open",
-    //   this.isOpen ? "true" : "false"
-    // );
-    // container.innerHTML = template({ todayDate });
-
-    const container = document.createElement("div");
     const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
-    const template = `
-      <div data-breakpicker-type="container">
-        <div data-calendar-type="head">
-          ${todayDate}
-        </div>
-      </div>
-    `;
-    container.setAttribute("data-breakpicker-id", guid());
-    container.setAttribute(
-      "data-breakpicker-open",
-      this.isOpen ? "true" : "false"
-    );
-    container.innerHTML = template;
-
-    const node = h(
+    const containerNode = h(
       "div",
-      { id: "id-name" },
-      h("button", { className: "button" }, "Button text")
+      {
+        "data-breakpicker-id": `${guid()}`,
+        "data-breakpicker-open": `${this.isOpen ? "true" : "false"}`,
+      },
+      h(
+        "div",
+        { "data-breakpicker-type": "container" },
+        h("div", { "data-calendar-type": "head" }, `${todayDate}`)
+      )
     );
 
-    const rendered = render(node);
+    const renderedView = render(containerNode);
 
-    document.body.append(container);
+    document.body.append(renderedView);
   }
 
   private renderHeader() {
