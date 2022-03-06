@@ -48,19 +48,45 @@ export class Calendar {
     );
 
     const renderedView = render(containerNode);
+    const header = this.renderDayOfweek();
+    console.log(render(header));
 
     document.body.append(renderedView);
   }
 
-  private renderHeader() {
+  private renderDayOfweek() {
     const days = [
-      { m: "Mon" },
-      { t: "Tue" },
-      { w: "Wed" },
-      { t: "Thr" },
-      { f: "Fri" },
-      { s: "Sat" },
-      { s: "Sun" },
+      { d: "Su" },
+      { d: "Mo" },
+      { d: "Tu" },
+      { d: "We" },
+      { d: "Th" },
+      { d: "Fr" },
+      { d: "Sa" },
     ];
+    // const renderHeader = render(createHeader);
+    const toArr = days.reduce((acc: any, curr) => {
+      const day = h(
+        "div",
+        { "data-breakpicker-day": `${curr.d}` },
+        `${curr.d}`
+      );
+      // const rend = render(day);
+
+      if (Array.isArray(acc)) {
+        // acc.push(rend);
+        acc.push(h);
+      }
+
+      return acc;
+    }, []);
+
+    // toArr.map((elm: any) => renderHeader.appendChild(elm));
+
+    const toObject = Object.assign({}, toArr);
+    const toPropsCommaSep = Object.keys(toObject).forEach((e) => toObject[e]);
+    console.log(toPropsCommaSep);
+    const createHeader = h("div", { className: "some-classname" }, toObject);
+    return createHeader;
   }
 }
