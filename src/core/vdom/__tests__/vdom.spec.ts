@@ -25,6 +25,38 @@ describe("h function", () => {
 
     expect(hyper).toEqual(response);
   });
+
+  test("it renders nested functions as children of h function", () => {
+    const multipleHypers = [
+      h("div", { className: "some-classname" }, "Title in div"),
+      h("div", { className: "some-other-classname" }, "Some other title"),
+    ];
+    const hyper = h(
+      "div",
+      { className: "some-classname" },
+      "Title in div",
+      ...multipleHypers
+    );
+    const response = {
+      type: "div",
+      props: { className: "some-classname" },
+      children: [
+        "Title in div",
+        {
+          children: ["Title in div"],
+          props: { className: "some-classname" },
+          type: "div",
+        },
+        {
+          children: ["Some other title"],
+          props: { className: "some-other-classname" },
+          type: "div",
+        },
+      ],
+    };
+
+    expect(hyper).toEqual(response);
+  });
 });
 
 describe("render", () => {
