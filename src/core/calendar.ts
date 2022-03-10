@@ -34,6 +34,7 @@ export class Calendar {
 
   private buildCal() {
     const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
+    const header = this.renderDayOfweek();
     const containerNode = h(
       "div",
       {
@@ -43,14 +44,12 @@ export class Calendar {
       h(
         "div",
         { "data-breakpicker-type": "container" },
-        h("div", { "data-calendar-type": "head" }, `${todayDate}`)
+        h("div", { "data-calendar-type": "head" }, `${todayDate}`),
+        h("div", { "data-calendar-type": "body" }, header)
       )
     );
 
     const renderedView = render(containerNode);
-    const header = this.renderDayOfweek();
-    console.log(render(header));
-
     document.body.append(renderedView);
   }
 
@@ -77,7 +76,11 @@ export class Calendar {
 
       return acc;
     }, []);
-    const createHeader = h("div", { className: "some-classname" }, ...toArr);
+    const createHeader = h(
+      "div",
+      { "data-calendar-type": "body-header" },
+      ...toArr
+    );
 
     return createHeader;
   }

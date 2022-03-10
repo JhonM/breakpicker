@@ -63,3 +63,22 @@ test("it opens the picker", () => {
   fireEvent.click(input);
   expect(screen.getByText(todayDate)).toBeTruthy();
 });
+
+test("it shows the days of the week", () => {
+  const input = screen.getByTestId("input");
+  const options = {
+    selector: input,
+  };
+  const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
+  new Calendar({ ...options });
+  fireEvent.click(input);
+
+  expect(screen.getByText("Su").dataset.breakpickerDay).toBe(days[0]);
+  expect(screen.getByText("Mo").dataset.breakpickerDay).toBe(days[1]);
+  expect(screen.getByText("Tu").dataset.breakpickerDay).toBe(days[2]);
+  expect(screen.getByText("We").dataset.breakpickerDay).toBe(days[3]);
+  expect(screen.getByText("Th").dataset.breakpickerDay).toBe(days[4]);
+  expect(screen.getByText("Fr").dataset.breakpickerDay).toBe(days[5]);
+  expect(screen.getByText("Sa").dataset.breakpickerDay).toBe(days[6]);
+});
