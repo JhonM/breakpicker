@@ -87,3 +87,21 @@ test("it shows the days of the week", () => {
     "Sa",
   ]);
 });
+
+// test("it renders the days of passed in month", () => {
+//   const input = screen.getByTestId("input");
+//   const options = {
+//     selector: input,
+//   };
+
+//   new Calendar({ ...options });
+//   fireEvent.click(input);
+
+//   const renderedMonthDays = screen.getAllByRole("breakpicker-day");
+
+//   expect(renderedMonthDays.map((day) => day.textContent)).toEqual([
+//     "1",
+//     "2",
+//     "3",
+//   ]);
+// });
