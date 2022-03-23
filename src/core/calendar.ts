@@ -66,7 +66,7 @@ export class Calendar {
     const toArr = days.reduce((acc: any, curr) => {
       const day = h(
         "div",
-        { "data-breakpicker-day": `${curr.d}`, role: "breakpicker-day" },
+        { "data-breakpicker-day": `${curr.d}`, role: "breakpicker-week-day" },
         `${curr.d}`
       );
 

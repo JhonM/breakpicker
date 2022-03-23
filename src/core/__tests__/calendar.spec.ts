@@ -74,7 +74,7 @@ test("it shows the days of the week", () => {
   new Calendar({ ...options });
   fireEvent.click(input);
 
-  const renderedDays = screen.getAllByRole("breakpicker-day");
+  const renderedDays = screen.getAllByRole("breakpicker-week-day");
 
   expect(renderedDays.length).toEqual(days.length);
   expect(renderedDays.map((day) => day.textContent)).toEqual([
