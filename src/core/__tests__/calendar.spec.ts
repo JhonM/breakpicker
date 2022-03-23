@@ -74,11 +74,16 @@ test("it shows the days of the week", () => {
   new Calendar({ ...options });
   fireEvent.click(input);
 
-  expect(screen.getByText("Su").dataset.breakpickerDay).toBe(days[0]);
-  expect(screen.getByText("Mo").dataset.breakpickerDay).toBe(days[1]);
-  expect(screen.getByText("Tu").dataset.breakpickerDay).toBe(days[2]);
-  expect(screen.getByText("We").dataset.breakpickerDay).toBe(days[3]);
-  expect(screen.getByText("Th").dataset.breakpickerDay).toBe(days[4]);
-  expect(screen.getByText("Fr").dataset.breakpickerDay).toBe(days[5]);
-  expect(screen.getByText("Sa").dataset.breakpickerDay).toBe(days[6]);
+  const renderedDays = screen.getAllByRole("breakpicker-day");
+
+  expect(renderedDays.length).toEqual(days.length);
+  expect(renderedDays.map((day) => day.textContent)).toEqual([
+    "Su",
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa",
+  ]);
 });
