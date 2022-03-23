@@ -8,7 +8,7 @@ import {
 } from "../dates";
 
 describe("Get dates", () => {
-  const month = [
+  const months = [
     "January",
     "February",
     "March",
@@ -37,7 +37,7 @@ describe("Get dates", () => {
 
   test("getCurrentMonthName", () => {
     const currentMonth = new Date();
-    const expected = month[currentMonth.getMonth()];
+    const expected = months[currentMonth.getMonth()];
 
     expect(getCurrentMonthName).toBe(expected);
   });
@@ -58,7 +58,7 @@ describe("Get dates", () => {
 
   test("getMonthName", () => {
     const date = new Date("2016/02/16");
-    const expected = month[date.getMonth()];
+    const expected = months[date.getMonth()];
 
     expect(getMonthName(date)).toBe(expected);
   });
