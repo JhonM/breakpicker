@@ -1,9 +1,14 @@
 import { ICalendar } from "../interfaces/calendar";
-import { getCurrentYear, getCurrentMonthName } from "../helpers/dates";
+import {
+  getCurrentYear,
+  getCurrentMonthName,
+  getMonthDetails,
+} from "../helpers/dates";
 import { guid } from "../helpers/random";
 import { h, render } from "../core/vdom";
 import { template as compiler } from "./compilers";
 import { html as hbs } from "./compilers";
+import { view, initModel, update, simpleCounter } from "../simple-counter";
 
 export class Calendar {
   private selector: HTMLElement;
@@ -35,6 +40,7 @@ export class Calendar {
   private buildCal() {
     const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
     const header = this.renderDayOfweek();
+    const month = this.renderMonth(new Date());
     const containerNode = h(
       "div",
       {
@@ -45,11 +51,14 @@ export class Calendar {
         "div",
         { "data-breakpicker-type": "container" },
         h("div", { "data-calendar-type": "head" }, `${todayDate}`),
-        h("div", { "data-calendar-type": "body" }, header)
+        h("div", { "data-calendar-type": "body" }, month)
       )
     );
 
     const renderedView = render(containerNode);
+    const cal = simpleCounter(initModel, update, view, renderedView);
+
+    console.log(cal);
     document.body.append(renderedView);
   }
 
@@ -83,5 +92,14 @@ export class Calendar {
     );
 
     return createHeader;
+  }
+
+  private renderMonth(date: Date) {
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const monthDetails = getMonthDetails(month, year);
+
+    return monthDetails;
+    // debugger;
   }
 }
