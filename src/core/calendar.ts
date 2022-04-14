@@ -40,7 +40,7 @@ export class Calendar {
   private buildCal() {
     const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
     const header = this.renderDayOfweek();
-    const month = this.renderMonth(new Date());
+    // const month = this.renderMonth(new Date());
     const containerNode = h(
       "div",
       {
@@ -51,7 +51,7 @@ export class Calendar {
         "div",
         { "data-breakpicker-type": "container" },
         h("div", { "data-calendar-type": "head" }, `${todayDate}`),
-        h("div", { "data-calendar-type": "body" }, month)
+        h("div", { "data-calendar-type": "body" }, header)
       )
     );
 
