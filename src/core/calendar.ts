@@ -39,11 +39,16 @@ export class Calendar {
   }
 
   private buildCal() {
+    const CalID = `trigger-${guid()}`;
     const selector = this.selector;
+    selector.dataset.triggerId = CalID;
+
     const createSelector = h("div", {
       className: "selector-container",
+      "data-trigger-content": CalID,
     });
     const selectorContainer = render(createSelector);
+
     selector.parentNode?.insertBefore(selectorContainer, selector);
 
     app(initModel, update, view, selectorContainer);
