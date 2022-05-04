@@ -1,13 +1,7 @@
 import { ICalendar } from "../interfaces/calendar";
-import {
-  getCurrentYear,
-  getCurrentMonthName,
-  getMonthDetails,
-} from "../helpers/dates";
+import { getMonthDetails } from "../helpers/dates";
 import { guid } from "../helpers/random";
 import { h, render } from "../core/vdom";
-import { template as compiler } from "./compilers";
-import { html as hbs } from "./compilers";
 import initModel from "./calendar/Model";
 import update from "./calendar/Update";
 import view from "./calendar/View";
@@ -52,8 +46,6 @@ export class Calendar {
     selector.parentNode?.insertBefore(selectorContainer, selector);
 
     app(initModel, update, view, selectorContainer);
-
-    // const month = this.renderMonth(new Date());
   }
 
   private renderMonth(date: Date) {
@@ -62,6 +54,5 @@ export class Calendar {
     const monthDetails = getMonthDetails(month, year);
 
     return monthDetails;
-    // debugger;
   }
 }

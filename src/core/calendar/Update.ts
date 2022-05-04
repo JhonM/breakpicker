@@ -1,10 +1,17 @@
-import type { Msgs, Model } from "../../types";
+import type { ActionType, Model } from "../../types";
+import { MSGS } from "../../types";
 
-export default function update(msg: Msgs, model: Model): any {
-  switch (msg) {
-    case "INCREMENT":
-      return model;
-    case "DECREMENT":
-      return model;
+export function isOpenMsg(isOpen: boolean) {
+  return {
+    type: MSGS.IS_OPEN,
+    isOpen,
+  };
+}
+
+export default function update(msg: ActionType, model: Model): any {
+  switch (msg.type) {
+    case MSGS.IS_OPEN:
+      const { isOpen } = msg;
+      return { ...model, isOpen };
   }
 }

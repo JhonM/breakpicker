@@ -2,12 +2,13 @@ import { guid } from "../../helpers/random";
 import {
   getCurrentYear,
   getCurrentMonthName,
-  getMonthDetails,
+  // getMonthDetails,
 } from "../../helpers/dates";
 import { h } from "../../core/vdom";
-import type { Msgs, Model } from "../../types";
+import type { Model, ActionType } from "../../types";
+import { isOpenMsg } from "./Update";
 
-type DispatchType = (action: Msgs) => void;
+type DispatchType = (action: ActionType) => void;
 
 function daysOfWeek() {
   const days = [
@@ -41,20 +42,46 @@ function daysOfWeek() {
   return createHeader;
 }
 
-export default function view(dispatch: DispatchType, model: Model) {
-  const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
+function calendarView(dispatch: DispatchType, model: Model) {
+  if (model.isOpen) {
+    const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
+    return h(
+      "div",
+      {
+        "data-breakpicker-id": `${guid()}`,
+        "data-breakpicker-open": `${model.isOpen ? "true" : "false"}`,
+      },
+      h(
+        "div",
+        { "data-breakpicker-type": "container" },
+        h("div", { "data-calendar-type": "head" }, `${todayDate}`),
+        h("div", { "data-calendar-type": "body" }, daysOfWeek())
+      )
+    );
+  }
+
   return h(
     "div",
-    {
-      "data-breakpicker-id": `${guid()}`,
-      "data-breakpicker-open": `${model.isOpen ? "true" : "false"}`,
-    },
+    {},
     h(
-      "div",
-      { "data-breakpicker-type": "container" },
-      h("div", { "data-calendar-type": "head" }, `${todayDate}`),
-      h("div", { "data-calendar-type": "body" }, daysOfWeek())
+      "button",
+      {
+        "data-calendar-type": "button",
+        onclick: () => dispatch(isOpenMsg(true)),
+      },
+      "Show Calendar"
     )
+  );
+}
+
+export default function view(dispatch: DispatchType, model: Model) {
+  return h(
+    "div",
+    {},
+    ...[
+      calendarView(dispatch, model),
+      h("pre", {}, JSON.stringify(model, null, 2)),
+    ]
   );
   // return h(
   //   "div",

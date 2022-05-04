@@ -1,12 +1,12 @@
 import { render } from "../../core/vdom";
-import type { Msgs, Model } from "../../types";
+import type { ActionType, Model } from "../../types";
 
-type DispatchType = (action: Msgs) => void;
+type DispatchType = (action: ActionType) => void;
 
 // Handling all inpure state here
 export default function App(
-  initModel: any,
-  update: (msg: Msgs, model: Model) => any,
+  initModel: Model,
+  update: (msg: any, model: Model) => any,
   view: (dispatch: DispatchType, model: Model) => any,
   node: HTMLElement | null
 ) {
@@ -14,7 +14,7 @@ export default function App(
   let currentView = render(view(dispatch, model));
   node?.appendChild(currentView);
 
-  function dispatch(msg: Msgs) {
+  function dispatch(msg: any) {
     model = update(msg, model);
     const updatedView = render(view(dispatch, model));
     node?.replaceChild(updatedView, currentView);
