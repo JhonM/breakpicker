@@ -51,7 +51,3 @@ export function simpleCounter(
     currentView = updatedView;
   }
 }
-
-// const rootNode = document.getElementById("app");
-
-// simpleCounter(initModel, update, view, rootNode);

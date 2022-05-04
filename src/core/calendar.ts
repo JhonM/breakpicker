@@ -8,17 +8,19 @@ import { guid } from "../helpers/random";
 import { h, render } from "../core/vdom";
 import { template as compiler } from "./compilers";
 import { html as hbs } from "./compilers";
-import { view, initModel, update, simpleCounter } from "../simple-counter";
+import initModel from "./calendar/Model";
+import update from "./calendar/Update";
+import view from "./calendar/View";
+import app from "../core/calendar/App";
 
 export class Calendar {
   private selector: HTMLElement;
-  private isOpen: boolean;
 
   constructor(options: ICalendar) {
     const { selector } = options;
     this.selector = selector;
-    this.isOpen = false;
-    this.open();
+    // this.open();
+    this.show();
   }
 
   public open() {
@@ -33,36 +35,31 @@ export class Calendar {
   }
 
   private show() {
-    this.isOpen = true;
     this.buildCal();
   }
 
   private buildCal() {
-    const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
-    const header = this.renderDayOfweek();
+    // const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
+    // const header = this.renderDayOfweek();
     // const month = this.renderMonth(new Date());
-    const containerNode = h(
-      "div",
-      {
-        "data-breakpicker-id": `${guid()}`,
-        "data-breakpicker-open": `${this.isOpen ? "true" : "false"}`,
-      },
-      h(
-        "div",
-        { "data-breakpicker-type": "container" },
-        h("div", { "data-calendar-type": "head" }, `${todayDate}`),
-        h("div", { "data-calendar-type": "body" }, header)
-      )
-    );
+    // const containerNode = h(
+    //   "div",
+    //   {
+    //     "data-breakpicker-id": `${guid()}`,
+    //     "data-breakpicker-open": `${this.isOpen ? "true" : "false"}`,
+    //   },
+    //   h(
+    //     "div",
+    //     { "data-breakpicker-type": "container" },
+    //     h("div", { "data-calendar-type": "head" }, `${todayDate}`),
+    //     h("div", { "data-calendar-type": "body" }, header)
+    //   )
+    // );
 
-    const renderedView = render(containerNode);
-    const app = document.getElementsByTagName("body")[0];
-    console.log(renderedView);
-    console.log(app);
-    const cal = simpleCounter(initModel, update, view, app);
-
-    console.log(cal);
-    // document.body.append(renderedView);
+    // const renderedView = render(containerNode);
+    // console.log(renderedView);
+    const body = document.getElementsByTagName("body")[0];
+    app(initModel, update, view, body);
   }
 
   private renderDayOfweek() {
