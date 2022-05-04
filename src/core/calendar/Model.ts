@@ -1,6 +1,8 @@
-const initModel = {
+import type { Model } from "../../types";
+
+const initModel: Model = {
   isOpen: false,
-  curentDate: new Date(),
+  currentDate: new Date(),
 };
 
 export default initModel;

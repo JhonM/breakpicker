@@ -39,59 +39,11 @@ export class Calendar {
   }
 
   private buildCal() {
-    // const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
-    // const header = this.renderDayOfweek();
-    // const month = this.renderMonth(new Date());
-    // const containerNode = h(
-    //   "div",
-    //   {
-    //     "data-breakpicker-id": `${guid()}`,
-    //     "data-breakpicker-open": `${this.isOpen ? "true" : "false"}`,
-    //   },
-    //   h(
-    //     "div",
-    //     { "data-breakpicker-type": "container" },
-    //     h("div", { "data-calendar-type": "head" }, `${todayDate}`),
-    //     h("div", { "data-calendar-type": "body" }, header)
-    //   )
-    // );
-
-    // const renderedView = render(containerNode);
-    // console.log(renderedView);
     const body = document.getElementsByTagName("body")[0];
+    const selector = this.selector;
     app(initModel, update, view, body);
-  }
 
-  private renderDayOfweek() {
-    const days = [
-      { d: "Su" },
-      { d: "Mo" },
-      { d: "Tu" },
-      { d: "We" },
-      { d: "Th" },
-      { d: "Fr" },
-      { d: "Sa" },
-    ];
-    const toArr = days.reduce((acc: any, curr) => {
-      const day = h(
-        "div",
-        { "data-breakpicker-day": `${curr.d}`, role: "breakpicker-week-day" },
-        `${curr.d}`
-      );
-
-      if (Array.isArray(acc)) {
-        acc.push(day);
-      }
-
-      return acc;
-    }, []);
-    const createHeader = h(
-      "div",
-      { "data-calendar-type": "body-header" },
-      ...toArr
-    );
-
-    return createHeader;
+    // const month = this.renderMonth(new Date());
   }
 
   private renderMonth(date: Date) {

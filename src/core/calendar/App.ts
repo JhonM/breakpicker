@@ -1,12 +1,13 @@
 import { render } from "../../core/vdom";
-import type { Msgs } from "../../types";
+import type { Msgs, Model } from "../../types";
 
 type DispatchType = (action: Msgs) => void;
 
+// Handling all inpure state here
 export default function App(
   initModel: any,
-  update: (msg: Msgs, model: number) => number,
-  view: (dispatch: DispatchType, model: number) => any,
+  update: (msg: Msgs, model: Model) => any,
+  view: (dispatch: DispatchType, model: Model) => any,
   node: HTMLElement | null
 ) {
   let model = initModel;
