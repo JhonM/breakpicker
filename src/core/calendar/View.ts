@@ -1,12 +1,8 @@
 import { guid } from "../../helpers/random";
-import {
-  getCurrentYear,
-  getCurrentMonthName,
-  // getMonthDetails,
-} from "../../helpers/dates";
+import { getCurrentYear, getCurrentMonthName } from "../../helpers/dates";
 import { h } from "../../core/vdom";
 import type { Model, ActionType } from "../../types";
-import { isOpenMsg } from "./Update";
+import { isOpenMsg, isCloseMsg } from "./Update";
 
 type DispatchType = (action: ActionType) => void;
 
@@ -43,6 +39,14 @@ function daysOfWeek() {
 }
 
 function calendarView(dispatch: DispatchType, model: Model) {
+  // TODO: make sure to keep state of an unique id in the model
+  const sc = document.querySelector(".selector-container") as HTMLElement;
+  const btn = document.querySelector(
+    `[data-trigger-id="${sc.dataset.triggerContent}"]`
+  ) as HTMLInputElement;
+
+  btn.onfocus = () => dispatch(isOpenMsg(true));
+
   if (model.isOpen) {
     const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
     return h(
@@ -54,24 +58,14 @@ function calendarView(dispatch: DispatchType, model: Model) {
       h(
         "div",
         { "data-breakpicker-type": "container" },
+        h("button", { onclick: () => dispatch(isCloseMsg(false)) }, "Close"),
         h("div", { "data-calendar-type": "head" }, `${todayDate}`),
         h("div", { "data-calendar-type": "body" }, daysOfWeek())
       )
     );
   }
 
-  return h(
-    "div",
-    {},
-    h(
-      "button",
-      {
-        "data-calendar-type": "button",
-        onclick: () => dispatch(isOpenMsg(true)),
-      },
-      "Show Calendar"
-    )
-  );
+  return h("div", {}, "Calendar closed");
 }
 
 export default function view(dispatch: DispatchType, model: Model) {
@@ -83,22 +77,5 @@ export default function view(dispatch: DispatchType, model: Model) {
       h("pre", {}, JSON.stringify(model, null, 2)),
     ]
   );
-  // return h(
-  //   "div",
-  //   { className: "heading" },
-  //   ...[
-  //     h(
-  //       "button",
-  //       { className: "increase-class", onclick: () => dispatch("INCREMENT") },
-  //       "+"
-  //     ),
-  //     h(
-  //       "button",
-  //       { className: "decrease-class", onclick: () => dispatch("DECREMENT") },
-  //       "-"
-  //     ),
   //     h("div", { className: "some-pname" }, model.currentDate.toString()),
-  //     h("pre", {}, JSON.stringify(model, null, 2)),
-  //   ]
-  // );
 }

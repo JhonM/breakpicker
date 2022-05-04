@@ -13,26 +13,14 @@ export class Calendar {
   constructor(options: ICalendar) {
     const { selector } = options;
     this.selector = selector;
-    // this.open();
-    this.show();
+    this.init();
   }
 
-  public open() {
+  private init() {
     if (!this.selector) {
       throw new Error("Please select provide a selecor");
     }
 
-    this.selector.onfocus = (e) => {
-      e.preventDefault();
-      this.show();
-    };
-  }
-
-  private show() {
-    this.buildCal();
-  }
-
-  private buildCal() {
     const CalID = `trigger-${guid()}`;
     const selector = this.selector;
     selector.dataset.triggerId = CalID;
