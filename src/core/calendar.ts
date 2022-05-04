@@ -56,10 +56,13 @@ export class Calendar {
     );
 
     const renderedView = render(containerNode);
-    const cal = simpleCounter(initModel, update, view, renderedView);
+    const app = document.getElementsByTagName("body")[0];
+    console.log(renderedView);
+    console.log(app);
+    const cal = simpleCounter(initModel, update, view, app);
 
     console.log(cal);
-    document.body.append(renderedView);
+    // document.body.append(renderedView);
   }
 
   private renderDayOfweek() {
