@@ -39,9 +39,14 @@ export class Calendar {
   }
 
   private buildCal() {
-    const body = document.getElementsByTagName("body")[0];
     const selector = this.selector;
-    app(initModel, update, view, body);
+    const createSelector = h("div", {
+      className: "selector-container",
+    });
+    const selectorContainer = render(createSelector);
+    selector.parentNode?.insertBefore(selectorContainer, selector);
+
+    app(initModel, update, view, selectorContainer);
 
     // const month = this.renderMonth(new Date());
   }
