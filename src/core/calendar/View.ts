@@ -65,7 +65,7 @@ function calendarView(dispatch: DispatchType, model: Model) {
     );
   }
 
-  return h("div", {}, "Calendar closed");
+  return h("div", {}, "");
 }
 
 export default function view(dispatch: DispatchType, model: Model) {

@@ -18,7 +18,10 @@ export class Calendar {
 
   private init() {
     if (!this.selector) {
-      throw new Error("Please select provide a selecor");
+      throw new Error(
+        "Please provide a (valid) selector the current selector is: " +
+          this.selector
+      );
     }
 
     const CalID = `trigger-${guid()}`;
