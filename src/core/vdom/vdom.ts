@@ -1,7 +1,7 @@
 type SetPropsType = {
   target: any;
   name: string;
-  value: string;
+  value: any;
 };
 
 export const h = (type: any, props: any, ...children: any[]) => {
@@ -46,6 +46,8 @@ export const setProp = ({ target, name, value }: SetPropsType) => {
     target.setAttribute("class", value);
   } else if (name === "boolean") {
     setBooleanProp({ target, name, value });
+  } else if (name === "onclick") {
+    target.addEventListener("click", () => value());
   } else {
     target.setAttribute(name, value);
   }

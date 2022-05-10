@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { screen } from "@testing-library/dom";
+import { screen, waitFor, getByTestId } from "@testing-library/dom";
 import fireEvent from "@testing-library/user-event";
 import { getCurrentMonthName, getCurrentYear } from "../../helpers/dates";
 import { Calendar } from "../calendar";
@@ -15,7 +15,7 @@ beforeEach(() => {
 
 afterEach(() => {
   const input = document.getElementById("input") as HTMLElement;
-  const calendars = document.querySelectorAll("div[data-breakpicker-id]");
+  const calendars = document.querySelectorAll(".selector-container");
   calendars.forEach((cal) => {
     if (cal) {
       cal.remove();
@@ -51,7 +51,7 @@ test("it renders with a selection option", () => {
   expect(BP).toMatchObject(options);
 });
 
-test("it opens the picker", () => {
+test("it opens the picker", async () => {
   const input = screen.getByTestId("input");
   const options = {
     selector: input,
@@ -60,7 +60,8 @@ test("it opens the picker", () => {
 
   new Calendar({ ...options });
 
-  fireEvent.click(input);
+  input.focus();
+
   expect(screen.getByText(todayDate)).toBeTruthy();
 });
 
@@ -88,20 +89,20 @@ test("it shows the days of the week", () => {
   ]);
 });
 
-// test("it renders the days of passed in month", () => {
-//   const input = screen.getByTestId("input");
-//   const options = {
-//     selector: input,
-//   };
+test.skip("it renders the days of passed in month", () => {
+  const input = screen.getByTestId("input");
+  const options = {
+    selector: input,
+  };
 
-//   new Calendar({ ...options });
-//   fireEvent.click(input);
+  new Calendar({ ...options });
+  fireEvent.click(input);
 
-//   const renderedMonthDays = screen.getAllByRole("breakpicker-day");
+  const renderedMonthDays = screen.getAllByRole("breakpicker-day");
 
-//   expect(renderedMonthDays.map((day) => day.textContent)).toEqual([
-//     "1",
-//     "2",
-//     "3",
-//   ]);
-// });
+  expect(renderedMonthDays.map((day) => day.textContent)).toEqual([
+    "1",
+    "2",
+    "3",
+  ]);
+});
