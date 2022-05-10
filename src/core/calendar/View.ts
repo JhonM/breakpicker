@@ -45,7 +45,9 @@ function calendarView(dispatch: DispatchType, model: Model) {
     `[data-trigger-id="${sc.dataset.triggerContent}"]`
   ) as HTMLInputElement;
 
-  btn.onfocus = () => dispatch(isOpenMsg(true));
+  if (btn) {
+    btn.onfocus = () => dispatch(isOpenMsg(true));
+  }
 
   if (model.isOpen) {
     const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;

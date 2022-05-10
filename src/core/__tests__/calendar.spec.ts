@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { screen } from "@testing-library/dom";
+import { screen, waitFor, getByTestId } from "@testing-library/dom";
 import fireEvent from "@testing-library/user-event";
 import { getCurrentMonthName, getCurrentYear } from "../../helpers/dates";
 import { Calendar } from "../calendar";
@@ -15,7 +15,7 @@ beforeEach(() => {
 
 afterEach(() => {
   const input = document.getElementById("input") as HTMLElement;
-  const calendars = document.querySelectorAll("div[data-breakpicker-id]");
+  const calendars = document.querySelectorAll(".selector-container");
   calendars.forEach((cal) => {
     if (cal) {
       cal.remove();
@@ -51,7 +51,7 @@ test("it renders with a selection option", () => {
   expect(BP).toMatchObject(options);
 });
 
-test("it opens the picker", () => {
+test("it opens the picker", async () => {
   const input = screen.getByTestId("input");
   const options = {
     selector: input,
@@ -60,7 +60,8 @@ test("it opens the picker", () => {
 
   new Calendar({ ...options });
 
-  fireEvent.click(input);
+  input.focus();
+
   expect(screen.getByText(todayDate)).toBeTruthy();
 });
 
