@@ -13,3 +13,5 @@ export type Model = {
 export type ActionType =
   | { type: "IS_OPEN"; isOpen: boolean }
   | { type: "IS_CLOSE"; isOpen: boolean };
+
+export type DispatchType = (action: ActionType) => void;
