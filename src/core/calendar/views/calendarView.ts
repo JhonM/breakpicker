@@ -9,16 +9,13 @@ function monthView(dispatch: DispatchType, model: Model) {
   return h("div", { className: "month-view" }, "Hello");
 }
 
-export function calendarView(dispatch: DispatchType, model: Model) {
-  const sc = document.querySelector(
-    `.selector-container-${model.id}`
-  ) as HTMLElement;
-  const btn = document.querySelector(
-    `[data-trigger-id="${sc.dataset.triggerContent}"]`
-  ) as HTMLInputElement;
-
-  if (btn) {
-    btn.onfocus = () => dispatch(isOpenMsg(true));
+export function calendarView(
+  dispatch: DispatchType,
+  model: Model,
+  selector: HTMLElement
+) {
+  if (selector) {
+    selector.onfocus = () => dispatch(isOpenMsg(true));
   }
 
   if (model.isOpen) {

@@ -23,7 +23,7 @@ export class Calendar {
       );
     }
 
-    const id = initModel.id;
+    const id = this.id();
     const CalID = `trigger-${id}`;
     const selector = this.selector;
     selector.dataset.triggerId = CalID;
@@ -36,7 +36,11 @@ export class Calendar {
 
     selector.parentNode?.insertBefore(selectorContainer, selector);
 
-    app(initModel, update, view, selectorContainer);
+    app(initModel, update, view, selectorContainer, this.selector);
+  }
+
+  private id() {
+    return initModel.id;
   }
 
   private renderMonth(date: Date) {

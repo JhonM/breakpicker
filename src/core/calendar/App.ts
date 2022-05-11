@@ -7,16 +7,17 @@ type DispatchType = (action: ActionType) => void;
 export default function App(
   initModel: Model,
   update: (msg: any, model: Model) => any,
-  view: (dispatch: DispatchType, model: Model) => any,
-  node: HTMLElement | null
+  view: (dispatch: DispatchType, model: Model, selector: HTMLElement) => any,
+  node: HTMLElement | null,
+  selector: HTMLElement
 ) {
   let model = initModel;
-  let currentView = render(view(dispatch, model));
+  let currentView = render(view(dispatch, model, selector));
   node?.appendChild(currentView);
 
   function dispatch(msg: any) {
     model = update(msg, model);
-    const updatedView = render(view(dispatch, model));
+    const updatedView = render(view(dispatch, model, selector));
     node?.replaceChild(updatedView, currentView);
     currentView = updatedView;
   }

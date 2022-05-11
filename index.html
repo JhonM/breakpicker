@@ -9,10 +9,17 @@
   </head>
   <body>
     <input id="input" />
+    <input id="input-2" />
     <script>
       window.onload = () => {
-        const bp = new Breakpicker({ selector: document.getElementById("input") });
-        console.log(bp, "breakpicker")
+        const bp = new Breakpicker({
+          selector: document.getElementById("input"),
+        });
+        const bn = new Breakpicker({
+          selector: document.getElementById("input-2"),
+        });
+        console.log(bp, "breakpicker");
+        console.log(bn, "new breakpicker");
       };
     </script>
   </body>
