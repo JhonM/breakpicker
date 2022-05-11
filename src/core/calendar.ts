@@ -1,6 +1,5 @@
 import { ICalendar } from "../interfaces/calendar";
 import { getMonthDetails } from "../helpers/dates";
-import { guid } from "../helpers/random";
 import { h, render } from "../core/vdom";
 import initModel from "./calendar/Model";
 import update from "./calendar/Update";

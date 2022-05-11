@@ -10,7 +10,6 @@ function monthView(dispatch: DispatchType, model: Model) {
 }
 
 export function calendarView(dispatch: DispatchType, model: Model) {
-  // TODO: make sure to keep state of an unique id in the model
   const sc = document.querySelector(
     `.selector-container-${model.id}`
   ) as HTMLElement;
@@ -35,7 +34,8 @@ export function calendarView(dispatch: DispatchType, model: Model) {
         { "data-breakpicker-type": "container" },
         h("button", { onclick: () => dispatch(isCloseMsg(false)) }, "Close"),
         h("div", { "data-calendar-type": "head" }, `${todayDate}`),
-        h("div", { "data-calendar-type": "body" }, DaysOfWeekView())
+        h("div", { "data-calendar-type": "body" }, DaysOfWeekView()),
+        h("div", { "data-calendar-type": "foot" }, monthView(dispatch, model))
       )
     );
   }
