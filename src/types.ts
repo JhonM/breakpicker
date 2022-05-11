@@ -6,6 +6,7 @@ export const MSGS = {
 export type MsgType = typeof MSGS[keyof typeof MSGS];
 
 export type Model = {
+  id: string;
   isOpen: boolean;
   currentDate: Date;
 };

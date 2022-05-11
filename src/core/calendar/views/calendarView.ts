@@ -5,9 +5,15 @@ import { isOpenMsg, isCloseMsg } from "../Update";
 import { DispatchType, Model } from "../../../types";
 import { DaysOfWeekView } from "../views";
 
+function monthView(dispatch: DispatchType, model: Model) {
+  return h("div", { className: "month-view" }, "Hello");
+}
+
 export function calendarView(dispatch: DispatchType, model: Model) {
   // TODO: make sure to keep state of an unique id in the model
-  const sc = document.querySelector(".selector-container") as HTMLElement;
+  const sc = document.querySelector(
+    `.selector-container-${model.id}`
+  ) as HTMLElement;
   const btn = document.querySelector(
     `[data-trigger-id="${sc.dataset.triggerContent}"]`
   ) as HTMLInputElement;

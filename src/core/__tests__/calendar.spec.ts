@@ -15,10 +15,13 @@ beforeEach(() => {
 
 afterEach(() => {
   const input = document.getElementById("input") as HTMLElement;
-  const calendars = document.querySelectorAll(".selector-container");
+  const calendars = document.querySelectorAll("div");
   calendars.forEach((cal) => {
     if (cal) {
-      cal.remove();
+      const className = cal.className;
+      if (className.includes("selector-container")) {
+        cal.remove();
+      }
     }
   });
   document.body.removeChild(input);

@@ -24,12 +24,13 @@ export class Calendar {
       );
     }
 
-    const CalID = `trigger-${guid()}`;
+    const id = initModel.id;
+    const CalID = `trigger-${id}`;
     const selector = this.selector;
     selector.dataset.triggerId = CalID;
 
     const createSelector = h("div", {
-      className: "selector-container",
+      className: `selector-container-${id}`,
       "data-trigger-content": CalID,
     });
     const selectorContainer = render(createSelector);
