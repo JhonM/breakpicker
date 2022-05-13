@@ -25,7 +25,7 @@ export function daysOfWeekView() {
   }, []);
   const createHeader = h(
     "div",
-    { "data-calendar-type": "body-header" },
+    { className: "week-view", "data-calendar-type": "body-header" },
     ...toArr
   );
 

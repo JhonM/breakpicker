@@ -1,5 +1,6 @@
 import { ICalendar } from "../interfaces/calendar";
 import { getMonthDetails } from "../helpers/dates";
+import { guid } from "../helpers/random";
 import { h, render } from "../core/vdom";
 import initModel from "./calendar/Model";
 import update from "./calendar/Update";
@@ -12,6 +13,7 @@ export class Calendar {
   constructor(options: ICalendar) {
     const { selector } = options;
     this.selector = selector;
+    this.style();
     this.init();
   }
 
@@ -40,7 +42,52 @@ export class Calendar {
   }
 
   private id() {
-    return initModel.id;
+    return guid();
+  }
+
+  private style() {
+    // Create our stylesheet
+    var style = document.createElement("style");
+    style.innerHTML = `
+      .week-view, .month-view {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+      }
+
+      .prev-last-day {
+        opacity: 0.4;
+      }
+
+      .day {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        color: purlple;
+      }
+
+      .day:first-child {
+        grid-column: 7;
+      }
+
+      .month-day {
+        color: red;
+      }
+
+      .current-day {
+        padding: 2px;
+        border-radius: 50%;
+        background-color: black;
+        color: white;
+      }
+    `;
+
+    // Get the first script tag
+    var ref = document.querySelector("script");
+
+    // Insert our new styles before the first script tag
+    ref?.parentNode?.insertBefore(style, ref);
   }
 
   private renderMonth(date: Date) {
