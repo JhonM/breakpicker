@@ -1,26 +1,31 @@
 import { h } from "../../../core/vdom";
 import { guid } from "../../../helpers/random";
-import { getYear, getMonthName, getCalendarDays } from "../../../helpers/dates";
+import {
+  getYear,
+  getMonth,
+  getMonthName,
+  getCalendarDays,
+} from "../../../helpers/dates";
 import { isOpenMsg, isCloseMsg } from "../Update";
 import { DispatchType, Model } from "../../../types";
 import { DaysOfWeekView } from "../views";
 
 function monthView(dispatch: DispatchType, model: Model) {
-  const currentDate = new Date(model.currentDate);
+  const currentDate = model.currentDate;
 
   const prevLastDay = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth(),
+    getYear(currentDate),
+    getMonth(currentDate),
     0
   ).getDate();
   const totalMonthDay = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth() + 1,
+    getYear(currentDate),
+    getMonth(currentDate) + 1,
     0
   ).getDate();
   const startWeekDay = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth(),
+    getYear(currentDate),
+    getMonth(currentDate),
     1
   ).getDay();
 
