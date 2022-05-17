@@ -8,6 +8,7 @@ export type MsgType = typeof MSGS[keyof typeof MSGS];
 export type Model = {
   isOpen: boolean;
   currentDate: Date;
+  currentMonth?: number | undefined;
 };
 
 export type ActionType =
