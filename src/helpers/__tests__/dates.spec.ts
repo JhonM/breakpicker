@@ -6,8 +6,6 @@ import {
   getCurrentMonth,
   getCurrentMonthName,
   getNumberOfDays,
-  getDayDetails,
-  getMonthDetails,
 } from "../dates";
 
 describe("Get dates", () => {
@@ -75,70 +73,5 @@ describe("Get dates", () => {
 
     const decemberEightyEightyOne = getNumberOfDays(1981, 12);
     expect(decemberEightyEightyOne).toBe(31);
-  });
-
-  test("getDayDetails", () => {
-    const config = {
-      index: 0,
-      numberOfDays: 29,
-      firstDay: 0,
-      year: 2020,
-      month: 2,
-    };
-    const dayDetails = getDayDetails(config);
-
-    expect(dayDetails.dayString).toBe("Sunday");
-    expect(dayDetails.month).toBe(0);
-  });
-
-  test("getMonthDetails", () => {
-    const monthDetails = getMonthDetails(2020, 2);
-
-    expect(monthDetails.map((date) => date.month)).toMatchInlineSnapshot(`
-      Array [
-        -1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-      ]
-    `);
   });
 });

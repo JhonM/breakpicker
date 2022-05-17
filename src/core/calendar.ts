@@ -1,5 +1,4 @@
 import { ICalendar } from "../interfaces/calendar";
-import { getMonthDetails } from "../helpers/dates";
 import { guid } from "../helpers/random";
 import { h, render } from "../core/vdom";
 import initModel from "./calendar/Model";
@@ -88,13 +87,5 @@ export class Calendar {
 
     // Insert our new styles before the first script tag
     ref?.parentNode?.insertBefore(style, ref);
-  }
-
-  private renderMonth(date: Date) {
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    const monthDetails = getMonthDetails(month, year);
-
-    return monthDetails;
   }
 }

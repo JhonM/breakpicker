@@ -1,12 +1,6 @@
 import { h } from "../../../core/vdom";
 import { guid } from "../../../helpers/random";
-import {
-  getCurrentYear,
-  getCurrentMonthName,
-  getMonthDetails,
-  getYear,
-  getMonthName,
-} from "../../../helpers/dates";
+import { getYear, getMonthName } from "../../../helpers/dates";
 import { isOpenMsg, isCloseMsg } from "../Update";
 import { DispatchType, Model } from "../../../types";
 import { DaysOfWeekView } from "../views";
