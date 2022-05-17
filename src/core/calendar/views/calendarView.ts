@@ -1,6 +1,6 @@
 import { h } from "../../../core/vdom";
 import { guid } from "../../../helpers/random";
-import { getYear, getMonthName } from "../../../helpers/dates";
+import { getYear, getMonthName, getCalendarDays } from "../../../helpers/dates";
 import { isOpenMsg, isCloseMsg } from "../Update";
 import { DispatchType, Model } from "../../../types";
 import { DaysOfWeekView } from "../views";
@@ -23,14 +23,8 @@ function monthView(dispatch: DispatchType, model: Model) {
     currentDate.getMonth(),
     1
   ).getDay();
-  const totalCalendarDay = 6 * 7;
 
-  var start = 0;
-  const months = Array(totalCalendarDay - start + 1)
-    .fill(true)
-    .map(() => start++);
-
-  const toArr = months.reduce((acc: any, i) => {
+  const toArr = getCalendarDays().reduce((acc: any, i) => {
     const day = i - startWeekDay;
     let month;
 
