@@ -13,6 +13,7 @@ sample*.js
 .parcel-cache
 dist/
 types/*
+docs/*
 
 # compiled css files
 public/*.css
