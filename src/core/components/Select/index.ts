@@ -1,7 +1,12 @@
 import { h } from "../../../core/vdom";
 
-export const select = ({ className, ...props }: { className: string }) =>
-  h("select", { className, ...props });
+export const select = ({
+  className,
+  ...props
+}: {
+  className: string;
+  children: Array<any>;
+}) => h("select", { className, ...props }, ...props.children);
 
 export const option = ({
   className,

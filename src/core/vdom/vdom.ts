@@ -44,7 +44,7 @@ export const setProp = ({ target, name, value }: SetPropsType) => {
     return;
   } else if (name === "className") {
     target.setAttribute("class", value);
-  } else if (name === "boolean") {
+  } else if (name === "boolean" || name === "selected") {
     setBooleanProp({ target, name, value });
   } else if (name === "onclick") {
     target.addEventListener("click", () => value());

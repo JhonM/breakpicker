@@ -7,8 +7,6 @@ import {
   Months as months,
 } from "../../../types";
 
-const options: Array<string> = ["option 1", "option 2", "option 3", "option 4"];
-
 function selectOptions(selectedOption: MonthsType) {
   const opt = months.map((value: string) =>
     option({
@@ -22,7 +20,10 @@ function selectOptions(selectedOption: MonthsType) {
 }
 
 function container(selected: MonthsType) {
-  return h("select", { className: "" }, ...selectOptions(selected));
+  return select({
+    className: "select-classname",
+    children: selectOptions(selected),
+  });
 }
 
 export function selectView(dispatch: DispatchType, model: Model) {
