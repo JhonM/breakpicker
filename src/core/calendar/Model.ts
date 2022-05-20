@@ -1,8 +1,9 @@
+import { getCurrentMonthName } from "../../helpers/dates";
 import type { Model } from "../../types";
 
 const initModel: Model = {
   isOpen: false,
-  currentMonth: undefined,
+  currentMonth: getCurrentMonthName,
   currentDate: new Date(),
 };
 

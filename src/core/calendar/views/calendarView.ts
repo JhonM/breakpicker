@@ -1,9 +1,9 @@
 import { h } from "../../../core/vdom";
 import { guid } from "../../../helpers/random";
 import { getYear, getMonthName } from "../../../helpers/dates";
-import { isOpenMsg, isCloseMsg } from "../Update";
+import { isOpenMsg, isCloseMsg, changeCurrentDateMsg } from "../Update";
 import { DispatchType, Model } from "../../../types";
-import { DaysOfWeekView, MonthView } from "../views";
+import { DaysOfWeekView, MonthView, SelectView } from "../views";
 
 export function calendarView(
   dispatch: DispatchType,
@@ -28,7 +28,14 @@ export function calendarView(
         "div",
         { "data-breakpicker-type": "container" },
         h("button", { onclick: () => dispatch(isCloseMsg(false)) }, "Close"),
-        h("div", { "data-calendar-type": "head" }, `${todayDate}`),
+        h(
+          "div",
+          {
+            "data-calendar-type": "head",
+            // onclick: () => dispatch(changeCurrentDateMsg(model.currentDate)),
+          },
+          ...[`${todayDate}`, SelectView(dispatch, model)]
+        ),
         h("div", { "data-calendar-type": "body" }, DaysOfWeekView()),
         h("div", { "data-calendar-type": "foot" }, MonthView(dispatch, model))
       )

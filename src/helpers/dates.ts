@@ -1,3 +1,5 @@
+import { MonthsType, Months } from "../types";
+
 export type DayDetailsType = {
   index: number;
   numberOfDays: number;
@@ -6,30 +8,15 @@ export type DayDetailsType = {
   month: number;
 };
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
 const today = new Date();
 
 export const getYear = (d: Date) => d.getFullYear();
 export const getMonth = (d: Date) => d.getMonth();
-export const getMonthName = (d: Date) => months[d.getMonth()];
+export const getMonthName = (d: Date): MonthsType => Months[d.getMonth()];
 
 export const getCurrentYear = getYear(today);
 export const getCurrentMonth = getMonth(today);
-export const getCurrentMonthName = getMonthName(today);
+export const getCurrentMonthName: MonthsType = getMonthName(today);
 
 export const getNumberOfDays = (year: number, month: number): number => {
   return new Date(year, month, 0).getDate();
