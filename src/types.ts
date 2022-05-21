@@ -1,7 +1,7 @@
 export const MSGS = {
   IS_OPEN: "IS_OPEN",
   IS_CLOSE: "IS_CLOSE",
-  CURRENT_DATE: "CURRENT_DATE",
+  CURRENT_MONTH: "CURRENT_MONTH",
 } as const;
 
 export type MsgType = typeof MSGS[keyof typeof MSGS];
@@ -15,7 +15,7 @@ export type Model = {
 export type ActionType =
   | { type: "IS_OPEN"; isOpen: boolean }
   | { type: "IS_CLOSE"; isOpen: boolean }
-  | { type: "CURRENT_DATE"; currentDate: Date };
+  | { type: "CURRENT_MONTH"; currentMonth: MonthsType };
 
 export type DispatchType = (action: ActionType) => void;
 

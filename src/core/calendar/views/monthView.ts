@@ -1,6 +1,5 @@
 import { h } from "../../../core/vdom";
 import { getYear, getMonth, getCalendarDays } from "../../../helpers/dates";
-import { isOpenMsg, isCloseMsg } from "../Update";
 import { DispatchType, Model } from "../../../types";
 
 export function monthView(dispatch: DispatchType, model: Model) {

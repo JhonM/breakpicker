@@ -1,4 +1,4 @@
-import type { ActionType, Model } from "../../types";
+import type { ActionType, Model, MonthsType } from "../../types";
 import { MSGS } from "../../types";
 
 export function isOpenMsg(isOpen: boolean) {
@@ -15,10 +15,10 @@ export function isCloseMsg(isOpen: boolean) {
   };
 }
 
-export function changeCurrentDateMsg(currentDate: Date) {
+export function changeCurrentMonth(currentMonth: MonthsType) {
   return {
-    type: MSGS.CURRENT_DATE,
-    currentDate,
+    type: MSGS.CURRENT_MONTH,
+    currentMonth,
   };
 }
 
@@ -29,8 +29,9 @@ export default function update(msg: ActionType, model: Model): any {
       return { ...model, isOpen };
     case MSGS.IS_CLOSE:
       return { ...model, isOpen: msg.isOpen };
-    case MSGS.CURRENT_DATE:
-      return { ...model, currentDate: new Date("2 January 2023") };
+    case MSGS.CURRENT_MONTH:
+      console.log("currentMonth");
+      return { ...model, currentMonth: msg.currentMonth };
     default:
       return model;
   }

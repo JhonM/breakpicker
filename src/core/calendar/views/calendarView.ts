@@ -1,7 +1,7 @@
 import { h } from "../../../core/vdom";
 import { guid } from "../../../helpers/random";
 import { getYear, getMonthName } from "../../../helpers/dates";
-import { isOpenMsg, isCloseMsg, changeCurrentDateMsg } from "../Update";
+import { isOpenMsg, isCloseMsg } from "../Update";
 import { DispatchType, Model } from "../../../types";
 import { DaysOfWeekView, MonthView, SelectView } from "../views";
 
@@ -32,7 +32,6 @@ export function calendarView(
           "div",
           {
             "data-calendar-type": "head",
-            // onclick: () => dispatch(changeCurrentDateMsg(model.currentDate)),
           },
           ...[`${todayDate}`, SelectView(dispatch, model)]
         ),

@@ -1,13 +1,14 @@
 import { h } from "../../../core/vdom";
-import { select, option } from "../../components";
+import { select, option } from "../../components/Select";
 import {
   DispatchType,
   Model,
   MonthsType,
   Months as months,
 } from "../../../types";
+import { changeCurrentMonth } from "../Update";
 
-function selectOptions(selectedOption: MonthsType) {
+function selectOptions(dispatch: DispatchType, selectedOption: MonthsType) {
   const opt = months.map((value: string) =>
     option({
       className: "some-cool-classname",
@@ -19,14 +20,19 @@ function selectOptions(selectedOption: MonthsType) {
   return opt;
 }
 
-function container(selected: MonthsType) {
+function container(dispatch: DispatchType, selected: MonthsType) {
   return select({
     className: "select-classname",
-    children: selectOptions(selected),
+    children: selectOptions(dispatch, selected),
+    onchange: (e) => dispatch(changeCurrentMonth(e.target.value as MonthsType)),
   });
 }
 
 export function selectView(dispatch: DispatchType, model: Model) {
-  return h("div", { className: "select-view" }, container(model.currentMonth));
+  return h(
+    "div",
+    { className: "select-view" },
+    container(dispatch, model.currentMonth)
+  );
   //
 }
