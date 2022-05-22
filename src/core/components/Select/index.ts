@@ -3,16 +3,17 @@ import { h } from "../../../core/vdom";
 export const select = ({
   className,
   onchange,
+  options,
   ...props
 }: {
   className: string;
-  children: Array<any>;
+  options: Array<any>;
   onchange: (e: any) => void;
 }) =>
   h(
     "select",
     { className, onchange: (e: any) => onchange(e), ...props },
-    ...props.children
+    ...options
   );
 
 export const option = ({

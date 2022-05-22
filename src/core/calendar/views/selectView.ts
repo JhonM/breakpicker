@@ -23,7 +23,7 @@ function selectOptions(dispatch: DispatchType, selectedOption: MonthsType) {
 function container(dispatch: DispatchType, selected: MonthsType) {
   return select({
     className: "select-classname",
-    children: selectOptions(dispatch, selected),
+    options: selectOptions(dispatch, selected),
     onchange: (e) => dispatch(changeCurrentMonth(e.target.value as MonthsType)),
   });
 }
