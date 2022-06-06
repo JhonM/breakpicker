@@ -1,6 +1,6 @@
+import { h, render } from "@jhonm/blanc-vdom";
 import { ICalendar } from "../interfaces/calendar";
 import { guid } from "../helpers/random";
-import { h, render } from "../core/vdom";
 import initModel from "./calendar/Model";
 import update from "./calendar/Update";
 import view from "./calendar/View";

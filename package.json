@@ -47,6 +47,7 @@
   "author": "Jhon Majoor <jhonmajoor@gmail.com> (http://blancframe.com)",
   "license": "MIT",
   "dependencies": {
+    "@jhonm/blanc-vdom": "1.0.0",
     "http-server": "^14.1.0"
   }
 }

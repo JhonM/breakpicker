@@ -1,4 +1,4 @@
-import { h } from "../../../core/vdom";
+import { h } from "@jhonm/blanc-vdom";
 import { guid } from "../../../helpers/random";
 import { getYear, getMonthName } from "../../../helpers/dates";
 import { isOpenMsg, isCloseMsg } from "../Update";

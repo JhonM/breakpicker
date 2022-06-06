@@ -1,4 +1,4 @@
-import { render } from "../../core/vdom";
+import { render } from "@jhonm/blanc-vdom";
 import type { ActionType, Model } from "../../types";
 
 type DispatchType = (action: ActionType) => void;

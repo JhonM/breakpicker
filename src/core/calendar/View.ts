@@ -1,4 +1,4 @@
-import { h } from "../../core/vdom";
+import { h } from "@jhonm/blanc-vdom";
 import type { Model, DispatchType } from "../../types";
 import { CalendarView } from "./views";
 
