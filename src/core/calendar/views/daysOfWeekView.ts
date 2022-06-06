@@ -1,4 +1,4 @@
-import { h } from "../../../core/vdom";
+import { h } from "@jhonm/blanc-vdom";
 
 export function daysOfWeekView() {
   const days = [

@@ -1,4 +1,4 @@
-import { h } from "../../../core/vdom";
+import { h } from "@jhonm/blanc-vdom";
 import { getYear, getMonth, getCalendarDays } from "../../../helpers/dates";
 import { DispatchType, Model } from "../../../types";
 
