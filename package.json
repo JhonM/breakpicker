@@ -33,6 +33,8 @@
   "scripts": {
     "build": "parcel build",
     "watch": "parcel watch",
+    "demo:build": "parcel ./demo/index.html --dist-dir dist-demo",
+    "demo:start": "parcel ./demo/index.html",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "docs": "typedoc",
