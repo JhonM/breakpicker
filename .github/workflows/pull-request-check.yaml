@@ -20,4 +20,4 @@ jobs:
           yarn test
       - run: npm ci
         env:
-          NPM_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NPM_TOKEN: ${{secrets.GH_TOKEN}}
