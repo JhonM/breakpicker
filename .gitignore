@@ -24,3 +24,4 @@ public/compiled.js
 sass/lib/bourbon
 sass/lib/neat
 .vimspector.json
+yarn-error.log
