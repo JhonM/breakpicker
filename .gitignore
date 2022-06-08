@@ -12,6 +12,7 @@ sample*.js
 .sass-cache
 .parcel-cache
 dist/
+dist-demo/
 types/*
 docs/*
 
