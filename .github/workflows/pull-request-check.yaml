@@ -19,8 +19,6 @@ jobs:
           yarn verify
           yarn test
       - run: npm ci
-      - run: |
-          echo @jhonm:https://npm.pkg.github.com/ > .npmrc
-          echo '//npm.pkg.github.com/:_authToken=${NPM_TOKEN}' >> .npmrc
         env:
-          NPM_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
