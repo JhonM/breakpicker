@@ -22,7 +22,7 @@ export function changeCurrentMonth(currentMonth: MonthsType) {
   };
 }
 
-export default function update(msg: ActionType, model: Model): any {
+export default function update(msg: ActionType, model: Model): Model {
   switch (msg.type) {
     case MSGS.IS_OPEN:
       const { isOpen } = msg;
