@@ -1,6 +1,7 @@
 import { h } from "@jhonm/blanc-vdom";
 import { getYear, getMonth, getCalendarDays } from "../../../helpers/dates";
 import { DispatchType, Model } from "../../../types";
+import { prefixedNames } from "../../../helpers/prefix_builder";
 
 export function monthView(dispatch: DispatchType, model: Model) {
   const currentDate = model.currentDate;
@@ -28,7 +29,9 @@ export function monthView(dispatch: DispatchType, model: Model) {
     if (i <= startWeekDay) {
       month = h(
         "div",
-        { className: "day prev-last-day" },
+        {
+          className: prefixedNames("day prev-last-day"),
+        },
         `${prevLastDay - i}`
       );
     } else if (i <= startWeekDay + totalMonthDay) {
@@ -37,12 +40,20 @@ export function monthView(dispatch: DispatchType, model: Model) {
 
       const dayClass =
         currentDate.getTime() === new Date().setHours(0, 0, 0, 0)
-          ? "current-day"
-          : "month-day";
+          ? prefixedNames("current-day")
+          : prefixedNames("month-day");
 
-      month = h("div", { className: `day ${dayClass}` }, day.toString());
+      month = h(
+        "div",
+        { className: `${prefixedNames("day")} ${dayClass}` },
+        day.toString()
+      );
     } else {
-      month = h("div", { className: "day" }, `${day - totalMonthDay}`);
+      month = h(
+        "div",
+        { className: prefixedNames("day") },
+        `${day - totalMonthDay}`
+      );
     }
 
     if (Array.isArray(acc)) {
@@ -52,5 +63,5 @@ export function monthView(dispatch: DispatchType, model: Model) {
     return acc;
   }, []);
 
-  return h("div", { className: "month-view" }, ...toArr);
+  return h("div", { className: prefixedNames("month-view") }, ...toArr);
 }
