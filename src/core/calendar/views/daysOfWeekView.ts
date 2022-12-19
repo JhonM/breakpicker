@@ -1,4 +1,5 @@
 import { h } from "@jhonm/blanc-vdom";
+import { prefixedNames } from "../../../helpers/prefix_builder";
 
 export function daysOfWeekView() {
   const days = [
@@ -25,7 +26,10 @@ export function daysOfWeekView() {
   }, []);
   const createHeader = h(
     "div",
-    { className: "week-view", "data-calendar-type": "body-header" },
+    {
+      className: prefixedNames("week-view"),
+      "data-calendar-type": "body-header",
+    },
     ...toArr
   );
 

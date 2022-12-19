@@ -5,6 +5,7 @@ import initModel from "./calendar/Model";
 import update from "./calendar/Update";
 import view from "./calendar/View";
 import app from "../core/calendar/App";
+import { prefixedNames } from "../helpers/prefix_builder";
 
 export class Calendar {
   private selector: HTMLElement;
@@ -48,16 +49,16 @@ export class Calendar {
     // Create our stylesheet
     var style = document.createElement("style");
     style.innerHTML = `
-      .week-view, .month-view {
+      .${prefixedNames("week-view")}, .${prefixedNames("month-view")} {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
       }
 
-      .prev-last-day {
+      .${prefixedNames("prev-last-day")} {
         opacity: 0.4;
       }
 
-      .day {
+      .${prefixedNames("day")} {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -66,15 +67,15 @@ export class Calendar {
         color: purlple;
       }
 
-      .day:first-child {
+      .${prefixedNames("day")}:first-child {
         grid-column: 7;
       }
 
-      .month-day {
+      .${prefixedNames("month-day")} {
         color: red;
       }
 
-      .current-day {
+      .${prefixedNames("current-day")} {
         padding: 2px;
         border-radius: 50%;
         background-color: black;

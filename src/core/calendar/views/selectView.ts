@@ -7,11 +7,12 @@ import {
   Months as months,
 } from "../../../types";
 import { changeCurrentMonth } from "../Update";
+import { prefixedNames } from "../../../helpers/prefix_builder";
 
 function selectOptions(dispatch: DispatchType, selectedOption: MonthsType) {
   const opt = months.map((value: string) =>
     option({
-      className: "some-cool-classname",
+      className: "",
       value,
       selected: selectedOption === value,
     })
@@ -22,7 +23,7 @@ function selectOptions(dispatch: DispatchType, selectedOption: MonthsType) {
 
 function container(dispatch: DispatchType, selected: MonthsType) {
   return select({
-    className: "select-classname",
+    className: prefixedNames("select-classname"),
     options: selectOptions(dispatch, selected),
     onchange: (e) => dispatch(changeCurrentMonth(e.target.value as MonthsType)),
   });
@@ -31,7 +32,7 @@ function container(dispatch: DispatchType, selected: MonthsType) {
 export function selectView(dispatch: DispatchType, model: Model) {
   return h(
     "div",
-    { className: "select-view" },
+    { className: prefixedNames("select-view") },
     container(dispatch, model.currentMonth)
   );
   //
