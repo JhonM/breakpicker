@@ -65,6 +65,7 @@ export class Calendar {
         width: 40px;
         height: 40px;
         color: purlple;
+        cursor: pointer;
       }
 
       .${prefixedNames("day")}:first-child {

@@ -22,7 +22,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
     1
   ).getDay();
 
-  const toArr = getCalendarDays().reduce((acc: any, i) => {
+  const daysArray = getCalendarDays().reduce((acc: any, i) => {
     const day = i - startWeekDay;
     let month;
 
@@ -31,6 +31,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
         "div",
         {
           className: prefixedNames("day prev-last-day"),
+          onclick: () => console.log("clicked prev last day"),
         },
         `${prevLastDay - i}`
       );
@@ -45,13 +46,19 @@ export function monthView(dispatch: DispatchType, model: Model) {
 
       month = h(
         "div",
-        { className: `${prefixedNames("day")} ${dayClass}` },
+        {
+          className: `${prefixedNames("day")} ${dayClass}`,
+          onclick: () => console.log("clicked day view"),
+        },
         day.toString()
       );
     } else {
       month = h(
         "div",
-        { className: prefixedNames("day") },
+        {
+          className: prefixedNames("day"),
+          onclick: () => console.log("clicked day view else"),
+        },
         `${day - totalMonthDay}`
       );
     }
@@ -63,5 +70,5 @@ export function monthView(dispatch: DispatchType, model: Model) {
     return acc;
   }, []);
 
-  return h("div", { className: prefixedNames("month-view") }, ...toArr);
+  return h("div", { className: prefixedNames("month-view") }, ...daysArray);
 }
