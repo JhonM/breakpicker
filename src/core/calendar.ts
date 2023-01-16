@@ -5,7 +5,14 @@ import initModel from "./calendar/Model";
 import update from "./calendar/Update";
 import view from "./calendar/View";
 import app from "../core/calendar/App";
-import { prefixedNames } from "../helpers/prefix_builder";
+import {
+  prefixedWeekView,
+  prefixedMonthView,
+  prefixedDay,
+  prefixedPrevLastDay,
+  prefixedMonthDay,
+  prefixedCurrentDay,
+} from "../utilities/prefixed_names";
 
 export class Calendar {
   private selector: HTMLElement;
@@ -46,19 +53,19 @@ export class Calendar {
   }
 
   private style() {
-    // Create our stylesheet
-    var style = document.createElement("style");
+    const style = document.createElement("style");
+
     style.innerHTML = `
-      .${prefixedNames("week-view")}, .${prefixedNames("month-view")} {
+      .${prefixedWeekView}, .${prefixedMonthView} {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
       }
 
-      .${prefixedNames("prev-last-day")} {
+      .${prefixedPrevLastDay} {
         opacity: 0.4;
       }
 
-      .${prefixedNames("day")} {
+      .${prefixedDay} {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -68,15 +75,15 @@ export class Calendar {
         cursor: pointer;
       }
 
-      .${prefixedNames("day")}:first-child {
+      .${prefixedDay}:first-child {
         grid-column: 7;
       }
 
-      .${prefixedNames("month-day")} {
+      .${prefixedMonthDay} {
         color: red;
       }
 
-      .${prefixedNames("current-day")} {
+      .${prefixedCurrentDay} {
         padding: 2px;
         border-radius: 50%;
         background-color: black;
@@ -84,10 +91,7 @@ export class Calendar {
       }
     `;
 
-    // Get the first script tag
-    var ref = document.querySelector("script");
-
-    // Insert our new styles before the first script tag
+    const ref = document.querySelector("script");
     ref?.parentNode?.insertBefore(style, ref);
   }
 }
