@@ -6,7 +6,7 @@ import {
   MonthsType,
   Months as months,
 } from "../../../types";
-import { changeCurrentMonth } from "../Update";
+import { changeCurrentMonthMsg } from "../Update";
 import { prefixedNames } from "../../../helpers/prefix_builder";
 
 function selectOptions(dispatch: DispatchType, selectedOption: MonthsType) {
@@ -25,7 +25,8 @@ function container(dispatch: DispatchType, selected: MonthsType) {
   return select({
     className: prefixedNames("select-classname"),
     options: selectOptions(dispatch, selected),
-    onchange: (e) => dispatch(changeCurrentMonth(e.target.value as MonthsType)),
+    onchange: (e) =>
+      dispatch(changeCurrentMonthMsg(e.target.value as MonthsType)),
   });
 }
 

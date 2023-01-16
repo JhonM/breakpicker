@@ -36,7 +36,11 @@ export function calendarView(
           ...[`${todayDate}`, SelectView(dispatch, model)]
         ),
         h("div", { "data-calendar-type": "body" }, DaysOfWeekView()),
-        h("div", { "data-calendar-type": "foot" }, MonthView(dispatch, model))
+        h(
+          "div",
+          { "data-calendar-type": "foot" },
+          MonthView(dispatch, model, selector)
+        )
       )
     );
   }
