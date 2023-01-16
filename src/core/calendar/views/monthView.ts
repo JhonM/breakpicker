@@ -2,8 +2,13 @@ import { h } from "@jhonm/blanc-vdom";
 import { getYear, getMonth, getCalendarDays } from "../../../helpers/dates";
 import { DispatchType, Model } from "../../../types";
 import { prefixedNames } from "../../../helpers/prefix_builder";
+import { selectedDayMsg } from "../Update";
 
-export function monthView(dispatch: DispatchType, model: Model) {
+export function monthView(
+  dispatch: DispatchType,
+  model: Model,
+  selector: HTMLElement
+) {
   const currentDate = model.currentDate;
 
   const prevLastDay = new Date(
@@ -48,7 +53,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
         "div",
         {
           className: `${prefixedNames("day")} ${dayClass}`,
-          onclick: () => console.log("clicked day view"),
+          onclick: () => dispatch(selectedDayMsg(day)),
         },
         day.toString()
       );
