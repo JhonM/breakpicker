@@ -21,4 +21,4 @@ jobs:
           npm run test
       - run: npm ci
         env:
-          NPM_TOKEN: ${{secrets.GH_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
