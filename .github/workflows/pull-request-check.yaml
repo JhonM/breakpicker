@@ -12,9 +12,13 @@ jobs:
           node-version: 16
       - name: install  dependencies
         run: |
+          echo @jhonm:https://npm.pkg.github.com/ > .npmrc
+          echo '//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}' >> .npmrc
           npm install
       - name: run test
         run: |
           npm run verify
           npm run test
       - run: npm ci
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
