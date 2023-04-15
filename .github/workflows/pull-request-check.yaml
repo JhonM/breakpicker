@@ -18,4 +18,4 @@ jobs:
           npm run test
       - run: npm ci
         env:
-          VDOM_TOKEN: ${{secrets.VDOM_TOKEN}}
+          VDOM_TOKEN: ${{secrets.NPM_TOKEN}}
