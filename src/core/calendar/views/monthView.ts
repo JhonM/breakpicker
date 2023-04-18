@@ -1,8 +1,14 @@
 import { h } from "@jhonm/blanc-vdom";
 import { getYear, getMonth, getCalendarDays } from "../../../helpers/dates";
 import { DispatchType, Model } from "../../../types";
-import { prefixedNames } from "../../../helpers/prefix_builder";
 import { selectedDayMsg } from "../Update";
+import {
+  dayClass,
+  monthClass,
+  monthDayClass,
+  currentDayClass,
+  prevLastDayClass,
+} from "../../../styles/styles.css";
 
 export function monthView(
   dispatch: DispatchType,
@@ -35,7 +41,7 @@ export function monthView(
       month = h(
         "div",
         {
-          className: prefixedNames("day prev-last-day"),
+          className: `${dayClass} ${prevLastDayClass} `,
           onclick: () => console.log("clicked prev last day"),
         },
         `${prevLastDay - i}`
@@ -44,15 +50,15 @@ export function monthView(
       currentDate.setDate(day);
       currentDate.setHours(0, 0, 0, 0);
 
-      const dayClass =
+      const currentDayOrMonthDay =
         currentDate.getTime() === new Date().setHours(0, 0, 0, 0)
-          ? prefixedNames("current-day")
-          : prefixedNames("month-day");
+          ? currentDayClass
+          : monthDayClass;
 
       month = h(
         "div",
         {
-          className: `${prefixedNames("day")} ${dayClass}`,
+          className: `${dayClass} ${currentDayOrMonthDay}`,
           onclick: () => dispatch(selectedDayMsg(day)),
         },
         day.toString()
@@ -61,7 +67,7 @@ export function monthView(
       month = h(
         "div",
         {
-          className: prefixedNames("day"),
+          className: dayClass,
           onclick: () => console.log("clicked day view else"),
         },
         `${day - totalMonthDay}`
@@ -75,5 +81,5 @@ export function monthView(
     return acc;
   }, []);
 
-  return h("div", { className: prefixedNames("month-view") }, ...daysArray);
+  return h("div", { className: monthClass }, ...daysArray);
 }
