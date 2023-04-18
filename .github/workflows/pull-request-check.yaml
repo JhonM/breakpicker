@@ -7,18 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: install  dependencies
-        run: |
-          echo @jhonm:https://npm.pkg.github.com/ > .npmrc
-          echo '//npm.pkg.github.com/:_authToken=${GH_TOKEN}' >> .npmrc
-          npm install
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@jhonm"
+      - name: install dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm install
       - name: run test
         run: |
           npm run verify
           npm run test
       - run: npm ci
-        env:
-          NPM_TOKEN: ${{secrets.GH_TOKEN}}
