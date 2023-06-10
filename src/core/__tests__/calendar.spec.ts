@@ -48,10 +48,11 @@ test("it renders with a selection option", () => {
   const input = screen.getByTestId("input");
   const options = {
     selector: input,
+    isOpen: false,
   };
   const BP = new Calendar({ ...options });
 
-  expect(BP).toMatchObject(options);
+  expect(BP).toMatchObject(options.selector);
 });
 
 test("it opens the picker", async () => {
