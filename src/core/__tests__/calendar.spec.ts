@@ -69,6 +69,19 @@ test("it opens the picker", async () => {
   expect(screen.getByText(todayDate)).toBeTruthy();
 });
 
+test("it opens the picker when option isOpen is true", async () => {
+  const input = screen.getByTestId("input");
+  const options = {
+    selector: input,
+    isOpen: true,
+  };
+  const todayDate = `${getCurrentMonthName} ${getCurrentYear}`;
+
+  new Calendar({ ...options });
+
+  expect(screen.getByText(todayDate)).toBeTruthy();
+});
+
 test("it shows the days of the week", () => {
   const input = screen.getByTestId("input");
   const options = {
