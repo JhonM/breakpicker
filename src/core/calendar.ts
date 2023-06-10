@@ -5,14 +5,6 @@ import initModel from "./calendar/Model";
 import update from "./calendar/Update";
 import view from "./calendar/View";
 import app from "../core/calendar/App";
-import {
-  prefixedWeekView,
-  prefixedMonthView,
-  prefixedDay,
-  prefixedPrevLastDay,
-  prefixedMonthDay,
-  prefixedCurrentDay,
-} from "../utilities/prefixed_names";
 
 export class Calendar {
   private selector: HTMLElement;
@@ -20,7 +12,6 @@ export class Calendar {
   constructor(options: ICalendar) {
     const { selector } = options;
     this.selector = selector;
-    this.style();
     this.init();
   }
 
@@ -50,48 +41,5 @@ export class Calendar {
 
   private id() {
     return guid();
-  }
-
-  private style() {
-    const style = document.createElement("style");
-
-    style.innerHTML = `
-      .${prefixedWeekView}, .${prefixedMonthView} {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-      }
-
-      .${prefixedPrevLastDay} {
-        opacity: 0.4;
-      }
-
-      .${prefixedDay} {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        color: purlple;
-        cursor: pointer;
-      }
-
-      .${prefixedDay}:first-child {
-        grid-column: 7;
-      }
-
-      .${prefixedMonthDay} {
-        color: red;
-      }
-
-      .${prefixedCurrentDay} {
-        padding: 2px;
-        border-radius: 50%;
-        background-color: black;
-        color: white;
-      }
-    `;
-
-    const ref = document.querySelector("script");
-    ref?.parentNode?.insertBefore(style, ref);
   }
 }

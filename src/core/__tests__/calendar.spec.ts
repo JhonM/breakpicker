@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { screen, waitFor, getByTestId } from "@testing-library/dom";
+import { screen } from "@testing-library/dom";
 import fireEvent from "@testing-library/user-event";
 import { getCurrentMonthName, getCurrentYear } from "../../helpers/dates";
 import { Calendar } from "../calendar";
