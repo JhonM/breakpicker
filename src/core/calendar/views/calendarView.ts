@@ -14,7 +14,7 @@ export function calendarView(
     options.selector.onfocus = () => dispatch(isOpenMsg(true));
   }
 
-  if (model.isOpen) {
+  if (model.isOpen || options.isOpen) {
     const todayDate = `${getMonthName(model.currentDate)} ${getYear(
       model.currentDate
     )}`;
