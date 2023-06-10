@@ -32,6 +32,8 @@ export type Model = {
   selectedDate?: Date;
 };
 
+export type Options = { selector: HTMLElement; isOpen?: boolean };
+
 export type ActionType =
   | { type: "IS_OPEN"; isOpen: boolean }
   | { type: "IS_CLOSE"; isOpen: boolean }

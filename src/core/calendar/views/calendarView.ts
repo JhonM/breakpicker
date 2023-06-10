@@ -2,16 +2,16 @@ import { h } from "@jhonm/blanc-vdom";
 import { guid } from "../../../helpers/random";
 import { getYear, getMonthName } from "../../../helpers/dates";
 import { isOpenMsg, isCloseMsg } from "../Update";
-import { DispatchType, Model } from "../../../types";
+import { DispatchType, Model, Options } from "../../../types";
 import { DaysOfWeekView, MonthView, SelectView } from "../views";
 
 export function calendarView(
   dispatch: DispatchType,
   model: Model,
-  selector: HTMLElement
+  options: Options
 ) {
-  if (selector) {
-    selector.onfocus = () => dispatch(isOpenMsg(true));
+  if (options.selector) {
+    options.selector.onfocus = () => dispatch(isOpenMsg(true));
   }
 
   if (model.isOpen) {
@@ -39,7 +39,7 @@ export function calendarView(
         h(
           "div",
           { "data-calendar-type": "foot" },
-          MonthView(dispatch, model, selector)
+          MonthView(dispatch, model, options.selector)
         )
       )
     );
