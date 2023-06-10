@@ -1,17 +1,17 @@
 import { h } from "@jhonm/blanc-vdom";
-import type { Model, DispatchType } from "../../types";
+import type { Model, DispatchType, Options } from "../../types";
 import { CalendarView } from "./views";
 
 export default function view(
   dispatch: DispatchType,
   model: Model,
-  selector: HTMLElement
+  options: Options
 ) {
   return h(
     "div",
     {},
     ...[
-      CalendarView(dispatch, model, selector),
+      CalendarView(dispatch, model, options),
       h("pre", {}, JSON.stringify(model, null, 2)),
     ]
   );
