@@ -1,6 +1,10 @@
-import { Calendar } from "./core/calendar"
+import initModel from "./core/calendar/Model";
+import update from "./core/calendar/Update";
+import view from "./core/calendar/View";
+import app from "./core/calendar/App";
 
-export const Breakpicker = Calendar;
-(window as any).Breakpicker = Breakpicker;
-
-export default Calendar;
+const appContainer = document.getElementById("app");
+app(initModel, update, view, appContainer, {
+  isOpen: true,
+  selector: appContainer,
+});
