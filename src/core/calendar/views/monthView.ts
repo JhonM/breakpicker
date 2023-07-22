@@ -10,11 +10,7 @@ import {
   prevLastDayClass,
 } from "../../../styles/styles.css";
 
-export function monthView(
-  dispatch: DispatchType,
-  model: Model,
-  selector: HTMLElement
-) {
+export function monthView(dispatch: DispatchType, model: Model) {
   const currentDate = model.currentDate;
 
   const prevLastDay = new Date(
