@@ -1,5 +1,5 @@
 import { render } from "@jhonm/blanc-vdom";
-import type { ActionType, Model, Options } from "../../types";
+import type { ActionType, Model } from "../../types";
 
 type DispatchType = (action: ActionType) => void;
 
@@ -7,17 +7,16 @@ type DispatchType = (action: ActionType) => void;
 export default function App(
   initModel: Model,
   update: (msg: ActionType, model: Model) => Model,
-  view: (dispatch: DispatchType, model: Model, options: Options) => any,
-  node: HTMLElement | null,
-  options: Options
+  view: (dispatch: DispatchType, model: Model) => any,
+  node: HTMLElement | null
 ) {
   let model = initModel;
-  let currentView = render(view(dispatch, model, options));
+  let currentView = render(view(dispatch, model));
   node?.appendChild(currentView);
 
   function dispatch(msg: ActionType) {
     model = update(msg, model);
-    const updatedView = render(view(dispatch, model, options));
+    const updatedView = render(view(dispatch, model));
     node?.replaceChild(updatedView, currentView);
     currentView = updatedView;
   }

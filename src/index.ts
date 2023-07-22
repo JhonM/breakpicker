@@ -4,7 +4,4 @@ import view from "./core/calendar/View";
 import app from "./core/calendar/App";
 
 const appContainer = document.getElementById("app");
-app(initModel, update, view, appContainer, {
-  isOpen: true,
-  selector: appContainer,
-});
+app(initModel, update, view, appContainer);
