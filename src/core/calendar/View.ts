@@ -11,5 +11,4 @@ export default function view(dispatch: DispatchType, model: Model) {
       h("pre", {}, JSON.stringify(model, null, 2)),
     ]
   );
-  //     h("div", { className: "some-pname" }, model.currentDate.toString()),
 }
