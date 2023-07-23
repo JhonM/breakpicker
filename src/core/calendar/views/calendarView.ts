@@ -27,6 +27,4 @@ export function calendarView(dispatch: DispatchType, model: Model) {
       h("div", { "data-calendar-type": "foot" }, MonthView(dispatch, model))
     )
   );
-
-  return h("div", {}, "");
 }
