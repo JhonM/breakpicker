@@ -2,13 +2,19 @@ import { h } from "@jhonm/blanc-vdom";
 import { getYear, getMonth, getCalendarDays } from "../../../helpers/dates";
 import { DispatchType, Model } from "../../../types";
 import { selectedDayMsg } from "../Update";
+import { AddSlotView } from "./";
 import {
   dayClass,
   monthClass,
   monthDayClass,
   currentDayClass,
   prevLastDayClass,
+  dayContainerClass,
 } from "../../../styles/styles.css";
+
+function dayContainer(...props: any[]) {
+  return h("div", { className: dayContainerClass }, ...props);
+}
 
 export function monthView(dispatch: DispatchType, model: Model) {
   const currentDate = model.currentDate;
@@ -34,13 +40,15 @@ export function monthView(dispatch: DispatchType, model: Model) {
     let month;
 
     if (i <= startWeekDay) {
-      month = h(
-        "div",
-        {
-          className: `${dayClass} ${prevLastDayClass} `,
-          onclick: () => console.log("clicked prev last day"),
-        },
-        `${prevLastDay - i}`
+      month = dayContainer(
+        h(
+          "div",
+          {
+            className: `${dayClass} ${prevLastDayClass} `,
+            onclick: () => console.log("clicked prev last day"),
+          },
+          `${prevLastDay - i}`
+        )
       );
     } else if (i <= startWeekDay + totalMonthDay) {
       currentDate.setDate(day);
@@ -51,22 +59,27 @@ export function monthView(dispatch: DispatchType, model: Model) {
           ? currentDayClass
           : monthDayClass;
 
-      month = h(
-        "div",
-        {
-          className: `${dayClass} ${currentDayOrMonthDay}`,
-          onclick: () => dispatch(selectedDayMsg(day)),
-        },
-        day.toString()
+      month = dayContainer(
+        h(
+          "div",
+          {
+            className: `${dayClass} ${currentDayOrMonthDay}`,
+            onclick: () => dispatch(selectedDayMsg(day)),
+          },
+          day.toString()
+        ),
+        AddSlotView(dispatch, model)
       );
     } else {
-      month = h(
-        "div",
-        {
-          className: dayClass,
-          onclick: () => console.log("clicked day view else"),
-        },
-        `${day - totalMonthDay}`
+      month = dayContainer(
+        h(
+          "div",
+          {
+            className: dayClass,
+            onclick: () => console.log("clicked day view else"),
+          },
+          `${day - totalMonthDay}`
+        )
       );
     }
 
