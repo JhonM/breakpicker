@@ -60,3 +60,12 @@ export const dayContainerClass = style({
   height: "100%",
   width: "100%",
 });
+
+export const addSlotFormClass = style({
+  background: "gray",
+  height: "100vh",
+  position: "fixed",
+  top: 0,
+  right: 0,
+  width: "30%",
+});
