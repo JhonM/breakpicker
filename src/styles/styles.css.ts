@@ -1,8 +1,11 @@
-import { style } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
+
+globalStyle("html, body, #app", { margin: 0, height: "100%" });
 
 const defaultGrid = {
   display: "grid",
   gridTemplateColumns: "repeat(7, 1fr)",
+  height: "100%",
 };
 
 export const monthClass = style(defaultGrid);
@@ -39,4 +42,16 @@ export const currentDayClass = style({
 
 export const monthDayClass = style({
   color: "red",
+});
+
+export const containerClass = style({
+  height: "100%",
+});
+
+export const calendarClass = style({
+  height: "100%",
+});
+
+export const calendarFooterClass = style({
+  height: "100%",
 });
