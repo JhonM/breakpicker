@@ -55,3 +55,8 @@ export const calendarClass = style({
 export const calendarFooterClass = style({
   height: "100%",
 });
+
+export const dayContainerClass = style({
+  height: "100%",
+  width: "100%",
+});
