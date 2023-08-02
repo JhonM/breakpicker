@@ -1,5 +1,5 @@
 import type { ActionType, Model, MonthsType } from "../../types";
-import { MSGS } from "../../types";
+import { MSGS, Months as months } from "../../types";
 
 export function changeCurrentMonthMsg(currentMonth: MonthsType) {
   return {
@@ -25,8 +25,14 @@ export function showAddFormMsg(showAddForm: boolean) {
 export default function update(msg: ActionType, model: Model): Model {
   switch (msg.type) {
     case MSGS.CURRENT_MONTH:
-      console.log("currentMonth");
-      return { ...model, currentMonth: msg.currentMonth };
+      const { currentMonth } = msg;
+      const indexOfMonth = months.indexOf(currentMonth);
+
+      return {
+        ...model,
+        currentMonth,
+        month: indexOfMonth,
+      };
     case MSGS.SELECTED_DATE:
       const selectedDate = new Date(
         `${msg.selectedDay} ${model.currentMonth} ${model.currentYear}`

@@ -1,7 +1,7 @@
 import { h } from "@jhonm/blanc-vdom";
 import { guid } from "../../../helpers/random";
 import { getYear, getMonthName } from "../../../helpers/dates";
-import { DispatchType, Model } from "../../../types";
+import { DispatchType, Model, Months } from "../../../types";
 import { DaysOfWeekView, MonthView, SelectView } from "../views";
 import {
   calendarClass,
@@ -10,9 +10,8 @@ import {
 } from "../../../styles/styles.css";
 
 export function calendarView(dispatch: DispatchType, model: Model) {
-  const todayDate = `${getMonthName(model.currentDate)} ${getYear(
-    model.currentDate
-  )}`;
+  const todayDate = `${Months[model.month]} ${model.year}`;
+
   return h(
     "div",
     {
