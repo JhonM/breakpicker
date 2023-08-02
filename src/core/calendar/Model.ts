@@ -47,7 +47,7 @@ const initModel: Model = {
     },
     {
       id: "2",
-      date: new Date("2023-01-27"),
+      date: new Date("2023-08-21"),
       slots: [
         {
           id: "1",
