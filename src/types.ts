@@ -25,20 +25,30 @@ export type MonthsType = (typeof Months)[keyof typeof Months];
 export type MsgType = (typeof MSGS)[keyof typeof MSGS];
 
 export interface Slot {
-  id: number;
+  id: string;
   title: string;
   duration: number;
   startDate: Date;
+  endDate: Date;
+}
+
+export interface EventType {
+  id: string;
+  date: Date;
+  slots?: Slot[];
 }
 
 export type Model = {
+  month: number;
+  year: number;
+  activeDay: string;
   currentDate: Date;
   currentMonth: MonthsType;
   currentYear: number;
   currentMonthDays: string[] | null;
   showAddForm: boolean;
   selectedDate?: Date;
-  dateSlots?: Slot[] | null;
+  // events?: EventType[] | null;
 };
 
 export type ActionType =

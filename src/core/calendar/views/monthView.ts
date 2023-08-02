@@ -1,5 +1,11 @@
 import { h } from "@jhonm/blanc-vdom";
-import { getYear, getMonth, getCalendarDays } from "../../../helpers/dates";
+import {
+  getYear,
+  getMonth,
+  getCalendarDays,
+  getCurrentMonth,
+  getCurrentYear,
+} from "../../../helpers/dates";
 import { DispatchType, Model } from "../../../types";
 import { selectedDayMsg } from "../Update";
 import { AddSlotView } from "./";
@@ -16,29 +22,41 @@ function dayContainer(...props: any[]) {
   return h("div", { className: dayContainerClass }, ...props);
 }
 
+const selectedDate = (day: number) =>
+  new Date(`${getCurrentYear}-${getCurrentMonth + 1}-${day}`);
+
 export function monthView(dispatch: DispatchType, model: Model) {
-  const currentDate = model.currentDate;
-
-  const prevLastDay = new Date(
-    getYear(currentDate),
-    getMonth(currentDate),
-    0
-  ).getDate();
-  const totalMonthDay = new Date(
-    getYear(currentDate),
-    getMonth(currentDate) + 1,
-    0
-  ).getDate();
-  const startWeekDay = new Date(
-    getYear(currentDate),
-    getMonth(currentDate),
-    1
-  ).getDay();
-
+  /*
   const daysArray = getCalendarDays().reduce((acc: any, i) => {
+    const currentDate = model.currentDate;
+
+    const prevLastDay = new Date(
+      getYear(currentDate),
+      getMonth(currentDate),
+      0
+    ).getDate();
+    const totalMonthDay = new Date(
+      getYear(currentDate),
+      getMonth(currentDate) + 1,
+      0
+    ).getDate();
+    const startWeekDay = new Date(
+      getYear(currentDate),
+      getMonth(currentDate),
+      1
+    ).getDay();
+
+    const getEventDate = (model: Model) => (day: Date) =>
+      model.events?.find((e) => e?.date.getDate() === day.getDate());
     const day = i - startWeekDay;
     let month;
 
+    const selectedDateDay = selectedDate(day);
+    const t = getEventDate(model)(selectedDateDay);
+
+    const withSlots = t ? t : "";
+
+    console.info(withSlots);
     if (i <= startWeekDay) {
       month = dayContainer(
         h(
@@ -66,7 +84,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
             className: `${dayClass} ${currentDayOrMonthDay}`,
             onclick: () => dispatch(selectedDayMsg(day)),
           },
-          day.toString()
+          ...[day.toString(), withSlots.toString()]
         ),
         AddSlotView(dispatch, model)
       );
@@ -89,6 +107,81 @@ export function monthView(dispatch: DispatchType, model: Model) {
 
     return acc;
   }, []);
+*/
+
+  const { year, month } = model;
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const prevLastDay = new Date(year, month, 0);
+  const prevDays = prevLastDay.getDate();
+  const lastDate = lastDay.getDate();
+  const day = firstDay.getDay();
+  const nextDays = 7 - lastDay.getDay() - 1;
+  const daysArray = [];
+
+  for (let x = day; x > 0; x--) {
+    const view = dayContainer(
+      h(
+        "div",
+        {
+          className: `${dayClass} ${prevLastDayClass} `,
+          onclick: () => console.log("clicked prev last day"),
+        },
+        `${prevDays - x + 1}`
+      )
+    );
+
+    daysArray.push(view);
+  }
+
+  for (let i = 1; i < lastDate; i++) {
+    if (
+      i === new Date().getDate() &&
+      year === new Date().getFullYear() &&
+      month === new Date().getMonth()
+    ) {
+      const view = dayContainer(
+        h(
+          "div",
+          {
+            className: `${dayClass} ${currentDayClass}`,
+            onclick: () => dispatch(selectedDayMsg(day)),
+          },
+          `${i}`
+        )
+        // AddSlotView(dispatch, model)
+      );
+
+      daysArray.push(view);
+    } else {
+      const view = dayContainer(
+        h(
+          "div",
+          {
+            className: `${dayClass} ${monthDayClass}`,
+            onclick: () => dispatch(selectedDayMsg(day)),
+          },
+          `${i}`
+        )
+      );
+
+      daysArray.push(view);
+    }
+  }
+
+  for (let j = 1; j < nextDays; j++) {
+    const view = dayContainer(
+      h(
+        "div",
+        {
+          className: dayClass,
+          onclick: () => console.log("clicked day view else"),
+        },
+        `${j}`
+      )
+    );
+    daysArray.push(view);
+  }
 
   return h("div", { className: monthClass }, ...daysArray);
 }
