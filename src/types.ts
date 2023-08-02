@@ -48,7 +48,7 @@ export type Model = {
   currentMonthDays: string[] | null;
   showAddForm: boolean;
   selectedDate?: Date;
-  // events?: EventType[] | null;
+  events?: EventType[] | null;
 };
 
 export type ActionType =
