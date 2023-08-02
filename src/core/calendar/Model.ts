@@ -17,63 +17,63 @@ const initModel: Model = {
   currentDate: new Date(),
   currentMonthDays: null,
   showAddForm: false,
-  // events: [
-  //   {
-  //     id: "1",
-  //     date: new Date("2023-07-23"),
-  //     slots: [
-  //       {
-  //         id: "1",
-  //         title: "slot title",
-  //         duration: 4,
-  //         startDate: new Date(),
-  //         endDate: new Date(),
-  //       },
-  //       {
-  //         id: "2",
-  //         title: "slot title two",
-  //         duration: 3,
-  //         startDate: new Date(),
-  //         endDate: new Date(),
-  //       },
-  //       {
-  //         id: "3",
-  //         title: "slot title three",
-  //         duration: 1,
-  //         startDate: new Date(),
-  //         endDate: new Date(),
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: "2",
-  //     date: new Date("2023-01-27"),
-  //     slots: [
-  //       {
-  //         id: "1",
-  //         title: "slot two title",
-  //         duration: 4,
-  //         startDate: new Date(),
-  //         endDate: new Date(),
-  //       },
-  //       {
-  //         id: "2",
-  //         title: "slot two title two",
-  //         duration: 3,
-  //         startDate: new Date(),
-  //         endDate: new Date(),
-  //       },
-  //       {
-  //         id: "3",
-  //         title: "slot two title three",
-  //         duration: 1,
-  //         startDate: new Date(),
-  //         endDate: new Date(),
-  //       },
-  //     ],
-  //   },
-  //   ,
-  // ],
+  events: [
+    {
+      id: "1",
+      date: new Date("2023-07-23"),
+      slots: [
+        {
+          id: "1",
+          title: "slot title",
+          duration: 4,
+          startDate: new Date(),
+          endDate: new Date(),
+        },
+        {
+          id: "2",
+          title: "slot title two",
+          duration: 3,
+          startDate: new Date(),
+          endDate: new Date(),
+        },
+        {
+          id: "3",
+          title: "slot title three",
+          duration: 1,
+          startDate: new Date(),
+          endDate: new Date(),
+        },
+      ],
+    },
+    {
+      id: "2",
+      date: new Date("2023-01-27"),
+      slots: [
+        {
+          id: "1",
+          title: "slot two title",
+          duration: 4,
+          startDate: new Date(),
+          endDate: new Date(),
+        },
+        {
+          id: "2",
+          title: "slot two title two",
+          duration: 3,
+          startDate: new Date(),
+          endDate: new Date(),
+        },
+        {
+          id: "3",
+          title: "slot two title three",
+          duration: 1,
+          startDate: new Date(),
+          endDate: new Date(),
+        },
+      ],
+    },
+    ,
+  ],
 };
 
 export default initModel;

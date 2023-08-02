@@ -119,7 +119,14 @@ export function monthView(dispatch: DispatchType, model: Model) {
   const nextDays = 7 - lastDay.getDay() - 1;
   const daysArray = [];
 
-  for (let x = day; x > 0; x--) {
+  const getEventDate = (model: Model) => (day: Date) =>
+    model.events?.find((e) => e?.date.getDate() === day.getDate());
+
+  const selectedDateDay = selectedDate(day);
+  const t = getEventDate(model)(selectedDateDay);
+
+  let x = day;
+  while (x > 0) {
     const view = dayContainer(
       h(
         "div",
@@ -132,9 +139,12 @@ export function monthView(dispatch: DispatchType, model: Model) {
     );
 
     daysArray.push(view);
+
+    x--;
   }
 
-  for (let i = 1; i < lastDate; i++) {
+  let i = 1;
+  while (i < lastDate) {
     if (
       i === new Date().getDate() &&
       year === new Date().getFullYear() &&
@@ -161,15 +171,17 @@ export function monthView(dispatch: DispatchType, model: Model) {
             className: `${dayClass} ${monthDayClass}`,
             onclick: () => dispatch(selectedDayMsg(day)),
           },
-          `${i}`
+          ...[`${i}`]
         )
       );
 
       daysArray.push(view);
     }
+    i++;
   }
 
-  for (let j = 1; j < nextDays; j++) {
+  let j = 1;
+  while (j < nextDays) {
     const view = dayContainer(
       h(
         "div",
@@ -180,7 +192,9 @@ export function monthView(dispatch: DispatchType, model: Model) {
         `${j}`
       )
     );
+
     daysArray.push(view);
+    j++;
   }
 
   return h("div", { className: monthClass }, ...daysArray);
