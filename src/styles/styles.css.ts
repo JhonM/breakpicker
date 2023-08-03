@@ -42,6 +42,12 @@ export const currentDayClass = style({
 
 export const monthDayClass = style({
   color: "red",
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  justifyContent: "flex-start",
+  alignItems: "center",
+  flexDirection: "column",
 });
 
 export const containerClass = style({
@@ -68,4 +74,12 @@ export const addSlotFormClass = style({
   top: 0,
   right: 0,
   width: "30%",
+});
+
+export const eventClass = style({
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 });

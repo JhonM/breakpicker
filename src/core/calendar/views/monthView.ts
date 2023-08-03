@@ -10,6 +10,7 @@ import {
   currentDayClass,
   prevLastDayClass,
   dayContainerClass,
+  eventClass,
 } from "../../../styles/styles.css";
 
 function dayContainer(...props: any[]) {
@@ -27,7 +28,6 @@ function slotsView(dispatch: DispatchType, slots: Slot[]) {
 }
 
 function eventView(dispatch: DispatchType, event: EventType) {
-  const eventClass = "event-class";
   if (!event.slots) {
     return h("div", { className: eventClass }, "add new slot");
   }
