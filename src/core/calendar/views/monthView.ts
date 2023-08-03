@@ -1,5 +1,6 @@
+import * as R from "ramda";
 import { h } from "@jhonm/blanc-vdom";
-import { DispatchType, Model } from "../../../types";
+import { DispatchType, Model, Slot, EventType } from "../../../types";
 import { selectedDayMsg } from "../Update";
 import { AddSlotView } from "./";
 import {
@@ -13,6 +14,25 @@ import {
 
 function dayContainer(...props: any[]) {
   return h("div", { className: dayContainerClass }, ...props);
+}
+
+function slotRow(dispatch, slot: Slot) {
+  return h("div", {}, slot.title);
+}
+
+function slotsView(dispatch: DispatchType, slots: Slot[]) {
+  const rows = R.map(R.partial(slotRow, [dispatch]), [...slots]);
+
+  return h("div", {}, ...rows);
+}
+
+function eventView(dispatch: DispatchType, event: EventType) {
+  const eventClass = "event-class";
+  if (!event.slots) {
+    return h("div", { className: eventClass }, "add new slot");
+  }
+
+  return h("div", { className: eventClass }, slotsView(dispatch, event.slots));
 }
 
 export function monthView(dispatch: DispatchType, model: Model) {
@@ -73,11 +93,12 @@ export function monthView(dispatch: DispatchType, model: Model) {
 
       daysArray.push(view);
     } else {
-      const slots = findSlots?.filter(
+      const eventSlots = findSlots?.filter(
         (event) =>
           event.date.toLocaleDateString() ===
           selectedDate(i).toLocaleDateString()
       );
+      const slots = eventSlots?.find((e) => e.slots);
 
       const view = dayContainer(
         h(
@@ -87,7 +108,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
             onclick: () => dispatch(selectedDayMsg(day)),
             "data-day": `${i}`,
           },
-          ...[`${i}`, `${slots}`, AddSlotView(dispatch, model)]
+          ...[`${i}`, slots ? eventView(dispatch, slots) : ""]
         )
       );
 
