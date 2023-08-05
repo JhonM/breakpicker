@@ -1,5 +1,5 @@
 import { h } from "@jhonm/blanc-vdom";
-import { weekClass } from "../../../styles/styles.css";
+import { weekClass, weekDayClass } from "../../../styles/styles.css";
 
 export function daysOfWeekView() {
   const days = [
@@ -14,7 +14,11 @@ export function daysOfWeekView() {
   const toArr = days.reduce((acc: any, curr) => {
     const day = h(
       "div",
-      { "data-breakpicker-day": `${curr.d}`, role: "breakpicker-week-day" },
+      {
+        className: weekDayClass,
+        "data-breakpicker-day": `${curr.d}`,
+        role: "breakpicker-week-day",
+      },
       `${curr.d}`
     );
 
