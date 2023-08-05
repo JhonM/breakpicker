@@ -65,6 +65,10 @@ export const calendarFooterClass = style({
 export const dayContainerClass = style({
   height: "100%",
   width: "100%",
+  display: "flex",
+  justifyContent: "flex-start",
+  alignItems: "center",
+  flexDirection: "column",
 });
 
 export const addSlotFormClass = style({
@@ -77,6 +81,14 @@ export const addSlotFormClass = style({
 });
 
 export const eventClass = style({
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+});
+
+export const weekDayClass = style({
   width: "100%",
   height: "100%",
   display: "flex",

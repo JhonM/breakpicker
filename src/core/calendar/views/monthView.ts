@@ -17,8 +17,14 @@ function dayContainer(...props: any[]) {
   return h("div", { className: dayContainerClass }, ...props);
 }
 
-function slotRow(dispatch, slot: Slot) {
-  return h("div", {}, slot.title);
+function slotView(dispatch: DispatchType, slot: Slot) {
+  const { title, id } = slot;
+
+  return h("div", {}, title);
+}
+
+function slotRow(dispatch: DispatchType, slot: Slot) {
+  return h("div", {}, slotView(dispatch, slot));
 }
 
 function slotsView(dispatch: DispatchType, slots: Slot[]) {
@@ -59,7 +65,6 @@ export function monthView(dispatch: DispatchType, model: Model) {
         "div",
         {
           className: `${dayClass} ${prevLastDayClass} `,
-          onclick: () => console.log("clicked prev last day"),
           "data-day": `${prevDays - x + 1}`,
         },
         `${prevDays - x + 1}`
@@ -83,7 +88,6 @@ export function monthView(dispatch: DispatchType, model: Model) {
           "div",
           {
             className: `${dayClass} ${currentDayClass}`,
-            onclick: () => dispatch(selectedDayMsg(day)),
             "data-day": `${i}`,
           },
           `${i}`
@@ -105,7 +109,6 @@ export function monthView(dispatch: DispatchType, model: Model) {
           "div",
           {
             className: `${dayClass} ${monthDayClass}`,
-            onclick: () => dispatch(selectedDayMsg(day)),
             "data-day": `${i}`,
           },
           ...[`${i}`, slots ? eventView(dispatch, slots) : ""]
