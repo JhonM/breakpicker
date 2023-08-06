@@ -69,12 +69,14 @@ export default function update(msg: ActionType, model: Model): Model {
           ...model,
           month: 11,
           year: model.year - 1,
+          currentMonth: months[11],
         };
       }
 
       return {
         ...model,
         month: prevMonth,
+        currentMonth: months[prevMonth],
       };
     case MSGS.NEXT_MONTH:
       const nextMonth = model.month + msg.amount;
@@ -84,12 +86,14 @@ export default function update(msg: ActionType, model: Model): Model {
           ...model,
           month: 0,
           year: model.year + 1,
+          currentMonth: months[11],
         };
       }
 
       return {
         ...model,
         month: nextMonth,
+        currentMonth: months[nextMonth],
       };
     default:
       return model;
