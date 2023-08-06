@@ -22,6 +22,20 @@ export function showAddFormMsg(showAddForm: boolean) {
   };
 }
 
+export function prevMonthMsg(amount: number) {
+  return {
+    type: MSGS.PREV_MONTH,
+    amount,
+  };
+}
+
+export function nextMonthMsg(amount: number) {
+  return {
+    type: MSGS.NEXT_MONTH,
+    amount,
+  };
+}
+
 export default function update(msg: ActionType, model: Model): Model {
   switch (msg.type) {
     case MSGS.CURRENT_MONTH:
@@ -46,6 +60,36 @@ export default function update(msg: ActionType, model: Model): Model {
       return {
         ...model,
         showAddForm,
+      };
+    case MSGS.PREV_MONTH:
+      const prevMonth = model.month - msg.amount;
+
+      if (prevMonth < 0) {
+        return {
+          ...model,
+          month: 11,
+          year: model.year - 1,
+        };
+      }
+
+      return {
+        ...model,
+        month: prevMonth,
+      };
+    case MSGS.NEXT_MONTH:
+      const nextMonth = model.month + msg.amount;
+
+      if (nextMonth > 11) {
+        return {
+          ...model,
+          month: 0,
+          year: model.year + 1,
+        };
+      }
+
+      return {
+        ...model,
+        month: nextMonth,
       };
     default:
       return model;

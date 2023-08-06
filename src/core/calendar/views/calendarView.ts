@@ -1,6 +1,5 @@
 import { h } from "@jhonm/blanc-vdom";
 import { guid } from "../../../helpers/random";
-import { getYear, getMonthName } from "../../../helpers/dates";
 import { DispatchType, Model, Months } from "../../../types";
 import { DaysOfWeekView, MonthView, SelectView } from "../views";
 import {
@@ -8,6 +7,23 @@ import {
   calendarFooterClass,
   containerClass,
 } from "../../../styles/styles.css";
+import { prevMonthMsg, nextMonthMsg } from "../Update";
+
+function prevMonthButton(dispatch: DispatchType) {
+  return h(
+    "button",
+    { onclick: () => dispatch(prevMonthMsg(1)) },
+    "Prev Month"
+  );
+}
+
+function nextMonthButton(dispatch: DispatchType) {
+  return h(
+    "button",
+    { onclick: () => dispatch(nextMonthMsg(1)) },
+    "Next Month"
+  );
+}
 
 export function calendarView(dispatch: DispatchType, model: Model) {
   const todayDate = `${Months[model.month]} ${model.year}`;
@@ -29,7 +45,12 @@ export function calendarView(dispatch: DispatchType, model: Model) {
         {
           "data-calendar-type": "head",
         },
-        ...[`${todayDate}`, SelectView(dispatch, model)]
+        ...[
+          `${todayDate}`,
+          SelectView(dispatch, model),
+          prevMonthButton(dispatch),
+          nextMonthButton(dispatch),
+        ]
       ),
       h("div", { "data-calendar-type": "body" }, DaysOfWeekView()),
       h(
