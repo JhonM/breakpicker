@@ -26,7 +26,9 @@ export default function update(msg: ActionType, model: Model): Model {
   switch (msg.type) {
     case MSGS.CURRENT_MONTH:
       const { currentMonth } = msg;
-      const indexOfMonth = months.indexOf(currentMonth);
+      const indexOfMonth = months.findIndex(
+        (month: MonthsType) => month === currentMonth
+      );
 
       return {
         ...model,

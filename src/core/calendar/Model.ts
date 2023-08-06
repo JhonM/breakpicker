@@ -4,7 +4,7 @@ import {
   getMonth,
   getYear,
 } from "../../helpers/dates";
-import type { Model } from "../../types";
+import type { EventType, Model } from "../../types";
 
 const today = new Date();
 
@@ -73,7 +73,7 @@ const initModel: Model = {
       ],
     },
     ,
-  ],
+  ] as EventType[],
 };
 
 export default initModel;
