@@ -7,7 +7,7 @@ import {
   calendarFooterClass,
   containerClass,
 } from "../../../styles/styles.css";
-import { prevMonthMsg, nextMonthMsg } from "../Update";
+import { prevMonthMsg, nextMonthMsg, goToTodayMsg } from "../Update";
 
 function prevMonthButton(dispatch: DispatchType) {
   return h(
@@ -23,6 +23,10 @@ function nextMonthButton(dispatch: DispatchType) {
     { onclick: () => dispatch(nextMonthMsg(1)) },
     "Next Month"
   );
+}
+
+function goToTodayButton(dispatch: DispatchType) {
+  return h("button", { onclick: () => dispatch(goToTodayMsg()) }, "Today");
 }
 
 export function calendarView(dispatch: DispatchType, model: Model) {
@@ -50,6 +54,7 @@ export function calendarView(dispatch: DispatchType, model: Model) {
           SelectView(dispatch, model),
           prevMonthButton(dispatch),
           nextMonthButton(dispatch),
+          goToTodayButton(dispatch),
         ]
       ),
       h("div", { "data-calendar-type": "body" }, DaysOfWeekView()),
