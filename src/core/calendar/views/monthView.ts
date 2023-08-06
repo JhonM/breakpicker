@@ -3,6 +3,7 @@ import { h } from "@jhonm/blanc-vdom";
 import { DispatchType, Model, Slot, EventType } from "../../../types";
 import { selectedDayMsg } from "../Update";
 import { AddSlotView } from "./";
+import { EventView } from "./events";
 import {
   dayClass,
   monthClass,
@@ -15,30 +16,6 @@ import {
 
 function dayContainer(...props: any[]) {
   return h("div", { className: dayContainerClass }, ...props);
-}
-
-function slotView(dispatch: DispatchType, slot: Slot) {
-  const { title, id } = slot;
-
-  return h("div", {}, title);
-}
-
-function slotRow(dispatch: DispatchType, slot: Slot) {
-  return h("div", {}, slotView(dispatch, slot));
-}
-
-function slotsView(dispatch: DispatchType, slots: Slot[]) {
-  const rows = R.map(R.partial(slotRow, [dispatch]), [...slots]);
-
-  return h("div", {}, ...rows);
-}
-
-function eventView(dispatch: DispatchType, event: EventType) {
-  if (!event.slots) {
-    return h("div", { className: eventClass }, "add new slot");
-  }
-
-  return h("div", { className: eventClass }, slotsView(dispatch, event.slots));
 }
 
 export function monthView(dispatch: DispatchType, model: Model) {
@@ -111,7 +88,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
             className: `${dayClass} ${monthDayClass}`,
             "data-day": `${i}`,
           },
-          ...[`${i}`, slots ? eventView(dispatch, slots) : ""]
+          ...[`${i}`, slots ? EventView(dispatch, slots) : ""]
         )
       );
 
