@@ -20,7 +20,7 @@ export const Months = [
   "December",
 ] as const;
 
-export type MonthsType = (typeof Months)[keyof typeof Months];
+export type MonthType = (typeof Months)[keyof typeof Months];
 
 export type MsgType = (typeof MSGS)[keyof typeof MSGS];
 
@@ -43,7 +43,7 @@ export type Model = {
   year: number;
   activeDay: string;
   currentDate: Date;
-  currentMonth: MonthsType;
+  currentMonth: MonthType;
   currentYear: number;
   currentMonthDays: string[] | null;
   showAddForm: boolean;
@@ -52,7 +52,7 @@ export type Model = {
 };
 
 export type ActionType =
-  | { type: "CURRENT_MONTH"; currentMonth: MonthsType }
+  | { type: "CURRENT_MONTH"; currentMonth: MonthType }
   | { type: "SELECTED_DATE"; selectedDay: number }
   | { type: "SET_CURRENT_MONTH_DAYS"; currentMonthDays: string[] | null }
   | { type: "SHOW_ADD_FORM"; showAddForm: boolean };

@@ -1,7 +1,7 @@
-import type { ActionType, Model, MonthsType } from "../../types";
+import type { ActionType, Model, MonthType } from "../../types";
 import { MSGS, Months as months } from "../../types";
 
-export function changeCurrentMonthMsg(currentMonth: MonthsType) {
+export function changeCurrentMonthMsg(currentMonth: MonthType) {
   return {
     type: MSGS.CURRENT_MONTH,
     currentMonth,
@@ -27,7 +27,7 @@ export default function update(msg: ActionType, model: Model): Model {
     case MSGS.CURRENT_MONTH:
       const { currentMonth } = msg;
       const indexOfMonth = months.findIndex(
-        (month: MonthsType) => month === currentMonth
+        (month: MonthType) => month === currentMonth
       );
 
       return {
