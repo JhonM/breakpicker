@@ -3,8 +3,9 @@ export const MSGS = {
   SELECTED_DATE: "SELECTED_DATE",
   SET_CURRENT_MONTH_DAYS: "SET_CURRENT_MONTH_DAYS",
   SHOW_ADD_FORM: "SHOW_ADD_FORM",
-  NEXT_MONTH: "NEXT_MONTH",
   PREV_MONTH: "PREV_MONTH",
+  NEXT_MONTH: "NEXT_MONTH",
+  GO_TO_TODAY: "GO_TO_TODAY",
 } as const;
 
 export const Months = [
@@ -59,6 +60,7 @@ export type ActionType =
   | { type: "SET_CURRENT_MONTH_DAYS"; currentMonthDays: string[] | null }
   | { type: "PREV_MONTH"; amount: number }
   | { type: "NEXT_MONTH"; amount: number }
+  | { type: "GO_TO_TODAY" }
   | { type: "SHOW_ADD_FORM"; showAddForm: boolean };
 
 export type DispatchType = (action: ActionType) => void;

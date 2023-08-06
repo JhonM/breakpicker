@@ -36,6 +36,12 @@ export function nextMonthMsg(amount: number) {
   };
 }
 
+export function goToTodayMsg() {
+  return {
+    type: MSGS.GO_TO_TODAY,
+  };
+}
+
 export default function update(msg: ActionType, model: Model): Model {
   switch (msg.type) {
     case MSGS.CURRENT_MONTH:
@@ -94,6 +100,14 @@ export default function update(msg: ActionType, model: Model): Model {
         ...model,
         month: nextMonth,
         currentMonth: months[nextMonth],
+      };
+    case MSGS.GO_TO_TODAY:
+      const today = new Date();
+
+      return {
+        ...model,
+        month: today.getMonth(),
+        year: today.getFullYear(),
       };
     default:
       return model;
