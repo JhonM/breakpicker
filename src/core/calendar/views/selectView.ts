@@ -3,12 +3,12 @@ import { select, option } from "../../components/Select";
 import {
   DispatchType,
   Model,
-  MonthsType,
+  MonthType,
   Months as months,
 } from "../../../types";
 import { changeCurrentMonthMsg } from "../Update";
 
-function selectOptions(dispatch: DispatchType, selectedOption: MonthsType) {
+function selectOptions(dispatch: DispatchType, selectedOption: MonthType) {
   const opt = months.map((value: string) =>
     option({
       className: "",
@@ -20,12 +20,12 @@ function selectOptions(dispatch: DispatchType, selectedOption: MonthsType) {
   return opt;
 }
 
-function container(dispatch: DispatchType, selected: MonthsType) {
+function container(dispatch: DispatchType, selected: MonthType) {
   return select({
     className: "select-classname",
     options: selectOptions(dispatch, selected),
     onchange: (e) =>
-      dispatch(changeCurrentMonthMsg(e.target.value as MonthsType)),
+      dispatch(changeCurrentMonthMsg(e.target.value as MonthType)),
   });
 }
 
