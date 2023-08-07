@@ -27,6 +27,8 @@ function titleFieldSet(dispatch: DispatchType, model: Model) {
 }
 
 export function addSlotFormView(dispatch: DispatchType, model: Model) {
+  const date = new Date(model.year, model.month, model.activeDay);
+
   if (model.showAddForm) {
     return h(
       "form",
@@ -36,6 +38,7 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
       ...[
         closeButton(() => dispatch(showAddFormMsg(false))),
         titleFieldSet(dispatch, model),
+        `${date.toLocaleDateString()}`,
       ]
     );
   }

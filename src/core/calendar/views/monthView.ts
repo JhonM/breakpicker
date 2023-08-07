@@ -1,7 +1,7 @@
 import * as R from "ramda";
 import { h } from "@jhonm/blanc-vdom";
 import { DispatchType, Model, Slot, EventType } from "../../../types";
-import { selectedDayMsg } from "../Update";
+import { activeDayMsg, selectedDayMsg, showAddFormMsg } from "../Update";
 import { AddSlotView } from "./";
 import { EventView } from "./events";
 import {
@@ -68,8 +68,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
             "data-day": `${i}`,
           },
           `${i}`
-        ),
-        AddSlotView(dispatch, model)
+        )
       );
 
       daysArray.push(view);
@@ -87,6 +86,10 @@ export function monthView(dispatch: DispatchType, model: Model) {
           {
             className: `${dayClass} ${monthDayClass}`,
             "data-day": `${i}`,
+            onclick: (e) => {
+              dispatch(showAddFormMsg(true));
+              dispatch(activeDayMsg(Number(e.target.dataset.day)));
+            },
           },
           ...[`${i}`, slots ? EventView(dispatch, slots) : ""]
         )

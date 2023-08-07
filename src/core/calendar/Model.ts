@@ -11,7 +11,6 @@ const today = new Date();
 const initModel: Model = {
   month: getMonth(today),
   year: getYear(today),
-  activeDay: "",
   currentMonth: getCurrentMonthName,
   currentYear: getCurrentYear,
   currentDate: new Date(),
