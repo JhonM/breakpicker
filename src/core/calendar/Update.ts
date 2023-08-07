@@ -42,6 +42,13 @@ export function goToTodayMsg() {
   };
 }
 
+export function activeDayMsg(activeDay: number) {
+  return {
+    type: MSGS.ACTIVE_DAY,
+    activeDay,
+  };
+}
+
 export default function update(msg: ActionType, model: Model): Model {
   switch (msg.type) {
     case MSGS.CURRENT_MONTH:
@@ -108,6 +115,11 @@ export default function update(msg: ActionType, model: Model): Model {
         ...model,
         month: today.getMonth(),
         year: today.getFullYear(),
+      };
+    case MSGS.ACTIVE_DAY:
+      return {
+        ...model,
+        activeDay: msg.activeDay,
       };
     default:
       return model;
