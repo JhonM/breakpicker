@@ -1,8 +1,6 @@
-import * as R from "ramda";
 import { h } from "@jhonm/blanc-vdom";
-import { DispatchType, Model, Slot, EventType } from "../../../types";
-import { activeDayMsg, selectedDayMsg, showAddFormMsg } from "../Update";
-import { AddSlotView } from "./";
+import { DispatchType, Model } from "../../../types";
+import { activeDayMsg, showAddFormMsg } from "../Update";
 import { EventView } from "./events";
 import {
   dayClass,
@@ -11,7 +9,6 @@ import {
   currentDayClass,
   prevLastDayClass,
   dayContainerClass,
-  eventClass,
 } from "../../../styles/styles.css";
 
 function dayContainer(...props: any[]) {
