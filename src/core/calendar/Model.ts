@@ -19,7 +19,7 @@ const initModel: Model = {
   events: [
     {
       id: "1",
-      date: new Date("2023-07-23"),
+      date: new Date("2024-02-13"),
       slots: [
         {
           id: "1",
@@ -46,7 +46,7 @@ const initModel: Model = {
     },
     {
       id: "2",
-      date: new Date("2023-08-21"),
+      date: new Date("2024-01-12"),
       slots: [
         {
           id: "1",
@@ -71,7 +71,6 @@ const initModel: Model = {
         },
       ],
     },
-    ,
   ] as EventType[],
 };
 

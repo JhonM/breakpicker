@@ -1,4 +1,4 @@
-import type { ActionType, Model, MonthType } from "../../types";
+import type { ActionType, EventType, Model, MonthType } from "../../types";
 import { MSGS, Months as months } from "../../types";
 
 export function changeCurrentMonthMsg(currentMonth: MonthType) {
@@ -46,6 +46,12 @@ export function activeDayMsg(activeDay: number) {
   return {
     type: MSGS.ACTIVE_DAY,
     activeDay,
+  };
+}
+
+export function onSubmitMsg() {
+  return {
+    type: MSGS.ON_SUBMIT,
   };
 }
 
@@ -120,6 +126,31 @@ export default function update(msg: ActionType, model: Model): Model {
       return {
         ...model,
         activeDay: msg.activeDay,
+      };
+    case MSGS.ON_SUBMIT:
+      const todayDate = new Date();
+      const tomorrow = new Date();
+      tomorrow.setDate(todayDate.getDate() + 1);
+
+      const event = {
+        id: "4",
+        date: tomorrow,
+        slots: [
+          {
+            id: "4",
+            title: "Selected day",
+            duration: 4,
+            startDate: new Date(),
+            endDate: new Date(),
+          },
+        ],
+      };
+
+      const events = [...(model.events as EventType[]), event];
+
+      return {
+        ...model,
+        events,
       };
     default:
       return model;
