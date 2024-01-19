@@ -7,6 +7,7 @@ export const MSGS = {
   NEXT_MONTH: "NEXT_MONTH",
   GO_TO_TODAY: "GO_TO_TODAY",
   ACTIVE_DAY: "ACTIVE_DAY",
+  ON_SUBMIT: "ON_SUBMIT",
 } as const;
 
 export const Months = [
@@ -63,6 +64,7 @@ export type ActionType =
   | { type: "NEXT_MONTH"; amount: number }
   | { type: "GO_TO_TODAY" }
   | { type: "ACTIVE_DAY"; activeDay: number }
+  | { type: "ON_SUBMIT" }
   | { type: "SHOW_ADD_FORM"; showAddForm: boolean };
 
 export type DispatchType = (action: ActionType) => void;
