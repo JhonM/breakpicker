@@ -1,5 +1,5 @@
 import { h } from "@jhonm/blanc-vdom";
-import { DispatchType, Model } from "../../../types";
+import { DispatchType, Model, HTMLElementEvent } from "../../../types";
 import { activeDayMsg, showAddFormMsg } from "../Update";
 import { EventView } from "./events";
 import {
@@ -83,7 +83,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
           {
             className: `${dayClass} ${monthDayClass}`,
             "data-day": `${i}`,
-            onclick: (e) => {
+            onclick: (e: HTMLElementEvent<HTMLDivElement>) => {
               dispatch(showAddFormMsg(true));
               dispatch(activeDayMsg(Number(e.target.dataset.day)));
             },

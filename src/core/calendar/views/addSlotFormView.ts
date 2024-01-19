@@ -31,7 +31,7 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
       "form",
       {
         className: addSlotFormClass,
-        onsubmit: (e) => {
+        onsubmit: (e: SubmitEvent) => {
           e.preventDefault();
           dispatch(onSubmitMsg());
           dispatch(showAddFormMsg(false));
