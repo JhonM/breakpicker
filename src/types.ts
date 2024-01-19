@@ -68,3 +68,7 @@ export type ActionType =
   | { type: "SHOW_ADD_FORM"; showAddForm: boolean };
 
 export type DispatchType = (action: ActionType) => void;
+
+export type HTMLElementEvent<T extends HTMLElement> = Event & {
+  target: T;
+};
