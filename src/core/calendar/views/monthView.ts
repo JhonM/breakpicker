@@ -1,5 +1,10 @@
 import { h } from "@jhonm/blanc-vdom";
-import { DispatchType, Model, HTMLElementEvent } from "../../../types";
+import {
+  DispatchType,
+  Model,
+  HTMLElementEvent,
+  EventType,
+} from "../../../types";
 import { activeDayMsg, showAddFormMsg } from "../Update";
 import { EventView } from "./events";
 import {
@@ -11,9 +16,21 @@ import {
   dayContainerClass,
 } from "../../../styles/styles.css";
 
-function dayContainer(...props: any[]) {
-  return h("div", { className: dayContainerClass }, ...props);
+function dayContainer(dayClass: string, ...props: any[]) {
+  return h("div", { className: dayClass }, ...props);
 }
+
+const getEventSlots =
+  (slots: EventType[]) =>
+  (selectedDate: (date: number) => Date) =>
+  (day: number) =>
+    slots
+      .filter(
+        (event) =>
+          event.date.toLocaleDateString() ===
+          selectedDate(day).toLocaleDateString()
+      )
+      ?.find((e) => e.slots);
 
 export function monthView(dispatch: DispatchType, model: Model) {
   const { year, month } = model;
@@ -32,9 +49,22 @@ export function monthView(dispatch: DispatchType, model: Model) {
     ?.filter((event) => event.slots)
     .filter((e) => e.date);
 
+  const eventsSlots = getEventSlots(findSlots || []);
+  const slots = eventsSlots(selectedDate);
+  const currentDay = (i: number) =>
+    h(
+      "div",
+      {
+        className: `${dayClass} ${currentDayClass}`,
+        "data-day": `${i}`,
+      },
+      `${i}`
+    );
+
   let x = day;
   while (x > 0) {
     const view = dayContainer(
+      dayContainerClass,
       h(
         "div",
         {
@@ -58,26 +88,21 @@ export function monthView(dispatch: DispatchType, model: Model) {
       month === new Date().getMonth()
     ) {
       const view = dayContainer(
+        dayContainerClass,
         h(
           "div",
           {
             className: `${dayClass} ${currentDayClass}`,
-            "data-day": `${i}`,
           },
-          `${i}`
+
+          ...[currentDay(i)]
         )
       );
 
       daysArray.push(view);
     } else {
-      const eventSlots = findSlots?.filter(
-        (event) =>
-          event.date.toLocaleDateString() ===
-          selectedDate(i).toLocaleDateString()
-      );
-      const slots = eventSlots?.find((e) => e.slots);
-
       const view = dayContainer(
+        dayContainerClass,
         h(
           "div",
           {
@@ -88,7 +113,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
               dispatch(activeDayMsg(Number(e.target.dataset.day)));
             },
           },
-          ...[`${i}`, slots ? EventView(dispatch, slots) : ""]
+          ...[`${i}`, EventView(dispatch, slots(i))]
         )
       );
 
@@ -100,6 +125,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
   let j = 1;
   while (j < nextDays) {
     const view = dayContainer(
+      dayContainerClass,
       h(
         "div",
         {
