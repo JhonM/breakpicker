@@ -16,8 +16,23 @@ import {
   dayContainerClass,
 } from "../../../styles/styles.css";
 
-function dayContainer(dayClass: string, ...props: any[]) {
-  return h("div", { className: dayClass }, ...props);
+function dayContainer(
+  dayClass: string,
+  dispatch: DispatchType,
+  ...props: any[]
+) {
+  return h(
+    "div",
+    {
+      className: dayClass,
+
+      onclick: (e: HTMLElementEvent<HTMLDivElement>) => {
+        dispatch?.(showAddFormMsg(true));
+        dispatch?.(activeDayMsg(Number(e.target.dataset.day)));
+      },
+    },
+    ...props
+  );
 }
 
 const getEventSlots =
@@ -65,6 +80,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
   while (x > 0) {
     const view = dayContainer(
       dayContainerClass,
+      dispatch,
       h(
         "div",
         {
@@ -89,6 +105,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
     ) {
       const view = dayContainer(
         dayContainerClass,
+        dispatch,
         h(
           "div",
           {
@@ -103,15 +120,12 @@ export function monthView(dispatch: DispatchType, model: Model) {
     } else {
       const view = dayContainer(
         dayContainerClass,
+        dispatch,
         h(
           "div",
           {
             className: `${dayClass} ${monthDayClass}`,
             "data-day": `${i}`,
-            onclick: (e: HTMLElementEvent<HTMLDivElement>) => {
-              dispatch(showAddFormMsg(true));
-              dispatch(activeDayMsg(Number(e.target.dataset.day)));
-            },
           },
           ...[`${i}`, EventView(dispatch, slots(i))]
         )
@@ -126,6 +140,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
   while (j < nextDays) {
     const view = dayContainer(
       dayContainerClass,
+      dispatch,
       h(
         "div",
         {
