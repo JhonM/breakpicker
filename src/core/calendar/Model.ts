@@ -16,9 +16,11 @@ const initModel: Model = {
   currentDate: new Date(),
   currentMonthDays: null,
   showAddForm: false,
+  nextId: 2,
+  editId: null,
   events: [
     {
-      id: "1",
+      id: 1,
       date: new Date("2024-02-13"),
       slots: [
         {
@@ -45,7 +47,7 @@ const initModel: Model = {
       ],
     },
     {
-      id: "2",
+      id: 2,
       date: new Date("2024-01-12"),
       slots: [
         {

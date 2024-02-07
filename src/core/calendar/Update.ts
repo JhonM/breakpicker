@@ -1,5 +1,12 @@
-import type { ActionType, EventType, Model, MonthType } from "../../types";
+import type {
+  ActionType,
+  EventType,
+  Model,
+  MonthType,
+  SubmitData,
+} from "../../types";
 import { MSGS, Months as months } from "../../types";
+import { guid } from "../../helpers/random";
 
 export function changeCurrentMonthMsg(currentMonth: MonthType) {
   return {
@@ -49,9 +56,10 @@ export function activeDayMsg(activeDay: number) {
   };
 }
 
-export function onSubmitMsg() {
+export function onSubmitMsg(submitData: SubmitData) {
   return {
     type: MSGS.ON_SUBMIT,
+    submitData,
   };
 }
 
@@ -128,29 +136,31 @@ export default function update(msg: ActionType, model: Model): Model {
         activeDay: msg.activeDay,
       };
     case MSGS.ON_SUBMIT:
-      const todayDate = new Date();
-      const tomorrow = new Date();
-      tomorrow.setDate(todayDate.getDate() + 1);
+      // const todayDate = new Date();
+      // const tomorrow = new Date();
+      // tomorrow.setDate(todayDate.getDate() + 1);
 
-      const event = {
-        id: "4",
-        date: tomorrow,
-        slots: [
-          {
-            id: "4",
-            title: "Selected day",
-            duration: 4,
+      const matchedEventArray = model.events?.map((event) => {
+        if (event.id === 2) {
+          const newSlot = {
+            id: `${guid()}`,
             startDate: new Date(),
             endDate: new Date(),
-          },
-        ],
-      };
+            ...msg.submitData,
+          };
 
-      const events = [...(model.events as EventType[]), event];
+          const mergeSlots = [...(event.slots || []), newSlot];
+          const updatedSlots = { ...event, slots: mergeSlots };
+
+          return updatedSlots;
+        }
+
+        return event;
+      });
 
       return {
         ...model,
-        events,
+        events: matchedEventArray,
       };
     default:
       return model;
