@@ -143,7 +143,7 @@ export default function update(msg: ActionType, model: Model): Model {
       const matchedEventArray = model.events?.map((event) => {
         if (event.id === 2) {
           const newSlot = {
-            id: `${guid()}`,
+            id: guid(),
             startDate: new Date(),
             endDate: new Date(),
             ...msg.submitData,

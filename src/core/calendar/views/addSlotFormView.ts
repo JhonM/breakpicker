@@ -51,7 +51,7 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
         closeButton(() => dispatch(showAddFormMsg(false))),
         baseInput(dispatch, "title"),
         baseInput(dispatch, "duration"),
-        `${date.toLocaleDateString()} jhonln`,
+        `${date.toLocaleDateString()}`,
         submitButton(),
       ]
     );
