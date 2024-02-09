@@ -15,16 +15,20 @@ import {
   prevLastDayClass,
   dayContainerClass,
 } from "../../../styles/styles.css";
+import { guid } from "../../../helpers/random";
 
 function dayContainer(
   dayClass: string,
   dispatch: DispatchType,
+  dataDay: string | number,
   ...props: any[]
 ) {
   return h(
     "div",
     {
       className: dayClass,
+      "data-day-id": guid(),
+      "data-day": dataDay,
 
       onclick: (e: HTMLElementEvent<HTMLDivElement>) => {
         dispatch?.(showAddFormMsg(true));
@@ -81,6 +85,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
     const view = dayContainer(
       dayContainerClass,
       dispatch,
+      prevDays - x + 1,
       h(
         "div",
         {
@@ -106,10 +111,12 @@ export function monthView(dispatch: DispatchType, model: Model) {
       const view = dayContainer(
         dayContainerClass,
         dispatch,
+        i,
         h(
           "div",
           {
             className: `${dayClass} ${currentDayClass}`,
+            "data-type-day": "current",
           },
 
           ...[currentDay(i)]
@@ -121,11 +128,13 @@ export function monthView(dispatch: DispatchType, model: Model) {
       const view = dayContainer(
         dayContainerClass,
         dispatch,
+        i,
         h(
           "div",
           {
             className: `${dayClass} ${monthDayClass}`,
             "data-day": `${i}`,
+            "data-type-day": "include-event",
           },
           ...[`${i}`, EventView(dispatch, slots(i))]
         )
@@ -141,12 +150,14 @@ export function monthView(dispatch: DispatchType, model: Model) {
     const view = dayContainer(
       dayContainerClass,
       dispatch,
+      j,
       h(
         "div",
         {
           className: dayClass,
           onclick: () => console.log("clicked day view else"),
           "data-day": `${j}`,
+          "data-type-day": "inactive",
         },
         `${j}`
       )

@@ -4,6 +4,7 @@ import {
   getMonth,
   getYear,
 } from "../../helpers/dates";
+import { guid } from "../../helpers/random";
 import type { EventType, Model } from "../../types";
 
 const today = new Date();
@@ -24,21 +25,21 @@ const initModel: Model = {
       date: new Date("2024-02-13"),
       slots: [
         {
-          id: "1",
+          id: guid(),
           title: "slot title",
           duration: 4,
           startDate: new Date(),
           endDate: new Date(),
         },
         {
-          id: "2",
+          id: guid(),
           title: "slot title two",
           duration: 3,
           startDate: new Date(),
           endDate: new Date(),
         },
         {
-          id: "3",
+          id: guid(),
           title: "slot title three",
           duration: 1,
           startDate: new Date(),
@@ -51,21 +52,21 @@ const initModel: Model = {
       date: new Date("2024-01-12"),
       slots: [
         {
-          id: "1",
+          id: guid(),
           title: "slot two title",
           duration: 4,
           startDate: new Date(),
           endDate: new Date(),
         },
         {
-          id: "2",
+          id: guid(),
           title: "slot two title two",
           duration: 3,
           startDate: new Date(),
           endDate: new Date(),
         },
         {
-          id: "3",
+          id: guid(),
           title: "slot two title three",
           duration: 1,
           startDate: new Date(),
