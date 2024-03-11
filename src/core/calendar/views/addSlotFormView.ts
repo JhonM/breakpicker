@@ -34,22 +34,29 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
         onsubmit: (e: SubmitEvent) => {
           e.preventDefault();
 
-          const title = e.target?.title.value;
-          const duration = e.target?.duration.value;
+          if (e.target) {
+            const target = e.target as HTMLFormElement;
 
-          dispatch(
-            onSubmitMsg({
-              title,
-              duration,
-              date,
-            })
-          );
-          dispatch(showAddFormMsg(false));
+            const title = target?.mainTitle.value;
+            const duration = target?.duration.value;
+            const slotId = target;
+            console.info(slotId, "slotId");
+
+            dispatch(
+              onSubmitMsg({
+                title,
+                duration,
+                date,
+                slotId,
+              })
+            );
+            dispatch(showAddFormMsg(false));
+          }
         },
       },
       ...[
         closeButton(() => dispatch(showAddFormMsg(false))),
-        baseInput(dispatch, "title"),
+        baseInput(dispatch, "mainTitle"),
         baseInput(dispatch, "duration"),
         `${date.toLocaleDateString()}`,
         submitButton(),

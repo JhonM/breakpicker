@@ -63,6 +63,13 @@ export function onSubmitMsg(submitData: SubmitData) {
   };
 }
 
+export function currentSlotIdMsg(slotId: string) {
+  return {
+    type: MSGS.CURRENT_SLOT_ID,
+    slotId,
+  };
+}
+
 export default function update(msg: ActionType, model: Model): Model {
   switch (msg.type) {
     case MSGS.CURRENT_MONTH:
@@ -134,6 +141,11 @@ export default function update(msg: ActionType, model: Model): Model {
       return {
         ...model,
         activeDay: msg.activeDay,
+      };
+    case MSGS.CURRENT_SLOT_ID:
+      return {
+        ...model,
+        slotId: msg.slotId,
       };
     case MSGS.ON_SUBMIT:
       // const todayDate = new Date();
