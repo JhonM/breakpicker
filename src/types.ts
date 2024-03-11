@@ -8,6 +8,7 @@ export const MSGS = {
   GO_TO_TODAY: "GO_TO_TODAY",
   ACTIVE_DAY: "ACTIVE_DAY",
   ON_SUBMIT: "ON_SUBMIT",
+  CURRENT_SLOT_ID: "CURRENT_SLOT_ID",
 } as const;
 
 export const Months = [
@@ -53,6 +54,7 @@ export type Model = {
   showAddForm: boolean;
   nextId: number;
   editId: number | null;
+  currentSlotId: string | null;
   activeDay?: number;
   selectedDate?: Date;
   events?: EventType[];
@@ -62,6 +64,7 @@ export type SubmitData = {
   title: string;
   duration: number;
   date: Date;
+  slotId: string;
 };
 
 export type ActionType =
@@ -73,7 +76,8 @@ export type ActionType =
   | { type: "GO_TO_TODAY" }
   | { type: "ACTIVE_DAY"; activeDay: number }
   | { type: "ON_SUBMIT"; submitData: SubmitData }
-  | { type: "SHOW_ADD_FORM"; showAddForm: boolean };
+  | { type: "SHOW_ADD_FORM"; showAddForm: boolean }
+  | { type: "CURRENT_SLOT_ID"; slotId: string };
 
 export type DispatchType = (action: ActionType) => void;
 

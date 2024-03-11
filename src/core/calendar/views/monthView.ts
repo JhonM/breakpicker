@@ -125,6 +125,12 @@ export function monthView(dispatch: DispatchType, model: Model) {
 
       daysArray.push(view);
     } else {
+      const slotId = findSlots?.find(
+        (slot) =>
+          slot.date.toLocaleDateString() ===
+          selectedDate(i).toLocaleDateString()
+      );
+
       const view = dayContainer(
         dayContainerClass,
         dispatch,
@@ -136,7 +142,11 @@ export function monthView(dispatch: DispatchType, model: Model) {
             "data-day": `${i}`,
             "data-type-day": "include-event",
           },
-          ...[`${i}`, EventView(dispatch, slots(i))]
+          ...[
+            `${i}`,
+            EventView(dispatch, slots(i)),
+            h("input", { type: "hidden", name: "slotId", value: slotId?.id }),
+          ]
         )
       );
 

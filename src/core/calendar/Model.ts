@@ -19,6 +19,7 @@ const initModel: Model = {
   showAddForm: false,
   nextId: 2,
   editId: null,
+  currentSlotId: null,
   events: [
     {
       id: 1,
