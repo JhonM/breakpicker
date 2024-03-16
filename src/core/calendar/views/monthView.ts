@@ -5,7 +5,7 @@ import {
   HTMLElementEvent,
   EventType,
 } from "../../../types";
-import { activeDayMsg, showAddFormMsg } from "../Update";
+import { activeDayMsg, showAddFormMsg, currentSlotIdMsg } from "../Update";
 import { EventView } from "./events";
 import {
   dayClass,
@@ -141,12 +141,9 @@ export function monthView(dispatch: DispatchType, model: Model) {
             className: `${dayClass} ${monthDayClass}`,
             "data-day": `${i}`,
             "data-type-day": "include-event",
+            onclick: () => dispatch(currentSlotIdMsg(slotId?.id || null)),
           },
-          ...[
-            `${i}`,
-            EventView(dispatch, slots(i)),
-            h("input", { type: "hidden", name: "slotId", value: slotId?.id }),
-          ]
+          ...[`${i}`, EventView(dispatch, slots(i))]
         )
       );
 
