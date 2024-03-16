@@ -63,7 +63,7 @@ export function onSubmitMsg(submitData: SubmitData) {
   };
 }
 
-export function currentSlotIdMsg(slotId: string) {
+export function currentSlotIdMsg(slotId: number | null) {
   return {
     type: MSGS.CURRENT_SLOT_ID,
     slotId,
@@ -145,15 +145,11 @@ export default function update(msg: ActionType, model: Model): Model {
     case MSGS.CURRENT_SLOT_ID:
       return {
         ...model,
-        slotId: msg.slotId,
+        currentSlotId: msg.slotId,
       };
     case MSGS.ON_SUBMIT:
-      // const todayDate = new Date();
-      // const tomorrow = new Date();
-      // tomorrow.setDate(todayDate.getDate() + 1);
-
       const matchedEventArray = model.events?.map((event) => {
-        if (event.id === 2) {
+        if (event.id === model.currentSlotId) {
           const newSlot = {
             id: guid(),
             startDate: new Date(),
@@ -170,9 +166,28 @@ export default function update(msg: ActionType, model: Model): Model {
         return event;
       });
 
+      const hasSlots = model.events?.find(
+        (event) => event.id === model.currentSlotId
+      );
+
+      const newEvent = {
+        id: model.nextId + 1,
+        date: msg.submitData.date,
+        slots: [
+          {
+            id: guid(),
+            startDate: new Date(),
+            endDate: new Date(),
+            ...msg.submitData,
+          },
+        ],
+      };
+
+      const mergeEvents = [...(model.events || []), newEvent];
+
       return {
         ...model,
-        events: matchedEventArray,
+        events: hasSlots ? matchedEventArray : mergeEvents,
       };
     default:
       return model;

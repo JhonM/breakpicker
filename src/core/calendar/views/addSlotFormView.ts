@@ -40,14 +40,13 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
             const title = target?.mainTitle.value;
             const duration = target?.duration.value;
             const slotId = target;
-            console.info(slotId, "slotId");
 
             dispatch(
               onSubmitMsg({
                 title,
                 duration,
                 date,
-                slotId,
+                slotId: model.currentSlotId || null,
               })
             );
             dispatch(showAddFormMsg(false));

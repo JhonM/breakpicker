@@ -54,7 +54,7 @@ export type Model = {
   showAddForm: boolean;
   nextId: number;
   editId: number | null;
-  currentSlotId: string | null;
+  currentSlotId: number | null;
   activeDay?: number;
   selectedDate?: Date;
   events?: EventType[];
@@ -64,7 +64,7 @@ export type SubmitData = {
   title: string;
   duration: number;
   date: Date;
-  slotId: string;
+  slotId: number | null;
 };
 
 export type ActionType =
@@ -77,7 +77,7 @@ export type ActionType =
   | { type: "ACTIVE_DAY"; activeDay: number }
   | { type: "ON_SUBMIT"; submitData: SubmitData }
   | { type: "SHOW_ADD_FORM"; showAddForm: boolean }
-  | { type: "CURRENT_SLOT_ID"; slotId: string };
+  | { type: "CURRENT_SLOT_ID"; slotId: number | null };
 
 export type DispatchType = (action: ActionType) => void;
 
