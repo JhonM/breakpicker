@@ -3,20 +3,22 @@ import { addSlotFormClass } from "../../../styles/styles.css";
 import { DispatchType, Model } from "../../../types";
 import { showAddFormMsg, onSubmitMsg } from "../Update";
 
-function input(dispatch: DispatchType, name: string) {
-  return h("input", { type: "text", name }, "");
+type InputType = "text" | "number";
+
+function input(type: InputType, name: string) {
+  return h("input", { type, name }, "");
 }
 
-function fieldSet(dispatch: DispatchType, name: string) {
-  return h("fieldset", {}, input(dispatch, name));
+function fieldSet(type: InputType, name: string) {
+  return h("fieldset", {}, input(type, name));
 }
 
 function closeButton(onclick: () => void) {
   return h("button", { onclick }, "close");
 }
 
-function baseInput(dispatch: DispatchType, name: string) {
-  return fieldSet(dispatch, name);
+function baseInput(type: InputType, name: string) {
+  return fieldSet(type, name);
 }
 
 function submitButton() {
@@ -39,7 +41,6 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
 
             const title = target?.mainTitle.value;
             const duration = target?.duration.value;
-            const slotId = target;
 
             dispatch(
               onSubmitMsg({
@@ -55,8 +56,8 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
       },
       ...[
         closeButton(() => dispatch(showAddFormMsg(false))),
-        baseInput(dispatch, "mainTitle"),
-        baseInput(dispatch, "duration"),
+        baseInput("text", "mainTitle"),
+        baseInput("number", "duration"),
         `${date.toLocaleDateString()}`,
         submitButton(),
       ]
