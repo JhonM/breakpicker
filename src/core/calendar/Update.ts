@@ -68,7 +68,7 @@ export function setEventsBeforeAddingSlotMsg(
   eventsBeforeAddedSlot: Model["events"]
 ) {
   return {
-    type: MSGS.SET_OLD_MODEL,
+    type: MSGS.SET_EVENTS_BEFORE_ADDING_SLOT,
     eventsBeforeAddedSlot,
   };
 }
@@ -156,15 +156,19 @@ export default function update(msg: ActionType, model: Model): Model {
         ...model,
         currentSlotId: msg.slotId,
       };
-    case MSGS.SET_OLD_MODEL:
+    case MSGS.SET_EVENTS_BEFORE_ADDING_SLOT:
       return {
         ...model,
         eventsBeforeAddedSlot: msg.eventsBeforeAddedSlot,
       };
     case MSGS.UNDO_ADD_LATEST_SLOT:
+      const undoModel = { ...model, events: model.eventsBeforeAddedSlot };
+      const undoManager = createCommandManager(undoModel, msg);
+
+      undoManager.undo();
+
       return {
-        ...model,
-        events: model.eventsBeforeAddedSlot,
+        ...undoModel,
       };
     case MSGS.ON_SUBMIT:
       const newModel = { ...model };
