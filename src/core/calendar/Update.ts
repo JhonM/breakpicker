@@ -7,6 +7,9 @@ import type {
 } from "../../types";
 import { MSGS, Months as months } from "../../types";
 import { guid } from "../../helpers/random";
+import { eventHandler } from "../command";
+import DatabaseControl from "../repository/database/control";
+import ControlAddSlotCommand from "../repository/database/command/add-slot-command";
 
 export function changeCurrentMonthMsg(currentMonth: MonthType) {
   return {
@@ -148,46 +151,11 @@ export default function update(msg: ActionType, model: Model): Model {
         currentSlotId: msg.slotId,
       };
     case MSGS.ON_SUBMIT:
-      const matchedEventArray = model.events?.map((event) => {
-        if (event.id === model.currentSlotId) {
-          const newSlot = {
-            id: guid(),
-            startDate: new Date(),
-            endDate: new Date(),
-            ...msg.submitData,
-          };
-
-          const mergeSlots = [...(event.slots || []), newSlot];
-          const updatedSlots = { ...event, slots: mergeSlots };
-
-          return updatedSlots;
-        }
-
-        return event;
-      });
-
-      const hasSlots = model.events?.find(
-        (event) => event.id === model.currentSlotId
-      );
-
-      const newEvent = {
-        id: model.nextId + 1,
-        date: msg.submitData.date,
-        slots: [
-          {
-            id: guid(),
-            startDate: new Date(),
-            endDate: new Date(),
-            ...msg.submitData,
-          },
-        ],
-      };
-
-      const mergeEvents = [...(model.events || []), newEvent];
+      const m = new DatabaseControl(model, msg);
+      eventHandler.handleAction(new ControlAddSlotCommand(m));
 
       return {
-        ...model,
-        events: hasSlots ? matchedEventArray : mergeEvents,
+        ...m.data,
       };
     default:
       return model;
