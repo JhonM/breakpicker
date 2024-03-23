@@ -8,9 +8,6 @@ type CreateCommandMangerType = {
 };
 
 const addSlotCommand = (model: Model, msg: any) => {
-  const previousModel = model.events;
-  console.info(msg);
-
   return {
     execute: () => {
       const matchedEventArray = model.events?.map((event) => {
@@ -58,7 +55,7 @@ const addSlotCommand = (model: Model, msg: any) => {
     },
 
     undo: () => {
-      return previousModel;
+      model.events = model.eventsBeforeAddedSlot;
     },
   };
 };
