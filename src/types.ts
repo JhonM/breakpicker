@@ -9,6 +9,8 @@ export const MSGS = {
   ACTIVE_DAY: "ACTIVE_DAY",
   ON_SUBMIT: "ON_SUBMIT",
   CURRENT_SLOT_ID: "CURRENT_SLOT_ID",
+  SET_OLD_MODEL: "SET_OLD_MODEL",
+  UNDO_ADD_LATEST_SLOT: "UNDO_ADD_LATEST_SLOT",
 } as const;
 
 export const Months = [
@@ -55,6 +57,7 @@ export type Model = {
   nextId: number;
   editId: number | null;
   currentSlotId: number | null;
+  eventsBeforeAddedSlot?: Model["events"];
   activeDay?: number;
   selectedDate?: Date;
   events?: EventType[];
@@ -77,7 +80,9 @@ export type ActionType =
   | { type: "ACTIVE_DAY"; activeDay: number }
   | { type: "ON_SUBMIT"; submitData: SubmitData }
   | { type: "SHOW_ADD_FORM"; showAddForm: boolean }
-  | { type: "CURRENT_SLOT_ID"; slotId: number | null };
+  | { type: "CURRENT_SLOT_ID"; slotId: number | null }
+  | { type: "SET_OLD_MODEL"; eventsBeforeAddedSlot: Model["events"] }
+  | { type: "UNDO_ADD_LATEST_SLOT" };
 
 export type DispatchType = (action: ActionType) => void;
 
