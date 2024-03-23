@@ -1,7 +1,11 @@
 import { h } from "@jhonm/blanc-vdom";
 import { addSlotFormClass } from "../../../styles/styles.css";
 import { DispatchType, Model } from "../../../types";
-import { showAddFormMsg, onSubmitMsg } from "../Update";
+import {
+  showAddFormMsg,
+  onSubmitMsg,
+  setEventsBeforeAddingSlotMsg,
+} from "../Update";
 
 type InputType = "text" | "number";
 
@@ -35,6 +39,7 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
         className: addSlotFormClass,
         onsubmit: (e: SubmitEvent) => {
           e.preventDefault();
+          dispatch(setEventsBeforeAddingSlotMsg(model.events));
 
           if (e.target) {
             const target = e.target as HTMLFormElement;

@@ -1,15 +1,6 @@
-import type {
-  ActionType,
-  EventType,
-  Model,
-  MonthType,
-  SubmitData,
-} from "../../types";
+import type { ActionType, Model, MonthType, SubmitData } from "../../types";
 import { MSGS, Months as months } from "../../types";
-import { guid } from "../../helpers/random";
-import { eventHandler } from "../command";
-import DatabaseControl from "../repository/database/control";
-import ControlAddSlotCommand from "../repository/database/command/add-slot-command";
+import { createCommandManager } from "../command/new-commands";
 
 export function changeCurrentMonthMsg(currentMonth: MonthType) {
   return {
@@ -70,6 +61,21 @@ export function currentSlotIdMsg(slotId: number | null) {
   return {
     type: MSGS.CURRENT_SLOT_ID,
     slotId,
+  };
+}
+
+export function setEventsBeforeAddingSlotMsg(
+  eventsBeforeAddedSlot: Model["events"]
+) {
+  return {
+    type: MSGS.SET_OLD_MODEL,
+    eventsBeforeAddedSlot,
+  };
+}
+
+export function undoAddLatestSlotMsg() {
+  return {
+    type: MSGS.UNDO_ADD_LATEST_SLOT,
   };
 }
 
@@ -150,12 +156,24 @@ export default function update(msg: ActionType, model: Model): Model {
         ...model,
         currentSlotId: msg.slotId,
       };
+    case MSGS.SET_OLD_MODEL:
+      return {
+        ...model,
+        eventsBeforeAddedSlot: msg.eventsBeforeAddedSlot,
+      };
+    case MSGS.UNDO_ADD_LATEST_SLOT:
+      return {
+        ...model,
+        events: model.eventsBeforeAddedSlot,
+      };
     case MSGS.ON_SUBMIT:
-      const m = new DatabaseControl(model, msg);
-      eventHandler.handleAction(new ControlAddSlotCommand(m));
+      const newModel = { ...model };
+      const submitManager = createCommandManager(newModel, msg);
+
+      submitManager.doCommand("ADD_SLOT");
 
       return {
-        ...m.data,
+        ...newModel,
       };
     default:
       return model;

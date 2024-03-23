@@ -7,7 +7,12 @@ import {
   calendarFooterClass,
   containerClass,
 } from "../../../styles/styles.css";
-import { prevMonthMsg, nextMonthMsg, goToTodayMsg } from "../Update";
+import {
+  prevMonthMsg,
+  nextMonthMsg,
+  goToTodayMsg,
+  undoAddLatestSlotMsg,
+} from "../Update";
 
 function prevMonthButton(dispatch: DispatchType) {
   return h(
@@ -38,6 +43,14 @@ export function calendarView(dispatch: DispatchType, model: Model) {
       className: calendarClass,
       "data-breakpicker-id": `${guid()}`,
     },
+
+    h(
+      "button",
+      {
+        onclick: () => dispatch(undoAddLatestSlotMsg()),
+      },
+      "undo"
+    ),
     h(
       "div",
       {
