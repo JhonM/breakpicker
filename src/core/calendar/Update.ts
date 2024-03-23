@@ -1,6 +1,6 @@
 import type { ActionType, Model, MonthType, SubmitData } from "../../types";
 import { MSGS, Months as months } from "../../types";
-import { createCommandManager } from "../command/new-commands";
+import { createCommandManager } from "../command";
 
 export function changeCurrentMonthMsg(currentMonth: MonthType) {
   return {
