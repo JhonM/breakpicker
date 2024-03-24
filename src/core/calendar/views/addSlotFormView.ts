@@ -1,11 +1,8 @@
 import { h } from "@jhonm/blanc-vdom";
 import { addSlotFormClass } from "../../../styles/styles.css";
 import { DispatchType, Model } from "../../../types";
-import {
-  showAddFormMsg,
-  onSubmitMsg,
-  setEventsBeforeAddingSlotMsg,
-} from "../Update";
+import { onSubmitMsg, setEventsBeforeAddingSlotMsg } from "../Update";
+import { showAddFormMsg } from "../update/updateShowAddForm";
 
 type InputType = "text" | "number";
 

@@ -1,6 +1,6 @@
 import { h } from "@jhonm/blanc-vdom";
-import { showAddFormMsg } from "../Update";
 import { DispatchType, Model } from "../../../types";
+import { showAddFormMsg } from "../update/updateShowAddForm";
 
 export function addSlotView(dispatch: DispatchType, model: Model) {
   return h(
