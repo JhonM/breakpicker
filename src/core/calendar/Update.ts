@@ -1,21 +1,9 @@
 import { match } from "../../helpers/match";
-import type { ActionType, Model, MonthType, SubmitData } from "../../types";
+import type { ActionType, Model, SubmitData } from "../../types";
 import { MSGS, Months as months } from "../../types";
 import { createCommandManager } from "../command";
-
-export function changeCurrentMonthMsg(currentMonth: MonthType) {
-  return {
-    type: MSGS.CURRENT_MONTH,
-    currentMonth,
-  };
-}
-
-export function selectedDayMsg(selectedDay: number) {
-  return {
-    type: MSGS.SELECTED_DATE,
-    selectedDay,
-  };
-}
+import { updateCurrentMonth } from "./update/updateCurrentMonth";
+import { updateSelectedDate } from "./update/updateSelectedDate";
 
 export function showAddFormMsg(showAddForm: boolean) {
   return {
@@ -84,32 +72,11 @@ export default function update(msg: ActionType, model: Model): Model {
   return match<ActionType, Model>(msg)
     .on(
       (x) => x.type === MSGS.CURRENT_MONTH,
-      (x) => {
-        if (x.type !== "CURRENT_MONTH") return model;
-
-        const { currentMonth } = x;
-        const indexOfMonth = months.findIndex(
-          (month: MonthType) => month === currentMonth
-        );
-
-        return {
-          ...model,
-          currentMonth,
-          month: indexOfMonth,
-        };
-      }
+      (x) => updateCurrentMonth({ msg: x, model })
     )
     .on(
       (x) => x.type === MSGS.SELECTED_DATE,
-      (x) => {
-        if (x.type !== "SELECTED_DATE") return model;
-
-        const selectedDate = new Date(
-          `${x.selectedDay} ${model.currentMonth} ${model.currentYear}`
-        );
-        console.log("selected date", selectedDate);
-        return { ...model, selectedDate };
-      }
+      (x) => updateSelectedDate({ msg: x, model })
     )
     .on(
       (x) => x.type === MSGS.SHOW_ADD_FORM,
