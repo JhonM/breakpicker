@@ -5,7 +5,7 @@ import {
   HTMLElementEvent,
   EventType,
 } from "../../../types";
-import { activeDayMsg, showAddFormMsg, currentSlotIdMsg } from "../Update";
+import { activeDayMsg, currentSlotIdMsg } from "../Update";
 import { EventView } from "./events";
 import {
   dayClass,
@@ -16,6 +16,7 @@ import {
   dayContainerClass,
 } from "../../../styles/styles.css";
 import { guid } from "../../../helpers/random";
+import { showAddFormMsg } from "../update/updateShowAddForm";
 
 function dayContainer(
   dayClass: string,

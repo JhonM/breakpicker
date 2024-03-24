@@ -4,13 +4,7 @@ import { MSGS, Months as months } from "../../types";
 import { createCommandManager } from "../command";
 import { updateCurrentMonth } from "./update/updateCurrentMonth";
 import { updateSelectedDate } from "./update/updateSelectedDate";
-
-export function showAddFormMsg(showAddForm: boolean) {
-  return {
-    type: MSGS.SHOW_ADD_FORM,
-    showAddForm,
-  };
-}
+import { updateShowAddForm } from "./update/updateShowAddForm";
 
 export function prevMonthMsg(amount: number) {
   return {
@@ -80,15 +74,7 @@ export default function update(msg: ActionType, model: Model): Model {
     )
     .on(
       (x) => x.type === MSGS.SHOW_ADD_FORM,
-      (x) => {
-        if (x.type !== "SHOW_ADD_FORM") return model;
-
-        const { showAddForm } = x;
-        return {
-          ...model,
-          showAddForm,
-        };
-      }
+      (x) => updateShowAddForm({ msg: x, model })
     )
     .on(
       (x) => x.type === MSGS.PREV_MONTH,
