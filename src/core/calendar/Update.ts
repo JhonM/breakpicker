@@ -1,37 +1,14 @@
 import { match } from "../../helpers/match";
 import type { ActionType, Model, SubmitData } from "../../types";
-import { MSGS, Months as months } from "../../types";
+import { MSGS } from "../../types";
 import { createCommandManager } from "../command";
+import { updateActiveDay } from "./update/updateActiveDay";
 import { updateCurrentMonth } from "./update/updateCurrentMonth";
+import { updateGoToToday } from "./update/updateGoToToday";
+import { updateNextMonth } from "./update/updateNextMonth";
+import { updatePrevMonth } from "./update/updatePrevMonth";
 import { updateSelectedDate } from "./update/updateSelectedDate";
 import { updateShowAddForm } from "./update/updateShowAddForm";
-
-export function prevMonthMsg(amount: number) {
-  return {
-    type: MSGS.PREV_MONTH,
-    amount,
-  };
-}
-
-export function nextMonthMsg(amount: number) {
-  return {
-    type: MSGS.NEXT_MONTH,
-    amount,
-  };
-}
-
-export function goToTodayMsg() {
-  return {
-    type: MSGS.GO_TO_TODAY,
-  };
-}
-
-export function activeDayMsg(activeDay: number) {
-  return {
-    type: MSGS.ACTIVE_DAY,
-    activeDay,
-  };
-}
 
 export function onSubmitMsg(submitData: SubmitData) {
   return {
@@ -78,72 +55,19 @@ export default function update(msg: ActionType, model: Model): Model {
     )
     .on(
       (x) => x.type === MSGS.PREV_MONTH,
-      (x) => {
-        if (x.type !== "PREV_MONTH") return model;
-
-        const prevMonth = model.month - x.amount;
-
-        if (prevMonth < 0) {
-          return {
-            ...model,
-            month: 11,
-            year: model.year - 1,
-            currentMonth: months[11],
-          };
-        }
-
-        return {
-          ...model,
-          month: prevMonth,
-          currentMonth: months[prevMonth],
-        };
-      }
+      (x) => updatePrevMonth({ msg: x, model })
     )
     .on(
       (x) => x.type === MSGS.NEXT_MONTH,
-      (x) => {
-        if (x.type !== "NEXT_MONTH") return model;
-
-        const nextMonth = model.month + x.amount;
-
-        if (nextMonth > 11) {
-          return {
-            ...model,
-            month: 0,
-            year: model.year + 1,
-            currentMonth: months[11],
-          };
-        }
-
-        return {
-          ...model,
-          month: nextMonth,
-          currentMonth: months[nextMonth],
-        };
-      }
+      (x) => updateNextMonth({ msg: x, model })
     )
     .on(
       (x) => x.type === MSGS.GO_TO_TODAY,
-      () => {
-        const today = new Date();
-
-        return {
-          ...model,
-          month: today.getMonth(),
-          year: today.getFullYear(),
-        };
-      }
+      () => updateGoToToday({ model })
     )
     .on(
       (x) => x.type === MSGS.ACTIVE_DAY,
-      (x) => {
-        if (x.type !== "ACTIVE_DAY") return model;
-
-        return {
-          ...model,
-          activeDay: x.activeDay,
-        };
-      }
+      (x) => updateActiveDay({ msg: x, model })
     )
     .on(
       (x) => x.type === MSGS.CURRENT_SLOT_ID,

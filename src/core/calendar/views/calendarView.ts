@@ -7,12 +7,10 @@ import {
   calendarFooterClass,
   containerClass,
 } from "../../../styles/styles.css";
-import {
-  prevMonthMsg,
-  nextMonthMsg,
-  goToTodayMsg,
-  undoAddLatestSlotMsg,
-} from "../Update";
+import { undoAddLatestSlotMsg } from "../Update";
+import { prevMonthMsg } from "../update/updatePrevMonth";
+import { nextMonthMsg } from "../update/updateNextMonth";
+import { goToTodayMsg } from "../update/updateGoToToday";
 
 function prevMonthButton(dispatch: DispatchType) {
   return h(
