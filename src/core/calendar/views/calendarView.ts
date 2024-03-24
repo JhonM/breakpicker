@@ -7,10 +7,10 @@ import {
   calendarFooterClass,
   containerClass,
 } from "../../../styles/styles.css";
-import { undoAddLatestSlotMsg } from "../Update";
 import { prevMonthMsg } from "../update/updatePrevMonth";
 import { nextMonthMsg } from "../update/updateNextMonth";
 import { goToTodayMsg } from "../update/updateGoToToday";
+import { undoAddLatestSlotMsg } from "../update/updateUndoLatestSlot";
 
 function prevMonthButton(dispatch: DispatchType) {
   return h(
