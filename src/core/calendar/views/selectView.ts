@@ -6,7 +6,7 @@ import {
   MonthType,
   Months as months,
 } from "../../../types";
-import { changeCurrentMonthMsg } from "../Update";
+import { changeCurrentMonthMsg } from "../update/updateCurrentMonth";
 
 function selectOptions(dispatch: DispatchType, selectedOption: MonthType) {
   const opt = months.map((value: string) =>
