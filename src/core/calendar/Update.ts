@@ -1,3 +1,4 @@
+import { match } from "../../helpers/match";
 import type { ActionType, Model, MonthType, SubmitData } from "../../types";
 import { MSGS, Months as months } from "../../types";
 import { createCommandManager } from "../command";
@@ -80,106 +81,164 @@ export function undoAddLatestSlotMsg() {
 }
 
 export default function update(msg: ActionType, model: Model): Model {
-  switch (msg.type) {
-    case MSGS.CURRENT_MONTH:
-      const { currentMonth } = msg;
-      const indexOfMonth = months.findIndex(
-        (month: MonthType) => month === currentMonth
-      );
+  return match<ActionType, Model>(msg)
+    .on(
+      (x) => x.type === MSGS.CURRENT_MONTH,
+      (x) => {
+        if (x.type !== "CURRENT_MONTH") return model;
 
-      return {
-        ...model,
-        currentMonth,
-        month: indexOfMonth,
-      };
-    case MSGS.SELECTED_DATE:
-      const selectedDate = new Date(
-        `${msg.selectedDay} ${model.currentMonth} ${model.currentYear}`
-      );
-      console.log("selected date", selectedDate);
-      return { ...model, selectedDate };
-    case MSGS.SHOW_ADD_FORM:
-      const { showAddForm } = msg;
-      return {
-        ...model,
-        showAddForm,
-      };
-    case MSGS.PREV_MONTH:
-      const prevMonth = model.month - msg.amount;
+        const { currentMonth } = x;
+        const indexOfMonth = months.findIndex(
+          (month: MonthType) => month === currentMonth
+        );
 
-      if (prevMonth < 0) {
         return {
           ...model,
-          month: 11,
-          year: model.year - 1,
-          currentMonth: months[11],
+          currentMonth,
+          month: indexOfMonth,
         };
       }
+    )
+    .on(
+      (x) => x.type === MSGS.SELECTED_DATE,
+      (x) => {
+        if (x.type !== "SELECTED_DATE") return model;
 
-      return {
-        ...model,
-        month: prevMonth,
-        currentMonth: months[prevMonth],
-      };
-    case MSGS.NEXT_MONTH:
-      const nextMonth = model.month + msg.amount;
+        const selectedDate = new Date(
+          `${x.selectedDay} ${model.currentMonth} ${model.currentYear}`
+        );
+        console.log("selected date", selectedDate);
+        return { ...model, selectedDate };
+      }
+    )
+    .on(
+      (x) => x.type === MSGS.SHOW_ADD_FORM,
+      (x) => {
+        if (x.type !== "SHOW_ADD_FORM") return model;
 
-      if (nextMonth > 11) {
+        const { showAddForm } = x;
         return {
           ...model,
-          month: 0,
-          year: model.year + 1,
-          currentMonth: months[11],
+          showAddForm,
         };
       }
+    )
+    .on(
+      (x) => x.type === MSGS.PREV_MONTH,
+      (x) => {
+        if (x.type !== "PREV_MONTH") return model;
 
-      return {
-        ...model,
-        month: nextMonth,
-        currentMonth: months[nextMonth],
-      };
-    case MSGS.GO_TO_TODAY:
-      const today = new Date();
+        const prevMonth = model.month - x.amount;
 
-      return {
-        ...model,
-        month: today.getMonth(),
-        year: today.getFullYear(),
-      };
-    case MSGS.ACTIVE_DAY:
-      return {
-        ...model,
-        activeDay: msg.activeDay,
-      };
-    case MSGS.CURRENT_SLOT_ID:
-      return {
-        ...model,
-        currentSlotId: msg.slotId,
-      };
-    case MSGS.SET_EVENTS_BEFORE_ADDING_SLOT:
-      return {
-        ...model,
-        eventsBeforeAddedSlot: msg.eventsBeforeAddedSlot,
-      };
-    case MSGS.UNDO_ADD_LATEST_SLOT:
-      const undoModel = { ...model, events: model.eventsBeforeAddedSlot };
-      const undoManager = createCommandManager(undoModel, msg);
+        if (prevMonth < 0) {
+          return {
+            ...model,
+            month: 11,
+            year: model.year - 1,
+            currentMonth: months[11],
+          };
+        }
 
-      undoManager.undo();
+        return {
+          ...model,
+          month: prevMonth,
+          currentMonth: months[prevMonth],
+        };
+      }
+    )
+    .on(
+      (x) => x.type === MSGS.NEXT_MONTH,
+      (x) => {
+        if (x.type !== "NEXT_MONTH") return model;
 
-      return {
-        ...undoModel,
-      };
-    case MSGS.ON_SUBMIT:
-      const newModel = { ...model };
-      const submitManager = createCommandManager(newModel, msg);
+        const nextMonth = model.month + x.amount;
 
-      submitManager.doCommand("ADD_SLOT");
+        if (nextMonth > 11) {
+          return {
+            ...model,
+            month: 0,
+            year: model.year + 1,
+            currentMonth: months[11],
+          };
+        }
 
-      return {
-        ...newModel,
-      };
-    default:
-      return model;
-  }
+        return {
+          ...model,
+          month: nextMonth,
+          currentMonth: months[nextMonth],
+        };
+      }
+    )
+    .on(
+      (x) => x.type === MSGS.GO_TO_TODAY,
+      () => {
+        const today = new Date();
+
+        return {
+          ...model,
+          month: today.getMonth(),
+          year: today.getFullYear(),
+        };
+      }
+    )
+    .on(
+      (x) => x.type === MSGS.ACTIVE_DAY,
+      (x) => {
+        if (x.type !== "ACTIVE_DAY") return model;
+
+        return {
+          ...model,
+          activeDay: x.activeDay,
+        };
+      }
+    )
+    .on(
+      (x) => x.type === MSGS.CURRENT_SLOT_ID,
+      (x) => {
+        if (x.type !== "CURRENT_SLOT_ID") return model;
+
+        return {
+          ...model,
+          currentSlotId: x.slotId,
+        };
+      }
+    )
+    .on(
+      (x) => x.type === MSGS.SET_EVENTS_BEFORE_ADDING_SLOT,
+      (x) => {
+        if (x.type !== "SET_EVENTS_BEFORE_ADDING_SLOT") return model;
+
+        return {
+          ...model,
+          eventsBeforeAddedSlot: x.eventsBeforeAddedSlot,
+        };
+      }
+    )
+    .on(
+      (x) => x.type === MSGS.UNDO_ADD_LATEST_SLOT,
+      () => {
+        const undoModel = { ...model, events: model.eventsBeforeAddedSlot };
+        const undoManager = createCommandManager(undoModel, msg);
+
+        undoManager.undo();
+
+        return {
+          ...undoModel,
+        };
+      }
+    )
+    .on(
+      (x) => x.type === MSGS.ON_SUBMIT,
+      () => {
+        const newModel = { ...model };
+        const submitManager = createCommandManager(newModel, msg);
+
+        submitManager.doCommand("ADD_SLOT");
+
+        return {
+          ...newModel,
+        };
+      }
+    )
+    .otherwise(() => model);
 }
