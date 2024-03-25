@@ -4,6 +4,7 @@ import { DispatchType, Model } from "../../../types";
 import { showAddFormMsg } from "../update/updateShowAddForm";
 import { setEventsBeforeAddingSlotMsg } from "../update/updateSetEventsBeforeAddingSlot";
 import { onSubmitMsg } from "../update/updateOnSubmit";
+import { showHideToastMsg } from "../update/updateControlToastNotification";
 
 type InputType = "text" | "number";
 
@@ -54,6 +55,7 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
               })
             );
             dispatch(showAddFormMsg(false));
+            dispatch(showHideToastMsg(true));
           }
         },
       },
