@@ -2,6 +2,7 @@ import { match } from "../../helpers/match";
 import type { ActionType, Model } from "../../types";
 import { MSGS } from "../../types";
 import { updateActiveDay } from "./update/updateActiveDay";
+import { updateControlToastNotification } from "./update/updateControlToastNotification";
 import { updateCurrentMonth } from "./update/updateCurrentMonth";
 import { updateCurrentSlotId } from "./update/updateCurrentSlotId";
 import { updateGoToToday } from "./update/updateGoToToday";
@@ -58,6 +59,10 @@ export default function update(msg: ActionType, model: Model): Model {
     .on(
       (x) => x.type === MSGS.ON_SUBMIT,
       (x) => updateOnSubmit({ msg: x, model })
+    )
+    .on(
+      (x) => x.type === MSGS.SHOW_TOAST,
+      (x) => updateControlToastNotification({ msg: x, model })
     )
     .otherwise(() => model);
 }
