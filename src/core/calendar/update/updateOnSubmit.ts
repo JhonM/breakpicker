@@ -1,4 +1,10 @@
-import { ActionType, Model, MSGS, SubmitData } from "../../../types";
+import {
+  ActionType,
+  CommandType,
+  Model,
+  MSGS,
+  SubmitData,
+} from "../../../types";
 import { createCommandManager } from "../../command";
 
 export function onSubmitMsg(submitData: SubmitData) {
@@ -18,7 +24,9 @@ export const updateOnSubmit = ({
   const newModel = { ...model };
   const submitManager = createCommandManager(newModel, msg);
 
-  submitManager.doCommand("ADD_SLOT");
+  ["ADD_SLOT"].forEach((commandType) =>
+    submitManager.doCommand(commandType as CommandType)
+  );
 
   return {
     ...newModel,

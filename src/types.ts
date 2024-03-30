@@ -95,3 +95,5 @@ export type DispatchType = (action: ActionType) => void;
 export type HTMLElementEvent<T extends HTMLElement> = Event & {
   target: T;
 };
+
+export type CommandType = "ADD_SLOT";

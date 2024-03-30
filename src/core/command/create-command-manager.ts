@@ -1,4 +1,4 @@
-import { Model } from "../../types";
+import { Model, CommandType } from "../../types";
 import { commands } from "./commands";
 
 type CreateCommandMangerType = {
@@ -15,7 +15,7 @@ export const createCommandManager = (
   let position = 0;
 
   return {
-    doCommand(CommandType: "ADD_SLOT") {
+    doCommand(CommandType: CommandType) {
       if (position < history.length - 1) {
         history = history.slice(0, position + 1);
       }
