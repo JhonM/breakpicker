@@ -17,7 +17,7 @@ export const updateUndoLatestSlot = ({
   const undoModel = { ...model, events: model.eventsBeforeAddedSlot };
   const undoManager = createCommandManager(undoModel, msg);
 
-  undoManager.undo();
+  undoManager.undo?.();
 
   return {
     ...undoModel,
