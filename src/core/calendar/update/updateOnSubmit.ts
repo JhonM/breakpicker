@@ -23,10 +23,9 @@ export const updateOnSubmit = ({
 }) => {
   const newModel = { ...model };
   const submitManager = createCommandManager(newModel, msg);
+  const commands: CommandType[] = ["ADD_SLOT"];
 
-  ["ADD_SLOT"].forEach((commandType) =>
-    submitManager.doCommand(commandType as CommandType)
-  );
+  commands.forEach((commandType) => submitManager.doCommand(commandType));
 
   return {
     ...newModel,

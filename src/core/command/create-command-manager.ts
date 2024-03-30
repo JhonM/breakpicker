@@ -2,9 +2,9 @@ import { Model, CommandType } from "../../types";
 import { commands } from "./commands";
 
 type CreateCommandMangerType = {
-  doCommand: (CommandType: "ADD_SLOT") => void;
-  undo: () => void;
-  redo: () => void;
+  doCommand: (CommandType: CommandType) => void;
+  undo?: () => void;
+  redo?: () => void;
 };
 
 export const createCommandManager = (
