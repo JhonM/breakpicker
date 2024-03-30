@@ -1,6 +1,6 @@
 import { h } from "@jhonm/blanc-vdom";
 import { DispatchType, Model } from "../../../types";
-import { showHideToastMsg } from "../update/updateControlToastNotification";
+import { showToastMsg } from "../update/updateControlToastNotification";
 
 export function toastViewDetail() {
   return h("div", {}, "Slot is added");
@@ -10,7 +10,7 @@ export function toastView(dispatch: DispatchType, model: Model, view: any) {
   if (model.showToast) {
     setTimeout(() => {
       (() => {
-        dispatch(showHideToastMsg(false));
+        dispatch(showToastMsg(false));
       })();
     }, 4000);
     return h("div", { className: "toast" }, ...[toastViewDetail(), view]);
