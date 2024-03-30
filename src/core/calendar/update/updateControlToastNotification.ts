@@ -1,6 +1,6 @@
 import { ActionType, Model, MSGS } from "../../../types";
 
-export function showHideToastMsg(showToast: boolean) {
+export function showToastMsg(showToast: boolean) {
   return {
     type: MSGS.SHOW_TOAST,
     showToast,

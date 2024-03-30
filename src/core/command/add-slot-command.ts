@@ -45,6 +45,9 @@ export const addSlotCommand = (model: Model, msg: any) => {
         ...model,
         events: hasSlots ? matchedEventArray : mergeEvents,
       };
+
+      model.showAddForm = false;
+      model.showToast = true;
       model.events = newModel.events;
     },
 

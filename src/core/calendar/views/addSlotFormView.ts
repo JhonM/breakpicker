@@ -4,7 +4,7 @@ import { DispatchType, Model } from "../../../types";
 import { showAddFormMsg } from "../update/updateShowAddForm";
 import { setEventsBeforeAddingSlotMsg } from "../update/updateSetEventsBeforeAddingSlot";
 import { onSubmitMsg } from "../update/updateOnSubmit";
-import { showHideToastMsg } from "../update/updateControlToastNotification";
+import { showToastMsg } from "../update/updateControlToastNotification";
 
 type InputType = "text" | "number";
 
@@ -40,23 +40,16 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
           e.preventDefault();
           dispatch(setEventsBeforeAddingSlotMsg(model.events));
 
-          if (e.target) {
-            const target = e.target as HTMLFormElement;
+          const target = e.target as HTMLFormElement;
 
-            const title = target?.mainTitle.value;
-            const duration = target?.duration.value;
-
-            dispatch(
-              onSubmitMsg({
-                title,
-                duration,
-                date,
-                slotId: model.currentSlotId || null,
-              })
-            );
-            dispatch(showAddFormMsg(false));
-            dispatch(showHideToastMsg(true));
-          }
+          dispatch(
+            onSubmitMsg({
+              title: target?.mainTitle.value,
+              duration: target?.duration.value,
+              slotId: model.currentSlotId || null,
+              date,
+            })
+          );
         },
       },
       ...[
