@@ -104,7 +104,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
   }
 
   let i = 1;
-  while (i < lastDate) {
+  while (i <= lastDate) {
     if (
       i === new Date().getDate() &&
       year === new Date().getFullYear() &&
