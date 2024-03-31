@@ -1,5 +1,5 @@
 import { ActionType, Model, MSGS } from "../../../types";
-import { createCommandManager } from "../../command";
+import { commandManager } from "../../command/command-manager";
 
 export function undoAddLatestSlotMsg() {
   return {
@@ -14,12 +14,12 @@ export const updateUndoLatestSlot = ({
   msg: ActionType;
   model: Model;
 }) => {
-  const undoModel = { ...model, events: model.eventsBeforeAddedSlot };
-  const undoManager = createCommandManager(undoModel, msg);
+  const newModel = { ...model, events: model.eventsBeforeAddedSlot };
+  const manager = commandManager({ model: newModel, msg });
 
-  undoManager.undo?.();
+  manager.undo?.();
 
   return {
-    ...undoModel,
+    ...newModel,
   };
 };
