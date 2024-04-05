@@ -1,10 +1,5 @@
 import { h } from "@jhonm/blanc-vdom";
-import {
-  DispatchType,
-  Model,
-  HTMLElementEvent,
-  EventType,
-} from "../../../types";
+import { DispatchType, Model, EventType } from "../../../types";
 import { EventView } from "./events";
 import {
   dayClass,
@@ -14,32 +9,8 @@ import {
   prevLastDayClass,
   dayContainerClass,
 } from "../../../styles/styles.css";
-import { guid } from "../../../helpers/random";
-import { showAddFormMsg } from "../update/updateShowAddForm";
-import { activeDayMsg } from "../update/updateActiveDay";
 import { currentSlotIdMsg } from "../update/updateCurrentSlotId";
-
-function dayContainer(
-  dayClass: string,
-  dispatch: DispatchType,
-  dataDay: string | number,
-  ...props: any[]
-) {
-  return h(
-    "div",
-    {
-      className: dayClass,
-      "data-day-id": guid(),
-      "data-day": dataDay,
-
-      onclick: (e: HTMLElementEvent<HTMLDivElement>) => {
-        dispatch?.(showAddFormMsg(true));
-        dispatch?.(activeDayMsg(Number(e.target.dataset.day)));
-      },
-    },
-    ...props
-  );
-}
+import { CurrentDayView, DayContainerView } from ".";
 
 const getEventSlots =
   (slots: EventType[]) =>
@@ -72,19 +43,10 @@ export function monthView(dispatch: DispatchType, model: Model) {
 
   const eventsSlots = getEventSlots(findSlots || []);
   const slots = eventsSlots(selectedDate);
-  const currentDay = (i: number) =>
-    h(
-      "div",
-      {
-        className: `${dayClass} ${currentDayClass}`,
-        "data-day": `${i}`,
-      },
-      `${i}`
-    );
 
   let x = day;
   while (x > 0) {
-    const view = dayContainer(
+    const view = DayContainerView(
       dayContainerClass,
       dispatch,
       prevDays - x + 1,
@@ -110,7 +72,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
       year === new Date().getFullYear() &&
       month === new Date().getMonth()
     ) {
-      const view = dayContainer(
+      const view = DayContainerView(
         dayContainerClass,
         dispatch,
         i,
@@ -121,7 +83,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
             "data-type-day": "current",
           },
 
-          ...[currentDay(i)]
+          ...[CurrentDayView(i)]
         )
       );
 
@@ -133,7 +95,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
           selectedDate(i).toLocaleDateString()
       );
 
-      const view = dayContainer(
+      const view = DayContainerView(
         dayContainerClass,
         dispatch,
         i,
@@ -156,7 +118,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
 
   let j = 1;
   while (j < nextDays) {
-    const view = dayContainer(
+    const view = DayContainerView(
       dayContainerClass,
       dispatch,
       j,
