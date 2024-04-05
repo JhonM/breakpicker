@@ -12,6 +12,7 @@ export const MSGS = {
   SET_EVENTS_BEFORE_ADDING_SLOT: "SET_EVENTS_BEFORE_ADDING_SLOT",
   UNDO_ADD_LATEST_SLOT: "UNDO_ADD_LATEST_SLOT",
   SHOW_TOAST: "SHOW_TOAST",
+  DELETE_SLOT: "DELETE_SLOT",
 } as const;
 
 export const Months = [
@@ -88,7 +89,8 @@ export type ActionType =
       eventsBeforeAddedSlot: Model["events"];
     }
   | { type: "UNDO_ADD_LATEST_SLOT" }
-  | { type: "SHOW_TOAST"; showToast: boolean };
+  | { type: "SHOW_TOAST"; showToast: boolean }
+  | { type: "DELETE_SLOT"; slotId: string };
 
 export type DispatchType = (action: ActionType) => void;
 
