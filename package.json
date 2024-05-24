@@ -1,7 +1,6 @@
 {
   "name": "breakpicker",
   "version": "0.0.1",
-  "types": "./types/type.d.ts",
   "description": "A datepicker",
   "repository": {
     "type": "git",
