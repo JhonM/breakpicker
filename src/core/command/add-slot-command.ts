@@ -1,4 +1,4 @@
-import { Model } from "../../types";
+import { EventType, Model, Slot } from "../../types";
 import { guid } from "../../helpers/random";
 
 export const addSlotCommand = (model: Model, msg: any) => {
@@ -26,8 +26,8 @@ export const addSlotCommand = (model: Model, msg: any) => {
         (event) => event.id === model.currentSlotId
       );
 
-      const newEvent = {
-        id: model.nextId + 1,
+      const newEvent: EventType = {
+        id: guid(),
         date: msg.submitData.date,
         slots: [
           {
@@ -46,6 +46,7 @@ export const addSlotCommand = (model: Model, msg: any) => {
         events: hasSlots ? matchedEventArray : mergeEvents,
       };
 
+      model.nextId = model.nextId + 1;
       model.showAddForm = false;
       model.showToast = true;
       model.events = newModel.events;

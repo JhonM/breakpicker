@@ -4,7 +4,7 @@ import { commands } from "./commands";
 type CreateCommandMangerType = {
   doCommand: (CommandType: CommandType) => void;
   undo?: () => void;
-  redo?: () => void;
+  redo: () => void;
 };
 
 export const createCommandManager = (

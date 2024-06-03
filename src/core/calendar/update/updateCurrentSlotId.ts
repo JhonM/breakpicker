@@ -1,6 +1,6 @@
 import { ActionType, Model, MSGS } from "../../../types";
 
-export function currentSlotIdMsg(slotId: number | null) {
+export function currentSlotIdMsg(slotId: string | null) {
   return {
     type: MSGS.CURRENT_SLOT_ID,
     slotId,
