@@ -38,12 +38,13 @@ export interface Slot {
   id: string;
   title: string;
   duration: number;
+  date: Date;
   startDate: Date;
   endDate: Date;
 }
 
 export interface EventType {
-  id: number;
+  id: string;
   date: Date;
   slots?: Slot[];
 }
@@ -58,7 +59,7 @@ export type Model = {
   showAddForm: boolean;
   nextId: number;
   editId: number | null;
-  currentSlotId: number | null;
+  currentSlotId: string | null;
   eventsBeforeAddedSlot?: Model["events"];
   activeDay?: number;
   selectedDate?: Date;
@@ -83,14 +84,14 @@ export type ActionType =
   | { type: "ACTIVE_DAY"; activeDay: number }
   | { type: "ON_SUBMIT"; submitData: SubmitData }
   | { type: "SHOW_ADD_FORM"; showAddForm: boolean }
-  | { type: "CURRENT_SLOT_ID"; slotId: number | null }
+  | { type: "CURRENT_SLOT_ID"; slotId: string | null }
   | {
       type: "SET_EVENTS_BEFORE_ADDING_SLOT";
       eventsBeforeAddedSlot: Model["events"];
     }
   | { type: "UNDO_ADD_LATEST_SLOT" }
   | { type: "SHOW_TOAST"; showToast: boolean }
-  | { type: "DELETE_SLOT"; slotId: string };
+  | { type: "DELETE_SLOT"; slotId: string; date: Date };
 
 export type DispatchType = (action: ActionType) => void;
 
@@ -98,4 +99,4 @@ export type HTMLElementEvent<T extends HTMLElement> = Event & {
   target: T;
 };
 
-export type CommandType = "ADD_SLOT" | "COPY_EVENT";
+export type CommandType = "ADD_SLOT" | "DELETE_SLOT" | "COPY_EVENT";
