@@ -71,7 +71,7 @@ export type SubmitData = {
   title: string;
   duration: number;
   date: Date;
-  slotId: number | null;
+  slotId: string | null;
 };
 
 export type ActionType =
@@ -91,7 +91,7 @@ export type ActionType =
     }
   | { type: "UNDO_ADD_LATEST_SLOT" }
   | { type: "SHOW_TOAST"; showToast: boolean }
-  | { type: "DELETE_SLOT"; slotId: string; date: Date };
+  | { type: "DELETE_SLOT"; slotId: string; startDate: Date };
 
 export type DispatchType = (action: ActionType) => void;
 

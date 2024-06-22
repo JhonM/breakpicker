@@ -1,11 +1,11 @@
 import { ActionType, CommandType, Model, MSGS } from "../../../types";
 import { commandManager } from "../../command/command-manager";
 
-export function deleteSlotMsg(slotId: string, date: Date) {
+export function deleteSlotMsg(slotId: string, startDate: Date) {
   return {
     type: MSGS.DELETE_SLOT,
     slotId,
-    date,
+    startDate,
   };
 }
 

@@ -10,14 +10,14 @@ function slotTitle(title: Slot["title"]) {
 function slotDeleteButton(
   dispatch: DispatchType,
   id: Slot["id"],
-  date: Slot["date"]
+  startDate: Slot["startDate"]
 ) {
   return h(
     "div",
     {
       onclick: (e: Event) => {
         e.stopPropagation();
-        dispatch(deleteSlotMsg(id, date));
+        dispatch(deleteSlotMsg(id, startDate));
         dispatch(currentSlotIdMsg(id));
       },
     },
@@ -25,11 +25,11 @@ function slotDeleteButton(
   );
 }
 export function slotView(dispatch: DispatchType, slot: Slot) {
-  const { title, id, date } = slot;
+  const { title, id, startDate } = slot;
 
   return h(
     "div",
     {},
-    ...[slotTitle(title), slotDeleteButton(dispatch, id, date)]
+    ...[slotTitle(title), slotDeleteButton(dispatch, id, startDate)]
   );
 }
