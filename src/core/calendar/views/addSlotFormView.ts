@@ -4,7 +4,6 @@ import { DispatchType, Model } from "../../../types";
 import { showAddFormMsg } from "../update/updateShowAddForm";
 import { setEventsBeforeAddingSlotMsg } from "../update/updateSetEventsBeforeAddingSlot";
 import { onSubmitMsg } from "../update/updateOnSubmit";
-import { showToastMsg } from "../update/updateControlToastNotification";
 
 type InputType = "text" | "number";
 
