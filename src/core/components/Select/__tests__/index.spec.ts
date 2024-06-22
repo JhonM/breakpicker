@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/dom";
-import { select } from "..";
 import { render } from "@jhonm/blanc-vdom";
+import { select } from "..";
 
 describe("select", () => {
   it("renders the select", () => {

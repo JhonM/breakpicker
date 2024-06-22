@@ -1,5 +1,4 @@
-import { Model, MsgType } from "../../types";
-import { guid } from "../../helpers/random";
+import { Model } from "../../types";
 
 export const deleteSlotCommand = (model: Model, msg: any) => {
   return {
@@ -12,9 +11,6 @@ export const deleteSlotCommand = (model: Model, msg: any) => {
             (slot) => slot.id !== msg.slotId
           );
 
-          const hasSlots = event.slots?.find(
-            (slot) => slot.id === model.currentSlotId
-          );
           const updatedSlots = { ...event, slots: deleteSlot };
 
           return updatedSlots;

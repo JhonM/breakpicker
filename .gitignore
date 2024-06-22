@@ -29,3 +29,6 @@ yarn-error.log
 
 # envoriment
 .env
+
+# vimspector
+.vimspector.json

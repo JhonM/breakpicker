@@ -1,4 +1,4 @@
-import { EventType, Model, Slot } from "../../types";
+import { EventType, Model } from "../../types";
 import { guid } from "../../helpers/random";
 
 export const addSlotCommand = (model: Model, msg: any) => {
