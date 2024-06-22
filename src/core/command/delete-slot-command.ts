@@ -1,16 +1,19 @@
 import { Model, MsgType } from "../../types";
 import { guid } from "../../helpers/random";
 
-export const deleteSlotCommand = (model: Model, msg: MsgType) => {
+export const deleteSlotCommand = (model: Model, msg: any) => {
   return {
     execute: () => {
+      console.info({ msg }, "msg");
       const matchedEventArray = model.events?.map((event) => {
-        if (event.date === msg.date) {
+        if (
+          event.date.toLocaleDateString === msg.startDate.toLocaleDateString
+        ) {
           const deleteSlot = event?.slots?.filter(
             (slot) => slot.id !== msg.slotId
           );
 
-          const hasSlots = event.slots.find(
+          const hasSlots = event.slots?.find(
             (slot) => slot.id === model.currentSlotId
           );
           const updatedSlots = { ...event, slots: deleteSlot };

@@ -9,6 +9,12 @@ import type { EventType, Model } from "../../types";
 
 const today = new Date();
 
+function addDaysToDate(date: Date, days: number) {
+  let new_date = new Date(date);
+  new_date.setDate(new_date.getDate() + days);
+  return new_date;
+}
+
 const initModel: Model = {
   month: getMonth(today),
   year: getYear(today),
@@ -23,7 +29,7 @@ const initModel: Model = {
   events: [
     {
       id: guid(),
-      date: new Date("2024-02-13"),
+      date: addDaysToDate(today, 3),
       slots: [
         {
           id: guid(),
@@ -50,7 +56,7 @@ const initModel: Model = {
     },
     {
       id: guid(),
-      date: new Date("2024-01-12"),
+      date: addDaysToDate(today, 7),
       slots: [
         {
           id: guid(),
