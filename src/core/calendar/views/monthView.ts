@@ -107,7 +107,7 @@ export function monthView(dispatch: DispatchType, model: Model) {
             "data-type-day": "include-event",
             onclick: () => dispatch(currentSlotIdMsg(slotId?.id || null)),
           },
-          ...[`${i}`, EventView(dispatch, slots(i))]
+          ...[`${i}`, EventView(dispatch, model, slots(i))]
         )
       );
 

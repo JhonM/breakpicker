@@ -4,7 +4,6 @@ import { guid } from "../../helpers/random";
 export const deleteSlotCommand = (model: Model, msg: any) => {
   return {
     execute: () => {
-      console.info({ msg }, "msg");
       const matchedEventArray = model.events?.map((event) => {
         if (
           event.date.toLocaleDateString === msg.startDate.toLocaleDateString
@@ -29,6 +28,7 @@ export const deleteSlotCommand = (model: Model, msg: any) => {
         events: matchedEventArray,
       };
 
+      model.showToast = true;
       model.events = newModel.events;
     },
     undo: () => {
