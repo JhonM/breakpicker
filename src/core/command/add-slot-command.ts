@@ -53,7 +53,7 @@ export const addSlotCommand = (model: Model, msg: any) => {
     },
 
     undo: () => {
-      model.events = model.eventsBeforeAddedSlot;
+      model.events = model.eventsBeforeCRUD;
     },
   };
 };
