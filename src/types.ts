@@ -9,7 +9,7 @@ export const MSGS = {
   ACTIVE_DAY: "ACTIVE_DAY",
   ON_SUBMIT: "ON_SUBMIT",
   CURRENT_SLOT_ID: "CURRENT_SLOT_ID",
-  SET_EVENTS_BEFORE_ADDING_SLOT: "SET_EVENTS_BEFORE_ADDING_SLOT",
+  SET_EVENTS_BEFORE_CRUD: "SET_EVENTS_BEFORE_CRUD",
   UNDO_ADD_LATEST_SLOT: "UNDO_ADD_LATEST_SLOT",
   SHOW_TOAST: "SHOW_TOAST",
   DELETE_SLOT: "DELETE_SLOT",
@@ -60,7 +60,7 @@ export type Model = {
   nextId: number;
   editId: number | null;
   currentSlotId: string | null;
-  eventsBeforeAddedSlot?: Model["events"];
+  eventsBeforeCRUD?: Model["events"];
   activeDay?: number;
   selectedDate?: Date;
   events?: EventType[];
@@ -86,8 +86,8 @@ export type ActionType =
   | { type: "SHOW_ADD_FORM"; showAddForm: boolean }
   | { type: "CURRENT_SLOT_ID"; slotId: string | null }
   | {
-      type: "SET_EVENTS_BEFORE_ADDING_SLOT";
-      eventsBeforeAddedSlot: Model["events"];
+      type: "SET_EVENTS_BEFORE_CRUD";
+      eventsBeforeCRUD: Model["events"];
     }
   | { type: "UNDO_ADD_LATEST_SLOT" }
   | { type: "SHOW_TOAST"; showToast: boolean }

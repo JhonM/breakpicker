@@ -14,7 +14,7 @@ export const updateUndoLatestSlot = ({
   msg: ActionType;
   model: Model;
 }) => {
-  const newModel = { ...model, events: model.eventsBeforeAddedSlot };
+  const newModel = { ...model, events: model.eventsBeforeCRUD };
   const manager = commandManager({ model: newModel, msg });
 
   manager.undo?.();

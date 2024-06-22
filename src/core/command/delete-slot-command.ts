@@ -32,7 +32,7 @@ export const deleteSlotCommand = (model: Model, msg: any) => {
       model.events = newModel.events;
     },
     undo: () => {
-      model.events = model.eventsBeforeAddedSlot;
+      model.events = model.eventsBeforeCRUD;
     },
   };
 };

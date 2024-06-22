@@ -11,7 +11,7 @@ import { updateNextMonth } from "./update/updateNextMonth";
 import { updateOnSubmit } from "./update/updateOnSubmit";
 import { updatePrevMonth } from "./update/updatePrevMonth";
 import { updateSelectedDate } from "./update/updateSelectedDate";
-import { updateSetEventsBeforeAddingSlot } from "./update/updateSetEventsBeforeAddingSlot";
+import { updateSetEventsBeforeCRUD } from "./update/updateSetEventsBeforeCRUD";
 import { updateShowAddForm } from "./update/updateShowAddForm";
 import { updateUndoLatestSlot } from "./update/updateUndoLatestSlot";
 
@@ -50,8 +50,8 @@ export default function update(msg: ActionType, model: Model): Model {
       (x) => updateCurrentSlotId({ msg: x, model })
     )
     .on(
-      (x) => x.type === MSGS.SET_EVENTS_BEFORE_ADDING_SLOT,
-      (x) => updateSetEventsBeforeAddingSlot({ msg: x, model })
+      (x) => x.type === MSGS.SET_EVENTS_BEFORE_CRUD,
+      (x) => updateSetEventsBeforeCRUD({ msg: x, model })
     )
     .on(
       (x) => x.type === MSGS.UNDO_ADD_LATEST_SLOT,

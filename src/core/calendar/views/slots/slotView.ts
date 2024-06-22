@@ -2,7 +2,7 @@ import { h } from "@jhonm/blanc-vdom";
 import { DispatchType, Model, Slot } from "../../../../types";
 import { deleteSlotMsg } from "../../update/updateDeleteSlot";
 import { currentSlotIdMsg } from "../../update/updateCurrentSlotId";
-import { setEventsBeforeAddingSlotMsg } from "../../update/updateSetEventsBeforeAddingSlot";
+import { setEventsBeforeCRUD } from "../../update/updateSetEventsBeforeCRUD";
 
 function slotTitle(title: Slot["title"]) {
   return h("div", {}, title);
@@ -19,7 +19,7 @@ function slotDeleteButton(
     {
       onclick: (e: Event) => {
         e.stopPropagation();
-        dispatch(setEventsBeforeAddingSlotMsg(model.events));
+        dispatch(setEventsBeforeCRUD(model.events));
         dispatch(deleteSlotMsg(id, startDate));
         dispatch(currentSlotIdMsg(id));
       },
