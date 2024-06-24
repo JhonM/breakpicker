@@ -3,10 +3,7 @@ import { DispatchType, Model, Slot } from "../../../../types";
 import { deleteSlotMsg } from "../../update/updateDeleteSlot";
 import { currentSlotIdMsg } from "../../update/updateCurrentSlotId";
 import { setEventsBeforeCRUD } from "../../update/updateSetEventsBeforeCRUD";
-
-function slotTitle(title: Slot["title"]) {
-  return h("div", {}, title);
-}
+import { slotTitle } from "./slotTitle";
 
 function slotDeleteButton(
   dispatch: DispatchType,
@@ -33,6 +30,9 @@ export function slotView(dispatch: DispatchType, slot: Slot, model: Model) {
   return h(
     "div",
     {},
-    ...[slotTitle(title), slotDeleteButton(dispatch, id, startDate, model)]
+    ...[
+      slotTitle({ dispatch, title, id, model }),
+      slotDeleteButton(dispatch, id, startDate, model),
+    ]
   );
 }

@@ -6,6 +6,7 @@ import { updateControlToastNotification } from "./update/updateControlToastNotif
 import { updateCurrentMonth } from "./update/updateCurrentMonth";
 import { updateCurrentSlotId } from "./update/updateCurrentSlotId";
 import { updateDeleteSlot } from "./update/updateDeleteSlot";
+import { updateEditSlot } from "./update/updateEditSlot";
 import { updateGoToToday } from "./update/updateGoToToday";
 import { updateNextMonth } from "./update/updateNextMonth";
 import { updateOnSubmit } from "./update/updateOnSubmit";
@@ -68,6 +69,10 @@ export default function update(msg: ActionType, model: Model): Model {
     .on(
       (x) => x.type === MSGS.DELETE_SLOT,
       (x) => updateDeleteSlot({ msg: x, model })
+    )
+    .on(
+      (x) => x.type === MSGS.EDIT_SLOT,
+      (x) => updateEditSlot({ msg: x, model })
     )
     .otherwise(() => model);
 }

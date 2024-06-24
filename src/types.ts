@@ -13,6 +13,7 @@ export const MSGS = {
   UNDO_ADD_LATEST_SLOT: "UNDO_ADD_LATEST_SLOT",
   SHOW_TOAST: "SHOW_TOAST",
   DELETE_SLOT: "DELETE_SLOT",
+  EDIT_SLOT: "EDIT_SLOT",
 } as const;
 
 export const Months = [
@@ -91,7 +92,8 @@ export type ActionType =
     }
   | { type: "UNDO_ADD_LATEST_SLOT" }
   | { type: "SHOW_TOAST"; showToast: boolean }
-  | { type: "DELETE_SLOT"; slotId: string; startDate: Date };
+  | { type: "DELETE_SLOT"; slotId: string; startDate: Date }
+  | { type: "EDIT_SLOT"; slotId: string };
 
 export type DispatchType = (action: ActionType) => void;
 
@@ -99,4 +101,8 @@ export type HTMLElementEvent<T extends HTMLElement> = Event & {
   target: T;
 };
 
-export type CommandType = "ADD_SLOT" | "DELETE_SLOT" | "COPY_EVENT";
+export type CommandType =
+  | "ADD_SLOT"
+  | "DELETE_SLOT"
+  | "EDIT_SLOT"
+  | "COPY_EVENT";
