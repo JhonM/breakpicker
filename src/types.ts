@@ -57,7 +57,7 @@ export type Model = {
   currentMonth: MonthType;
   currentYear: number;
   currentMonthDays: string[] | null;
-  showAddForm: boolean;
+  showForm: boolean;
   nextId: number;
   editId: number | null;
   currentSlotId: string | null;
@@ -84,7 +84,7 @@ export type ActionType =
   | { type: "GO_TO_TODAY" }
   | { type: "ACTIVE_DAY"; activeDay: number }
   | { type: "ON_SUBMIT"; submitData: SubmitData }
-  | { type: "SHOW_ADD_FORM"; showAddForm: boolean }
+  | { type: "SHOW_ADD_FORM"; showForm: boolean }
   | { type: "CURRENT_SLOT_ID"; slotId: string | null }
   | {
       type: "SET_EVENTS_BEFORE_CRUD";

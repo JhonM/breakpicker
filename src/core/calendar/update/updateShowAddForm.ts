@@ -1,9 +1,9 @@
 import { ActionType, Model, MSGS } from "../../../types";
 
-export function showAddFormMsg(showAddForm: boolean) {
+export function showAddFormMsg(showForm: boolean) {
   return {
     type: MSGS.SHOW_ADD_FORM,
-    showAddForm,
+    showForm,
   };
 }
 
@@ -16,9 +16,9 @@ export const updateShowAddForm = ({
 }) => {
   if (msg.type !== MSGS.SHOW_ADD_FORM) return model;
 
-  const { showAddForm } = msg;
+  const { showForm } = msg;
   return {
     ...model,
-    showAddForm,
+    showForm,
   };
 };
