@@ -22,7 +22,7 @@ const initModel: Model = {
   currentYear: getCurrentYear,
   currentDate: new Date(),
   currentMonthDays: null,
-  showAddForm: false,
+  showForm: false,
   nextId: 2,
   editId: null,
   currentSlotId: null,

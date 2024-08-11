@@ -7,20 +7,20 @@ import { onSubmitMsg } from "../update/updateOnSubmit";
 
 type InputType = "text" | "number";
 
-function input(type: InputType, name: string) {
-  return h("input", { type, name }, "");
+function input(value: string | undefined, type: InputType, name: string) {
+  return h("input", { type, name, value }, "");
 }
 
-function fieldSet(type: InputType, name: string) {
-  return h("fieldset", {}, input(type, name));
+function fieldSet(value: string | undefined, type: InputType, name: string) {
+  return h("fieldset", {}, input(value, type, name));
 }
 
 function closeButton(onclick: () => void) {
   return h("button", { onclick }, "close");
 }
 
-function baseInput(type: InputType, name: string) {
-  return fieldSet(type, name);
+function baseInput(value: string | undefined, type: InputType, name: string) {
+  return fieldSet(value, type, name);
 }
 
 function submitButton() {
@@ -29,8 +29,12 @@ function submitButton() {
 
 export function addSlotFormView(dispatch: DispatchType, model: Model) {
   const date = new Date(model.year, model.month, model.activeDay);
+  const event = {
+    title: "some title to edit",
+    duration: "233",
+  };
 
-  if (model.showAddForm) {
+  if (model.showForm) {
     return h(
       "form",
       {
@@ -53,8 +57,8 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
       },
       ...[
         closeButton(() => dispatch(showAddFormMsg(false))),
-        baseInput("text", "mainTitle"),
-        baseInput("number", "duration"),
+        baseInput(event.title, "text", "mainTitle"),
+        baseInput(event.duration, "number", "duration"),
         `${date.toLocaleDateString()}`,
         submitButton(),
       ]
