@@ -1,5 +1,5 @@
 import { h } from "@jhonm/blanc-vdom";
-import { DispatchType, Model, Slot } from "../../../../types";
+import { DispatchType, EventType, Model, Slot } from "../../../../types";
 import { deleteSlotMsg } from "../../update/updateDeleteSlot";
 import { currentSlotIdMsg } from "../../update/updateCurrentSlotId";
 import { setEventsBeforeCRUD } from "../../update/updateSetEventsBeforeCRUD";
@@ -24,14 +24,19 @@ function slotDeleteButton(
     "X"
   );
 }
-export function slotView(dispatch: DispatchType, slot: Slot, model: Model) {
+export function slotView(
+  dispatch: DispatchType,
+  slot: Slot,
+  model: Model,
+  eventId: EventType["id"]
+) {
   const { title, id, startDate } = slot;
 
   return h(
     "div",
     {},
     ...[
-      slotTitle({ dispatch, title, id, model }),
+      slotTitle({ dispatch, title, id, model, eventId }),
       slotDeleteButton(dispatch, id, startDate, model),
     ]
   );

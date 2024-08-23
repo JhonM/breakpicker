@@ -15,6 +15,6 @@ export function eventView(
   return h(
     "div",
     { className: eventClass },
-    SlotsView(dispatch, event.slots, model)
+    SlotsView({ dispatch, slots: event.slots, eventId: event.id, model })
   );
 }
