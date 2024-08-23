@@ -72,12 +72,8 @@ export const dayContainerClass = style({
 });
 
 export const addSlotFormClass = style({
-  background: "gray",
   height: "100vh",
-  position: "fixed",
-  top: 0,
-  right: 0,
-  width: "30%",
+  width: "100%",
 });
 
 export const eventClass = style({
@@ -93,4 +89,30 @@ export const weekDayClass = style({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+});
+
+export const dialogClass = style({
+  position: "fixed",
+  top: 0,
+  transition: ".3s",
+  margin: 0,
+  marginLeft: "auto",
+  minHeight: "100vh",
+  width: "400px",
+  maxWidth: "80%",
+  transform: "translateX(100%)",
+  selectors: {
+    "&::backdrop": {
+      background: "rgba(#000, 0.2)",
+      backdropFilter: "blur(4px)",
+    },
+    "&[open]": {
+      display: "flex",
+      margin: 0,
+      marginLeft: "auto",
+      flexDirection: "column",
+      transform: "translateX(0)",
+      transition: ".3s",
+    },
+  },
 });
