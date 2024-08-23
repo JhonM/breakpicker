@@ -34,36 +34,32 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
     duration: "233",
   };
 
-  if (model.showForm) {
-    return h(
-      "form",
-      {
-        className: addSlotFormClass,
-        onsubmit: (e: SubmitEvent) => {
-          e.preventDefault();
-          dispatch(setEventsBeforeCRUD(model.events));
+  return h(
+    "form",
+    {
+      className: addSlotFormClass,
+      onsubmit: (e: SubmitEvent) => {
+        e.preventDefault();
+        dispatch(setEventsBeforeCRUD(model.events));
 
-          const target = e.target as HTMLFormElement;
+        const target = e.target as HTMLFormElement;
 
-          dispatch(
-            onSubmitMsg({
-              title: target?.mainTitle.value,
-              duration: target?.duration.value,
-              slotId: model.currentSlotId || null,
-              date,
-            })
-          );
-        },
+        dispatch(
+          onSubmitMsg({
+            title: target?.mainTitle.value,
+            duration: target?.duration.value,
+            slotId: model.currentSlotId || null,
+            date,
+          })
+        );
       },
-      ...[
-        closeButton(() => dispatch(showAddFormMsg(false))),
-        baseInput(event.title, "text", "mainTitle"),
-        baseInput(event.duration, "number", "duration"),
-        `${date.toLocaleDateString()}`,
-        submitButton(),
-      ]
-    );
-  }
-
-  return h("span", {});
+    },
+    ...[
+      closeButton(() => dispatch(showAddFormMsg(false))),
+      baseInput(event.title, "text", "mainTitle"),
+      baseInput(event.duration, "number", "duration"),
+      `${date.toLocaleDateString()}`,
+      submitButton(),
+    ]
+  );
 }
