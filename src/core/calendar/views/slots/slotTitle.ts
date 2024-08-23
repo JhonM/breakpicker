@@ -1,5 +1,5 @@
 import { h } from "@jhonm/blanc-vdom";
-import { DispatchType, Model, Slot } from "../../../../types";
+import { DispatchType, EventType, Model, Slot } from "../../../../types";
 import { editSlotMsg } from "../../update/updateEditSlot";
 import { setEventsBeforeCRUD } from "../../update/updateSetEventsBeforeCRUD";
 import { showAddFormMsg } from "../../update/updateShowAddForm";
@@ -9,9 +9,11 @@ type Props = {
   id: string;
   dispatch: DispatchType;
   model: Model;
+  eventId: EventType["id"];
 };
 
-export function slotTitle({ dispatch, title, id, model }: Props) {
+export function slotTitle({ dispatch, title, id, model, eventId }: Props) {
+  console.info(eventId, "slotTitle");
   return h(
     "div",
     {
