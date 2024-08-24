@@ -1,10 +1,11 @@
 import { ActionType, CommandType, MSGS, Model } from "../../../types";
 import { commandManager } from "../../command/command-manager";
 
-export function editSlotMsg(slotId: string) {
+export function editSlotMsg(slotId: string, eventId: string) {
   return {
     type: MSGS.EDIT_SLOT,
     slotId,
+    eventId,
   };
 }
 
@@ -21,7 +22,14 @@ export const updateEditSlot = ({
 
   commands.forEach((command) => manager.doCommand(command));
 
+  const { slotId, eventId } = msg;
+
+  console.info(slotId, eventId);
+
   return {
     ...newModel,
+    editMode: true,
+    editId: slotId,
+    eventId,
   };
 };

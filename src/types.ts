@@ -58,8 +58,10 @@ export type Model = {
   currentYear: number;
   currentMonthDays: string[] | null;
   showForm: boolean;
+  editMode: boolean;
   nextId: number;
-  editId: number | null;
+  editId: string | null;
+  eventId: string | null;
   currentSlotId: string | null;
   eventsBeforeCRUD?: Model["events"];
   activeDay?: number;

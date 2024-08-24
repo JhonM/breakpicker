@@ -17,8 +17,19 @@ export const updateShowAddForm = ({
   if (msg.type !== MSGS.SHOW_ADD_FORM) return model;
 
   const { showForm } = msg;
+
+  if (showForm) {
+    return {
+      ...model,
+      showForm,
+    };
+  }
+
   return {
     ...model,
     showForm,
+    editMode: false,
+    editId: null,
+    eventId: null,
   };
 };
