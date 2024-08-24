@@ -16,6 +16,8 @@ export const updateEditSlot = ({
   model: Model;
   msg: ActionType;
 }) => {
+  if (msg.type !== MSGS.EDIT_SLOT) return model;
+
   const newModel = { ...model };
   const commands: CommandType[] = ["EDIT_SLOT"];
   const manager = commandManager({ model: newModel, msg });
@@ -23,8 +25,6 @@ export const updateEditSlot = ({
   commands.forEach((command) => manager.doCommand(command));
 
   const { slotId, eventId } = msg;
-
-  console.info(slotId, eventId);
 
   return {
     ...newModel,

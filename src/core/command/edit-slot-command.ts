@@ -4,55 +4,38 @@ export const editSlotCommand = (model: Model, msg: any) => {
   return {
     execute: () => {
       const matchedEventArray = model.events?.map((event) => {
-        const findEvent = event.slots?.find((slot) => slot.id === msg.slotId);
+        if (event.id === model.eventId) {
+          const foundedSlot = event?.slots?.find(
+            (slot) => slot.id === model.editId
+          );
 
-        if (findEvent) {
-          const newSlot = {
-            ...findEvent,
-          };
+          if (foundedSlot?.id) {
+            const newState = event.slots?.map((obj) =>
+              obj.id === foundedSlot.id ? { ...obj, ...msg.submitData } : obj
+            );
 
-          const mergeSlots = [...(event.slots || []), newSlot];
-          const updateSlots = { ...event, slots: mergeSlots };
+            const updateSlots = { ...event, slots: newState };
+            return updateSlots;
+          }
 
-          return updateSlots;
-          return findEvent;
+          return event;
         }
-        // if (event.id === model.currentSlotId) {
-        //   const newSlot = {
-        //     title: "Adjusted title",
-        //   };
-
-        //   const mergeSlots = [...(event.slots || []), newSlot];
-        //   const updateSlots = { ...event, slots: mergeSlots };
-
-        //   return updateSlots;
-        // }
 
         return event;
       });
 
-      const hasSlots = model.events?.find(
-        (event) => event.id === model.currentSlotId
-      );
-
-      const newEvent = {
+      const newModel = {
         ...model,
         events: matchedEventArray,
       };
 
-      const mergeEvents = [...(model.events || []), newEvent];
-
-      const newModel = {
-        ...model,
-        events: hasSlots ? matchedEventArray : mergeEvents,
-      };
-
-      // model.showToast = true;
+      model.showForm = false;
+      model.showToast = true;
       model.events = newModel.events;
     },
     undo: () => {
       console.info("undo");
-      // model.events = model.eventsBeforeCRUD;
+      model.events = model.eventsBeforeCRUD;
     },
   };
 };
