@@ -95,7 +95,7 @@ export type ActionType =
   | { type: "UNDO_ADD_LATEST_SLOT" }
   | { type: "SHOW_TOAST"; showToast: boolean }
   | { type: "DELETE_SLOT"; slotId: string; startDate: Date }
-  | { type: "EDIT_SLOT"; slotId: string };
+  | { type: "EDIT_SLOT"; slotId: string; eventId: EventType["id"] };
 
 export type DispatchType = (action: ActionType) => void;
 

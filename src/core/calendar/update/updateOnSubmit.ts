@@ -22,7 +22,9 @@ export const updateOnSubmit = ({
   model: Model;
 }) => {
   const newModel = { ...model };
-  const commands: CommandType[] = ["ADD_SLOT"];
+  const commands: CommandType[] = newModel.editMode
+    ? ["EDIT_SLOT"]
+    : ["ADD_SLOT"];
   const manager = commandManager({ model: newModel, msg });
 
   commands.forEach((command) => manager.doCommand(command));
