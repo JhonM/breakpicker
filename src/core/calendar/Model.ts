@@ -23,8 +23,10 @@ const initModel: Model = {
   currentDate: new Date(),
   currentMonthDays: null,
   showForm: false,
+  editMode: false,
   nextId: 2,
   editId: null,
+  eventId: null,
   currentSlotId: null,
   events: [
     {

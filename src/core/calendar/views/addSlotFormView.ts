@@ -29,10 +29,44 @@ function submitButton() {
 
 export function addSlotFormView(dispatch: DispatchType, model: Model) {
   const date = new Date(model.year, model.month, model.activeDay);
-  const event = {
-    title: "some title to edit",
-    duration: "233",
-  };
+  const findCurrentEvent = model?.events?.find(
+    (event) => event.id === model.eventId
+  );
+  const slot = findCurrentEvent?.slots?.find(
+    (slot) => slot.id === model.editId
+  );
+
+  if (model.editMode && slot) {
+    return h(
+      "form",
+      {
+        className: addSlotFormClass,
+        onsubmit: (e: SubmitEvent) => {
+          e.preventDefault();
+          dispatch(setEventsBeforeCRUD(model.events));
+
+          const target = e.target as HTMLFormElement;
+
+          dispatch(
+            onSubmitMsg({
+              title: target?.mainTitle.value,
+              duration: target?.duration.value,
+              slotId: model.currentSlotId || null,
+              date,
+            })
+          );
+        },
+      },
+      ...[
+        closeButton(() => dispatch(showAddFormMsg(false))),
+        baseInput(slot?.title, "text", "mainTitle"),
+        baseInput(slot?.duration.toString(), "number", "duration"),
+        `${date.toLocaleDateString()}`,
+        submitButton(),
+        h("pre", {}, JSON.stringify(model, null, 2)),
+      ]
+    );
+  }
 
   return h(
     "form",
@@ -56,10 +90,11 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
     },
     ...[
       closeButton(() => dispatch(showAddFormMsg(false))),
-      baseInput(event.title, "text", "mainTitle"),
-      baseInput(event.duration, "number", "duration"),
+      baseInput("", "text", "mainTitle"),
+      baseInput("", "number", "duration"),
       `${date.toLocaleDateString()}`,
       submitButton(),
+      h("pre", {}, JSON.stringify(model, null, 2)),
     ]
   );
 }

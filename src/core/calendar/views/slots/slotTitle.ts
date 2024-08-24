@@ -13,14 +13,13 @@ type Props = {
 };
 
 export function slotTitle({ dispatch, title, id, model, eventId }: Props) {
-  console.info(eventId, "slotTitle");
   return h(
     "div",
     {
       onclick: (e: Event) => {
         e.stopPropagation();
         dispatch(setEventsBeforeCRUD(model.events));
-        dispatch(editSlotMsg(id));
+        dispatch(editSlotMsg(id, eventId));
         dispatch(showAddFormMsg(true));
       },
     },
