@@ -35,9 +35,10 @@ class DialogOffCanvas extends HTMLElement {
   }
 
   _render() {
+    this.dialog.classList.add("off-canvas");
     this.dialog.innerHTML = `
       <style>
-        dialog {
+        dialog.off-canvas {
           position: fixed;
           top: 0;
           transition: .3s;
@@ -49,7 +50,7 @@ class DialogOffCanvas extends HTMLElement {
           transform: translateX(100%);
         }
 
-        dialog[open] {
+        dialog.off-canvas[open] {
           display: flex;
           margin: 0;
           margin-left: auto;
@@ -59,7 +60,7 @@ class DialogOffCanvas extends HTMLElement {
           border: 0;
         }
 
-        dialog::backdrop {
+        dialog.off-canvas::backdrop {
           background: rgba(#000, 0.2);
           backdrop-filter: blur(4px);
         }
