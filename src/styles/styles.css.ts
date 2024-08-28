@@ -90,3 +90,18 @@ export const weekDayClass = style({
   justifyContent: "center",
   alignItems: "center",
 });
+
+export const dialogClass = style({
+  position: "fixed",
+  transition: ".3s",
+  selectors: {
+    "&::backdrop": {
+      background: "rgba(#000, 0.2)",
+      backdropFilter: "blur(4px)",
+    },
+    "&[open]": {
+      display: "flex",
+      transition: ".3s",
+    },
+  },
+});
