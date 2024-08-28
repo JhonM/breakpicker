@@ -19,9 +19,13 @@ export const select = ({
 export const option = ({
   className,
   value,
+  selected,
   ...props
 }: {
   className: string;
   value: string;
   selected: boolean;
-}) => h("option", { className, ...props }, value);
+}) => {
+  const hasSelected = selected ? { selected, ...props } : { ...props };
+  return h("option", { className, ...hasSelected }, value);
+};
