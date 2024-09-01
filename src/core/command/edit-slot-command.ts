@@ -31,6 +31,7 @@ export const editSlotCommand = (model: Model, msg: any) => {
 
       model.showForm = false;
       model.showToast = true;
+      model.editMode = false;
       model.events = newModel.events;
     },
     undo: () => {

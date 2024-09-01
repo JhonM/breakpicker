@@ -23,7 +23,10 @@ export default function view(dispatch: DispatchType, model: Model) {
       ToastView(dispatch, model, undoView(dispatch, "Undo action")),
       h(
         "dialog-off-canvas",
-        { heading: "From base view", open: model.showForm ? true : false },
+        {
+          heading: `${model.editMode ? "Edit" : "Add"} slot`,
+          open: model.showForm ? true : false,
+        },
         AddSlotFormView(dispatch, model)
       ),
       DialogConfirmView(),
