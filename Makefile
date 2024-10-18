@@ -1,8 +1,5 @@
 default: clean_frontend install_frontend
 
-dev:
-	make dev_frontend	
-
 build:
 	make build_frontend	
 
@@ -35,3 +32,6 @@ test_frontend:
 
 test_watch_frontend:
 	cd frontend && npm run npm run start
+
+dev_backend:
+	cd backend && npm run start:dev
