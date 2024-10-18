@@ -1,0 +1,34 @@
+# JS tests / coverage / bower
+node_modules/*
+npm-debug.log
+
+# sample files
+sample*.js
+
+# Mac stuff
+.DS\_Store
+
+# SASS
+.sass-cache
+.parcel-cache
+dist/
+dist-demo/
+types/*
+docs/*
+
+# compiled css files
+public/*.css
+public/*.map
+public/compiled.js
+
+# ignore Bourbon and Neat
+sass/lib/bourbon
+sass/lib/neat
+.vimspector.json
+yarn-error.log
+
+# envoriment
+.env
+
+# vimspector
+.vimspector.json
