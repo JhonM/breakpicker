@@ -14,12 +14,23 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  Date: { input: any; output: any; }
 };
 
-export type PeopleCountQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllEventsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PeopleCountQuery = { __typename?: 'Root', allPeople?: { __typename?: 'PeopleConnection', totalCount?: number | null } | null };
+export type AllEventsQueryQuery = { __typename?: 'Query', getEvents?: Array<{ __typename?: 'Event', id?: string | null, date?: any | null } | null> | null };
+
+export type PostEventQueryMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PostEventQueryMutation = { __typename?: 'Mutation', createEvent: { __typename?: 'Event', date?: any | null } };
+
+export type GetEventQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetEventQueryQuery = { __typename?: 'Query', getEvent?: { __typename?: 'Event', id?: string | null, date?: any | null } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -36,10 +47,26 @@ export class TypedDocumentString<TResult, TVariables>
   }
 }
 
-export const PeopleCountDocument = new TypedDocumentString(`
-    query PeopleCount {
-  allPeople {
-    totalCount
+export const AllEventsQueryDocument = new TypedDocumentString(`
+    query AllEventsQuery {
+  getEvents {
+    id
+    date
   }
 }
-    `) as unknown as TypedDocumentString<PeopleCountQuery, PeopleCountQueryVariables>;
+    `) as unknown as TypedDocumentString<AllEventsQueryQuery, AllEventsQueryQueryVariables>;
+export const PostEventQueryDocument = new TypedDocumentString(`
+    mutation PostEventQuery {
+  createEvent(date: "2024-10-25T22:49:58.867Z") {
+    date
+  }
+}
+    `) as unknown as TypedDocumentString<PostEventQueryMutation, PostEventQueryMutationVariables>;
+export const GetEventQueryDocument = new TypedDocumentString(`
+    query GetEventQuery {
+  getEvent(id: "489769e7-d52b-4ad1-867a-97d5e3128639") {
+    id
+    date
+  }
+}
+    `) as unknown as TypedDocumentString<GetEventQueryQuery, GetEventQueryQueryVariables>;

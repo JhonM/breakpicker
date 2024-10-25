@@ -6,4 +6,9 @@ const pets: {
   ownerName: string;
 }[] = [];
 
-export default pets;
+const events: {
+  id: string;
+  date: Date;
+}[] = [];
+
+export { pets, events };

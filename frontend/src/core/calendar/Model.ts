@@ -10,15 +10,33 @@ import type { EventType, Model } from "../../types";
 import { graphql } from "../../graphql";
 import { execute } from "../../graphql/execute";
 
-const PeopleCountQuery = graphql(`
-  query PeopleCount {
-    allPeople {
-      totalCount
+const AllEventsQuery = graphql(`
+  query AllEventsQuery {
+    getEvents {
+      id
+      date
     }
   }
 `);
 
-execute(PeopleCountQuery).then((data) => {
+const PostEventQuery = graphql(`
+  mutation PostEventQuery {
+    createEvent(date: "2024-10-25T22:49:58.867Z") {
+      date
+    }
+  }
+`);
+
+const GetEventQuery = graphql(`
+  query GetEventQuery {
+    getEvent(id: "489769e7-d52b-4ad1-867a-97d5e3128639") {
+      id
+      date
+    }
+  }
+`);
+
+execute(GetEventQuery).then((data) => {
   console.info(data, "data");
 });
 

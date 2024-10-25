@@ -1,4 +1,4 @@
-import pets from "./database";
+import { pets, events } from "./database";
 import { randomUUID } from "crypto";
 
 type Pet = {
@@ -9,12 +9,25 @@ type Pet = {
   ownerName: string;
 };
 
+type Event = {
+  id: string;
+  date: Date;
+};
+
 const getPet = (args: { id: string }): Pet | undefined => {
   return pets.find((pet) => pet.id === args.id);
 };
 
 const getPets = (): Pet[] => {
   return pets;
+};
+
+const getEvent = (args: { id: string }): Event | undefined => {
+  return events.find((event) => event.id === args.id);
+};
+
+const getEvents = (): Event[] => {
+  return events;
 };
 
 const createPet = (args: {
@@ -29,6 +42,15 @@ const createPet = (args: {
   const pet = { id: generatedId, ...args };
   pets.push(pet);
   return pet;
+};
+
+const createEvent = (args: { date: Date }): Event => {
+  // generate randon uuid for pet object
+  const generatedId = randomUUID().toString();
+  // create pet object and save
+  const event = { id: generatedId, ...args };
+  events.push(event);
+  return event;
 };
 
 const updatePet = (args: {
@@ -66,4 +88,7 @@ export const root = {
   createPet,
   updatePet,
   deletePet,
+  getEvent,
+  getEvents,
+  createEvent,
 };
