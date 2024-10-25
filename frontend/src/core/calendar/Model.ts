@@ -7,6 +7,21 @@ import {
 import { guid } from "../../helpers/random";
 import type { EventType, Model } from "../../types";
 
+import { graphql } from "../../graphql";
+import { execute } from "../../graphql/execute";
+
+const PeopleCountQuery = graphql(`
+  query PeopleCount {
+    allPeople {
+      totalCount
+    }
+  }
+`);
+
+execute(PeopleCountQuery).then((data) => {
+  console.info(data, "data");
+});
+
 const today = new Date();
 
 function addDaysToDate(date: Date, days: number) {
