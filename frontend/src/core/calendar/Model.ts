@@ -8,7 +8,7 @@ import { guid } from "../../helpers/random";
 import type { EventType, Model } from "../../types";
 
 import { graphql } from "../../graphql";
-import { execute } from "../../graphql/execute";
+import { fetchData } from "../../api/fetchData";
 
 const AllEventsQuery = graphql(`
   query AllEventsQuery {
@@ -36,7 +36,7 @@ const GetEventQuery = graphql(`
   }
 `);
 
-execute(GetEventQuery).then((data) => {
+fetchData(GetEventQuery).then((data) => {
   console.info(data, "data");
 });
 

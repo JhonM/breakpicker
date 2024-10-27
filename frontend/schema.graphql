@@ -14,6 +14,7 @@ type Event {
 type Mutation {
   createEvent(date: Date!): Event!
   createPet(age: Int!, name: String!, ownerName: String, pictureUri: String): Pet!
+  createSlot(title: String!): Slot!
   deletePet(id: ID): ID!
   updatePet(age: Int, id: ID!, name: String, ownerName: String, pictureUri: String): Pet!
 }
@@ -31,10 +32,10 @@ type Query {
   getEvents: [Event]
   getPet(id: ID!): Pet
   getPets: [Pet]
+  getSlot(id: ID): Slot
 }
 
 type Slot {
-  date: Date
   duration: Int
   endDate: Date
   id: ID

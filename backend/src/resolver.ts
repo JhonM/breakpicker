@@ -1,4 +1,4 @@
-import { pets, events } from "./database";
+import { pets, events, slots } from "./database";
 import { randomUUID } from "crypto";
 
 type Pet = {
@@ -12,6 +12,14 @@ type Pet = {
 type Event = {
   id: string;
   date: Date;
+};
+
+type Slot = {
+  id: string;
+  title: string;
+  duration: number;
+  startDate: Date;
+  endDate?: Date;
 };
 
 const getPet = (args: { id: string }): Pet | undefined => {
@@ -28,6 +36,15 @@ const getEvent = (args: { id: string }): Event | undefined => {
 
 const getEvents = (): Event[] => {
   return events;
+};
+
+const getSlot = (args: { id: string }): Slot | undefined => {
+  return slots.find((slot) => slot.id === args.id);
+};
+
+const getSlots = (args: { eventId: string }): Slot[] => {
+  // do an find in particular event.
+  return slots;
 };
 
 const createPet = (args: {
@@ -51,6 +68,21 @@ const createEvent = (args: { date: Date }): Event => {
   const event = { id: generatedId, ...args };
   events.push(event);
   return event;
+};
+
+const createSlot = (args: {
+  eventId: string;
+  title: string;
+  duration: number;
+  startDate: Date;
+  endDate: Date;
+}): Slot => {
+  // generate randon uuid for pet object
+  const generatedId = randomUUID().toString();
+  // create pet object and save
+  const slot = { id: generatedId, ...args };
+  slots.push(slot);
+  return slot;
 };
 
 const updatePet = (args: {
@@ -91,4 +123,7 @@ export const root = {
   getEvent,
   getEvents,
   createEvent,
+  getSlot,
+  getSlots,
+  createSlot,
 };

@@ -15,7 +15,6 @@ const schema = buildSchema(`
     id: ID
     title: String
     duration: Int
-    date: Date
     startDate: Date
     endDate: Date
   }
@@ -31,6 +30,7 @@ const schema = buildSchema(`
     getPet(id: ID!): Pet
     getEvents: [Event]
     getEvent(id: ID): Event
+    getSlot(id: ID): Slot
   }
 
   type Mutation {
@@ -38,6 +38,7 @@ const schema = buildSchema(`
     updatePet(id: ID!, name: String, age: Int, pictureUri: String, ownerName: String): Pet!
     deletePet(id: ID): ID!
     createEvent(date: Date!): Event!
+    createSlot(title: String!): Slot!
   }
 `);
 

@@ -11,4 +11,12 @@ const events: {
   date: Date;
 }[] = [];
 
-export { pets, events };
+const slots: {
+  id: string;
+  title: string;
+  duration: number;
+  startDate: Date;
+  endDate: Date;
+}[] = [];
+
+export { pets, events, slots };
