@@ -1,7 +1,7 @@
 import { EventType, Model } from "../../types";
 import { guid } from "../../helpers/random";
 import { graphql } from "../../graphql";
-import { fetchData } from "../../api/fetchData";
+import { createSlotQuery } from "../../api/createSlotQuery";
 
 const AllEventsQuery = graphql(`
   query AllEventsQuery {
@@ -29,28 +29,6 @@ const GetEventQuery = graphql(`
   }
 `);
 
-const CreateSlotQuery = graphql(`
-  mutation CreateSlotQuery(
-    $mainTitle: String!
-    $duration: Int
-    $startDate: Date
-    $endDate: Date
-  ) {
-    createSlot(
-      title: $mainTitle
-      duration: $duration
-      startDate: $startDate
-      endDate: $endDate
-    ) {
-      id
-      title
-      duration
-      startDate
-      endDate
-    }
-  }
-`);
-
 const variables = {
   mainTitle: "Some slot title",
   duration: 4,
@@ -59,12 +37,11 @@ const variables = {
 };
 
 export const addSlotCommand = (model: Model, msg: any) => {
-  fetchData(CreateSlotQuery, variables).then((data) => {
-    console.info(data, "data");
-  });
-
   return {
-    execute: () => {
+    execute: async () => {
+      const data = await createSlotQuery(variables);
+
+      console.info(data, "data");
       const matchedEventArray = model.events?.map((event) => {
         if (event.id === model.currentSlotId) {
           const newSlot = {

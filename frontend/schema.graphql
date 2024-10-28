@@ -33,7 +33,6 @@ type Query {
   getPet(id: ID!): Pet
   getPets: [Pet]
   getSlot(id: ID): Slot
-  rollDice(numDice: Int!, numSides: Int): [Int]
 }
 
 type Slot {
