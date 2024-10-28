@@ -18,6 +18,8 @@ const documents = {
     "\n  query AllEventsQuery {\n    getEvents {\n      id\n      date\n    }\n  }\n": types.AllEventsQueryDocument,
     "\n  mutation PostEventQuery {\n    createEvent(date: \"2024-10-25T22:49:58.867Z\") {\n      date\n    }\n  }\n": types.PostEventQueryDocument,
     "\n  query GetEventQuery {\n    getEvent(id: \"489769e7-d52b-4ad1-867a-97d5e3128639\") {\n      id\n      date\n    }\n  }\n": types.GetEventQueryDocument,
+    "\n  query RollDiceQuery($dice: Int!, $sides: Int) {\n    rollDice(numDice: $dice, numSides: $sides)\n  }\n": types.RollDiceQueryDocument,
+    "\n  mutation CreateSlotQuery(\n    $mainTitle: String!\n    $duration: Int\n    $startDate: Date\n    $endDate: Date\n  ) {\n    createSlot(\n      title: $mainTitle\n      duration: $duration\n      startDate: $startDate\n      endDate: $endDate\n    ) {\n      id\n      title\n      duration\n      startDate\n      endDate\n    }\n  }\n": types.CreateSlotQueryDocument,
 };
 
 /**
@@ -32,6 +34,14 @@ export function graphql(source: "\n  mutation PostEventQuery {\n    createEvent(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetEventQuery {\n    getEvent(id: \"489769e7-d52b-4ad1-867a-97d5e3128639\") {\n      id\n      date\n    }\n  }\n"): typeof import('./graphql').GetEventQueryDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query RollDiceQuery($dice: Int!, $sides: Int) {\n    rollDice(numDice: $dice, numSides: $sides)\n  }\n"): typeof import('./graphql').RollDiceQueryDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation CreateSlotQuery(\n    $mainTitle: String!\n    $duration: Int\n    $startDate: Date\n    $endDate: Date\n  ) {\n    createSlot(\n      title: $mainTitle\n      duration: $duration\n      startDate: $startDate\n      endDate: $endDate\n    ) {\n      id\n      title\n      duration\n      startDate\n      endDate\n    }\n  }\n"): typeof import('./graphql').CreateSlotQueryDocument;
 
 
 export function graphql(source: string) {

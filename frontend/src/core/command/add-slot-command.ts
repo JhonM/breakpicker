@@ -29,8 +29,37 @@ const GetEventQuery = graphql(`
   }
 `);
 
+const CreateSlotQuery = graphql(`
+  mutation CreateSlotQuery(
+    $mainTitle: String!
+    $duration: Int
+    $startDate: Date
+    $endDate: Date
+  ) {
+    createSlot(
+      title: $mainTitle
+      duration: $duration
+      startDate: $startDate
+      endDate: $endDate
+    ) {
+      id
+      title
+      duration
+      startDate
+      endDate
+    }
+  }
+`);
+
+const variables = {
+  mainTitle: "Some slot title",
+  duration: 4,
+  startDate: new Date(),
+  endDate: new Date(),
+};
+
 export const addSlotCommand = (model: Model, msg: any) => {
-  fetchData(GetEventQuery).then((data) => {
+  fetchData(CreateSlotQuery, variables).then((data) => {
     console.info(data, "data");
   });
 

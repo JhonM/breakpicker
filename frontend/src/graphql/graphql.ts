@@ -32,6 +32,24 @@ export type GetEventQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetEventQueryQuery = { __typename?: 'Query', getEvent?: { __typename?: 'Event', id?: string | null, date?: any | null } | null };
 
+export type RollDiceQueryQueryVariables = Exact<{
+  dice: Scalars['Int']['input'];
+  sides?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type RollDiceQueryQuery = { __typename?: 'Query', rollDice?: Array<number | null> | null };
+
+export type CreateSlotQueryMutationVariables = Exact<{
+  mainTitle: Scalars['String']['input'];
+  duration?: InputMaybe<Scalars['Int']['input']>;
+  startDate?: InputMaybe<Scalars['Date']['input']>;
+  endDate?: InputMaybe<Scalars['Date']['input']>;
+}>;
+
+
+export type CreateSlotQueryMutation = { __typename?: 'Mutation', createSlot: { __typename?: 'Slot', id?: string | null, title?: string | null, duration?: number | null, startDate?: any | null, endDate?: any | null } };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -70,3 +88,24 @@ export const GetEventQueryDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<GetEventQueryQuery, GetEventQueryQueryVariables>;
+export const RollDiceQueryDocument = new TypedDocumentString(`
+    query RollDiceQuery($dice: Int!, $sides: Int) {
+  rollDice(numDice: $dice, numSides: $sides)
+}
+    `) as unknown as TypedDocumentString<RollDiceQueryQuery, RollDiceQueryQueryVariables>;
+export const CreateSlotQueryDocument = new TypedDocumentString(`
+    mutation CreateSlotQuery($mainTitle: String!, $duration: Int, $startDate: Date, $endDate: Date) {
+  createSlot(
+    title: $mainTitle
+    duration: $duration
+    startDate: $startDate
+    endDate: $endDate
+  ) {
+    id
+    title
+    duration
+    startDate
+    endDate
+  }
+}
+    `) as unknown as TypedDocumentString<CreateSlotQueryMutation, CreateSlotQueryMutationVariables>;

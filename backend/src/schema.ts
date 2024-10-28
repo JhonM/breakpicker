@@ -38,7 +38,7 @@ const schema = buildSchema(`
     updatePet(id: ID!, name: String, age: Int, pictureUri: String, ownerName: String): Pet!
     deletePet(id: ID): ID!
     createEvent(date: Date!): Event!
-    createSlot(title: String!): Slot!
+    createSlot(title: String!, duration: Int, startDate: Date, endDate: Date): Slot!
   }
 `);
 
