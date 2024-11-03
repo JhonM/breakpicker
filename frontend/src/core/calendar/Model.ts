@@ -35,21 +35,21 @@ const initModel: Model = {
       slots: [
         {
           id: guid(),
-          title: "slot title",
+          mainTitle: "slot mainTitle",
           duration: 4,
           startDate: new Date(),
           endDate: new Date(),
         },
         {
           id: guid(),
-          title: "slot title two",
+          mainTitle: "slot mainTitle two",
           duration: 3,
           startDate: new Date(),
           endDate: new Date(),
         },
         {
           id: guid(),
-          title: "slot title three",
+          mainTitle: "slot mainTitle three",
           duration: 1,
           startDate: new Date(),
           endDate: new Date(),
@@ -62,21 +62,21 @@ const initModel: Model = {
       slots: [
         {
           id: guid(),
-          title: "slot two title",
+          mainTitle: "slot two mainTitle",
           duration: 4,
           startDate: new Date(),
           endDate: new Date(),
         },
         {
           id: guid(),
-          title: "slot two title two",
+          mainTitle: "slot two mainTitle two",
           duration: 3,
           startDate: new Date(),
           endDate: new Date(),
         },
         {
           id: guid(),
-          title: "slot two title three",
+          mainTitle: "slot two mainTitle three",
           duration: 1,
           startDate: new Date(),
           endDate: new Date(),

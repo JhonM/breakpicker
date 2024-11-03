@@ -41,25 +41,26 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
       "form",
       {
         className: addSlotFormClass,
-        onsubmit: (e: SubmitEvent) => {
+        onsubmit: async (e: SubmitEvent) => {
           e.preventDefault();
           dispatch(setEventsBeforeCRUD(model.events));
 
           const target = e.target as HTMLFormElement;
 
           dispatch(
-            onSubmitMsg({
-              title: target?.mainTitle.value,
+            await onSubmitMsg({
+              mainTitle: target?.mainTitle.value,
               duration: target?.duration.value,
               slotId: model.currentSlotId || null,
-              date,
+              startDate: date,
+              endDate: date,
             })
           );
         },
       },
       ...[
         closeButton(() => dispatch(showAddFormMsg(false))),
-        baseInput(slot?.title, "text", "mainTitle"),
+        baseInput(slot?.mainTitle, "text", "mainTitle"),
         baseInput(slot?.duration.toString(), "number", "duration"),
         `${date.toLocaleDateString()}`,
         submitButton(),
@@ -72,18 +73,19 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
     "form",
     {
       className: addSlotFormClass,
-      onsubmit: (e: SubmitEvent) => {
+      onsubmit: async (e: SubmitEvent) => {
         e.preventDefault();
         dispatch(setEventsBeforeCRUD(model.events));
 
         const target = e.target as HTMLFormElement;
 
         dispatch(
-          onSubmitMsg({
-            title: target?.mainTitle.value,
+          await onSubmitMsg({
+            mainTitle: target?.mainTitle.value,
             duration: target?.duration.value,
             slotId: model.currentSlotId || null,
-            date,
+            startDate: date,
+            endDate: date,
           })
         );
       },

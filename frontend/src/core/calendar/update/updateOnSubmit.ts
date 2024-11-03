@@ -1,3 +1,4 @@
+import { createSlotQuery } from "../../../api/createSlotQuery";
 import {
   ActionType,
   CommandType,
@@ -7,11 +8,27 @@ import {
 } from "../../../types";
 import { commandManager } from "../../command/command-manager";
 
-export function onSubmitMsg(submitData: SubmitData) {
-  return {
-    type: MSGS.ON_SUBMIT,
-    submitData,
+export async function onSubmitMsg(submitData: SubmitData) {
+  const variables = {
+    mainTitle: submitData.mainTitle,
+    duration: Number(submitData.duration),
+    startDate: submitData.startDate,
+    endDate: submitData.endDate,
   };
+
+  try {
+    const { data } = await createSlotQuery(variables);
+
+    return {
+      type: MSGS.ON_SUBMIT,
+      submitData: { ...data },
+    };
+  } catch (error) {
+    return {
+      type: MSGS.ON_SUBMIT_ERROR,
+      submitData: {},
+    };
+  }
 }
 
 export const updateOnSubmit = ({

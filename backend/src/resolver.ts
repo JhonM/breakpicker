@@ -8,7 +8,7 @@ type Event = {
 
 type Slot = {
   id: string;
-  title: string;
+  mainTitle: string;
   duration: number;
   startDate: Date;
   endDate: Date;
@@ -40,13 +40,18 @@ const createEvent = (args: { date: Date }): Event => {
   return event;
 };
 
-const createSlot = ({ title, duration, startDate, endDate }: Slot): Slot => {
+const createSlot = ({
+  mainTitle,
+  duration,
+  startDate,
+  endDate,
+}: Slot): Slot => {
   // generate randon uuid for pet object
   const generatedId = randomUUID().toString();
   // create pet object and save
   const slot = {
     id: generatedId,
-    title,
+    mainTitle,
     duration,
     startDate,
     endDate,

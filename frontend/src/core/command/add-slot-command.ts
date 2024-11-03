@@ -1,7 +1,6 @@
 import { EventType, Model } from "../../types";
 import { guid } from "../../helpers/random";
 import { graphql } from "../../graphql";
-import { createSlotQuery } from "../../api/createSlotQuery";
 
 const AllEventsQuery = graphql(`
   query AllEventsQuery {
@@ -29,19 +28,11 @@ const GetEventQuery = graphql(`
   }
 `);
 
-const variables = {
-  mainTitle: "Some slot title",
-  duration: 4,
-  startDate: new Date(),
-  endDate: new Date(),
-};
-
 export const addSlotCommand = (model: Model, msg: any) => {
+  const date = new Date(model.year, model.month, model.activeDay);
+
   return {
     execute: async () => {
-      const data = await createSlotQuery(variables);
-
-      console.info(data, "data");
       const matchedEventArray = model.events?.map((event) => {
         if (event.id === model.currentSlotId) {
           const newSlot = {
@@ -66,12 +57,10 @@ export const addSlotCommand = (model: Model, msg: any) => {
 
       const newEvent: EventType = {
         id: guid(),
-        date: msg.submitData.date,
+        date,
         slots: [
           {
             id: guid(),
-            startDate: new Date(),
-            endDate: new Date(),
             ...msg.submitData,
           },
         ],

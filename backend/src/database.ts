@@ -5,7 +5,7 @@ const events: {
 
 const slots: {
   id: string;
-  title: string;
+  mainTitle: string;
   duration: number;
   startDate: Date;
   endDate: Date;

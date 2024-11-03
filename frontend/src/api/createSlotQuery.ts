@@ -1,7 +1,7 @@
 import { graphql } from "../graphql";
 import { fetchData } from "./fetchData";
 
-const CreateSlotQuery = graphql(`
+export const CreateSlotQuery = graphql(`
   mutation CreateSlotQuery(
     $mainTitle: String!
     $duration: Int
@@ -9,13 +9,13 @@ const CreateSlotQuery = graphql(`
     $endDate: Date
   ) {
     createSlot(
-      title: $mainTitle
+      mainTitle: $mainTitle
       duration: $duration
       startDate: $startDate
       endDate: $endDate
     ) {
       id
-      title
+      mainTitle
       duration
       startDate
       endDate
@@ -30,8 +30,11 @@ export const createSlotQuery = async (variables: {
   endDate: Date;
 }) => {
   try {
-    const data = await fetchData(CreateSlotQuery, variables);
-    return data;
+    const {
+      data: { createSlot },
+    } = await fetchData(CreateSlotQuery, variables);
+
+    return { data: createSlot };
   } catch (error) {
     console.error(error);
   }

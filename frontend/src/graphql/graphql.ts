@@ -25,7 +25,7 @@ export type CreateSlotQueryMutationVariables = Exact<{
 }>;
 
 
-export type CreateSlotQueryMutation = { __typename?: 'Mutation', createSlot: { __typename?: 'Slot', id?: string | null, title?: string | null, duration?: number | null, startDate?: any | null, endDate?: any | null } };
+export type CreateSlotQueryMutation = { __typename?: 'Mutation', createSlot: { __typename?: 'Slot', id?: string | null, mainTitle?: string | null, duration?: number | null, startDate?: any | null, endDate?: any | null } };
 
 export type AllEventsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -60,13 +60,13 @@ export class TypedDocumentString<TResult, TVariables>
 export const CreateSlotQueryDocument = new TypedDocumentString(`
     mutation CreateSlotQuery($mainTitle: String!, $duration: Int, $startDate: Date, $endDate: Date) {
   createSlot(
-    title: $mainTitle
+    mainTitle: $mainTitle
     duration: $duration
     startDate: $startDate
     endDate: $endDate
   ) {
     id
-    title
+    mainTitle
     duration
     startDate
     endDate

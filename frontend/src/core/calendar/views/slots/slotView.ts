@@ -9,7 +9,7 @@ import { guid } from "../../../../helpers/random";
 type SlotViewProp = {
   dispatch: DispatchType;
   id: Slot["id"];
-  title: Slot["title"];
+  mainTitle: Slot["mainTitle"];
   startDate: Slot["startDate"];
   model: Model;
 };
@@ -17,7 +17,7 @@ type SlotViewProp = {
 function slotDeleteButton({
   dispatch,
   id,
-  title,
+  mainTitle,
   startDate,
   model,
 }: SlotViewProp) {
@@ -68,7 +68,7 @@ function slotDeleteButton({
                 {
                   slot: "confirm-dialog-heading",
                 },
-                `Delete "${title}"`
+                `Delete "${mainTitle}"`
               ),
               h(
                 "p",
@@ -110,14 +110,14 @@ export function slotView(
   model: Model,
   eventId: EventType["id"]
 ) {
-  const { title, id, startDate } = slot;
+  const { mainTitle, id, startDate } = slot;
 
   return h(
     "div",
     {},
     ...[
-      slotTitle({ dispatch, title, id, model, eventId }),
-      slotDeleteButton({ dispatch, title, id, startDate, model }),
+      slotTitle({ dispatch, mainTitle, id, model, eventId }),
+      slotDeleteButton({ dispatch, mainTitle, id, startDate, model }),
     ]
   );
 }

@@ -13,7 +13,7 @@ const schema = buildSchema(`
 
   type Slot {
     id: ID
-    title: String
+    mainTitle: String
     duration: Int
     startDate: Date
     endDate: Date
@@ -38,7 +38,7 @@ const schema = buildSchema(`
     updatePet(id: ID!, name: String, age: Int, pictureUri: String, ownerName: String): Pet!
     deletePet(id: ID): ID!
     createEvent(date: Date!): Event!
-    createSlot(title: String!, duration: Int, startDate: Date, endDate: Date): Slot!
+    createSlot(mainTitle: String!, duration: Int, startDate: Date, endDate: Date): Slot!
   }
 `);
 

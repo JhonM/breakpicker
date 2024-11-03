@@ -10,6 +10,7 @@ import { updateEditSlot } from "./update/updateEditSlot";
 import { updateGoToToday } from "./update/updateGoToToday";
 import { updateNextMonth } from "./update/updateNextMonth";
 import { updateOnSubmit } from "./update/updateOnSubmit";
+import { updateOnSubmitError } from "./update/updateOnSubmitError";
 import { updatePrevMonth } from "./update/updatePrevMonth";
 import { updateSelectedDate } from "./update/updateSelectedDate";
 import { updateSetEventsBeforeCRUD } from "./update/updateSetEventsBeforeCRUD";
@@ -61,6 +62,10 @@ export default function update(msg: ActionType, model: Model): Model {
     .on(
       (x) => x.type === MSGS.ON_SUBMIT,
       (x) => updateOnSubmit({ msg: x, model })
+    )
+    .on(
+      (x) => x.type === MSGS.ON_SUBMIT_ERROR,
+      (x) => updateOnSubmitError({ msg: x, model })
     )
     .on(
       (x) => x.type === MSGS.SHOW_TOAST,

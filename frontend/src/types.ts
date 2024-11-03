@@ -8,6 +8,7 @@ export const MSGS = {
   GO_TO_TODAY: "GO_TO_TODAY",
   ACTIVE_DAY: "ACTIVE_DAY",
   ON_SUBMIT: "ON_SUBMIT",
+  ON_SUBMIT_ERROR: "ON_SUBMIT_ERROR",
   CURRENT_SLOT_ID: "CURRENT_SLOT_ID",
   SET_EVENTS_BEFORE_CRUD: "SET_EVENTS_BEFORE_CRUD",
   UNDO_ADD_LATEST_SLOT: "UNDO_ADD_LATEST_SLOT",
@@ -37,9 +38,8 @@ export type MsgType = (typeof MSGS)[keyof typeof MSGS];
 
 export interface Slot {
   id: string;
-  title: string;
+  mainTitle: string;
   duration: number;
-  date: Date;
   startDate: Date;
   endDate: Date;
 }
@@ -71,9 +71,10 @@ export type Model = {
 };
 
 export type SubmitData = {
-  title: string;
+  mainTitle: string;
   duration: number;
-  date: Date;
+  startDate: Date;
+  endDate: Date;
   slotId: string | null;
 };
 
@@ -86,6 +87,7 @@ export type ActionType =
   | { type: "GO_TO_TODAY" }
   | { type: "ACTIVE_DAY"; activeDay: number }
   | { type: "ON_SUBMIT"; submitData: SubmitData }
+  | { type: "ON_SUBMIT_ERROR"; submitData: {} }
   | { type: "SHOW_ADD_FORM"; showForm: boolean }
   | { type: "CURRENT_SLOT_ID"; slotId: string | null }
   | {

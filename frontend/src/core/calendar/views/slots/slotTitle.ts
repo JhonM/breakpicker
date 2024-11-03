@@ -5,14 +5,14 @@ import { setEventsBeforeCRUD } from "../../update/updateSetEventsBeforeCRUD";
 import { showAddFormMsg } from "../../update/updateShowAddForm";
 
 type Props = {
-  title: Slot["title"];
+  mainTitle: Slot["mainTitle"];
   id: string;
   dispatch: DispatchType;
   model: Model;
   eventId: EventType["id"];
 };
 
-export function slotTitle({ dispatch, title, id, model, eventId }: Props) {
+export function slotTitle({ dispatch, mainTitle, id, model, eventId }: Props) {
   return h(
     "div",
     {
@@ -23,6 +23,6 @@ export function slotTitle({ dispatch, title, id, model, eventId }: Props) {
         dispatch(showAddFormMsg(true));
       },
     },
-    title
+    mainTitle
   );
 }
