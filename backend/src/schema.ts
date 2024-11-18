@@ -30,12 +30,14 @@ const schema = buildSchema(`
     getPet(id: ID!): Pet
     getEvents: [Event]
     getEvent(id: ID): Event
+    getSlots: [Slot]
     getSlot(id: ID): Slot
   }
 
   type Mutation {
     createPet(name: String!, age: Int!, pictureUri: String, ownerName: String): Pet!
     updatePet(id: ID!, name: String, age: Int, pictureUri: String, ownerName: String): Pet!
+    updateSlot(id: ID!, mainTitle: String!, duration: Int!, startDate: Date!, endDate: Date): Slot!
     deletePet(id: ID): ID!
     createEvent(date: Date!): Event!
     createSlot(mainTitle: String!, duration: Int, startDate: Date, endDate: Date): Slot!

@@ -17,6 +17,7 @@ type Mutation {
   createSlot(duration: Int, endDate: Date, mainTitle: String!, startDate: Date): Slot!
   deletePet(id: ID): ID!
   updatePet(age: Int, id: ID!, name: String, ownerName: String, pictureUri: String): Pet!
+  updateSlot(duration: Int!, endDate: Date, id: ID!, mainTitle: String!, startDate: Date!): Slot!
 }
 
 type Pet {
@@ -33,6 +34,7 @@ type Query {
   getPet(id: ID!): Pet
   getPets: [Pet]
   getSlot(id: ID): Slot
+  getSlots: [Slot]
 }
 
 type Slot {

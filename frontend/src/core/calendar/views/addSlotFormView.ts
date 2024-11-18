@@ -36,6 +36,8 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
     (slot) => slot.id === model.editId
   );
 
+  // console.info(model, "model");
+
   if (model.editMode && slot) {
     return h(
       "form",
@@ -48,13 +50,16 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
           const target = e.target as HTMLFormElement;
 
           dispatch(
-            await onSubmitMsg({
-              mainTitle: target?.mainTitle.value,
-              duration: target?.duration.value,
-              slotId: model.currentSlotId || null,
-              startDate: date,
-              endDate: date,
-            })
+            await onSubmitMsg(
+              {
+                mainTitle: target?.mainTitle.value,
+                duration: target?.duration.value,
+                slotId: model.currentSlotId || null,
+                startDate: date,
+                endDate: date,
+              },
+              model.eventId
+            )
           );
         },
       },
@@ -80,13 +85,16 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
         const target = e.target as HTMLFormElement;
 
         dispatch(
-          await onSubmitMsg({
-            mainTitle: target?.mainTitle.value,
-            duration: target?.duration.value,
-            slotId: model.currentSlotId || null,
-            startDate: date,
-            endDate: date,
-          })
+          await onSubmitMsg(
+            {
+              mainTitle: target?.mainTitle.value,
+              duration: target?.duration.value,
+              slotId: model.currentSlotId || null,
+              startDate: date,
+              endDate: date,
+            },
+            model.eventId
+          )
         );
       },
     },

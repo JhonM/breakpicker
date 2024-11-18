@@ -27,6 +27,17 @@ export type CreateSlotQueryMutationVariables = Exact<{
 
 export type CreateSlotQueryMutation = { __typename?: 'Mutation', createSlot: { __typename?: 'Slot', id?: string | null, mainTitle?: string | null, duration?: number | null, startDate?: any | null, endDate?: any | null } };
 
+export type UpdateSlotQueryMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  mainTitle: Scalars['String']['input'];
+  duration: Scalars['Int']['input'];
+  startDate: Scalars['Date']['input'];
+  endDate: Scalars['Date']['input'];
+}>;
+
+
+export type UpdateSlotQueryMutation = { __typename?: 'Mutation', updateSlot: { __typename?: 'Slot', id?: string | null, mainTitle?: string | null, duration?: number | null, startDate?: any | null, endDate?: any | null } };
+
 export type AllEventsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -73,6 +84,23 @@ export const CreateSlotQueryDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CreateSlotQueryMutation, CreateSlotQueryMutationVariables>;
+export const UpdateSlotQueryDocument = new TypedDocumentString(`
+    mutation UpdateSlotQuery($id: ID!, $mainTitle: String!, $duration: Int!, $startDate: Date!, $endDate: Date!) {
+  updateSlot(
+    id: $id
+    mainTitle: $mainTitle
+    duration: $duration
+    startDate: $startDate
+    endDate: $endDate
+  ) {
+    id
+    mainTitle
+    duration
+    startDate
+    endDate
+  }
+}
+    `) as unknown as TypedDocumentString<UpdateSlotQueryMutation, UpdateSlotQueryMutationVariables>;
 export const AllEventsQueryDocument = new TypedDocumentString(`
     query AllEventsQuery {
   getEvents {

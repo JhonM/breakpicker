@@ -1,4 +1,5 @@
 import { createSlotQuery } from "../../../api/createSlotQuery";
+import { updateSlotQuery } from "../../../api/updateSlotQuery";
 import {
   ActionType,
   CommandType,
@@ -8,7 +9,10 @@ import {
 } from "../../../types";
 import { commandManager } from "../../command/command-manager";
 
-export async function onSubmitMsg(submitData: SubmitData) {
+export async function onSubmitMsg(
+  submitData: SubmitData,
+  eventId?: string | null
+) {
   const variables = {
     mainTitle: submitData.mainTitle,
     duration: Number(submitData.duration),
@@ -17,7 +21,19 @@ export async function onSubmitMsg(submitData: SubmitData) {
   };
 
   try {
-    const { data } = await createSlotQuery(variables);
+    let data;
+
+    if (eventId) {
+      const response = await updateSlotQuery({
+        ...variables,
+        id: eventId,
+      });
+      data = response?.data;
+      console.info({ data }, "data");
+    } else {
+      const response = await createSlotQuery(variables);
+      data = response?.data;
+    }
 
     return {
       type: MSGS.ON_SUBMIT,

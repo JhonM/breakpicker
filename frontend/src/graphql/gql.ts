@@ -16,6 +16,7 @@ import * as types from './graphql';
  */
 const documents = {
     "\n  mutation CreateSlotQuery(\n    $mainTitle: String!\n    $duration: Int\n    $startDate: Date\n    $endDate: Date\n  ) {\n    createSlot(\n      mainTitle: $mainTitle\n      duration: $duration\n      startDate: $startDate\n      endDate: $endDate\n    ) {\n      id\n      mainTitle\n      duration\n      startDate\n      endDate\n    }\n  }\n": types.CreateSlotQueryDocument,
+    "\n  mutation UpdateSlotQuery(\n    $id: ID!\n    $mainTitle: String!\n    $duration: Int!\n    $startDate: Date!\n    $endDate: Date!\n  ) {\n    updateSlot(\n      id: $id\n      mainTitle: $mainTitle\n      duration: $duration\n      startDate: $startDate\n      endDate: $endDate\n    ) {\n      id\n      mainTitle\n      duration\n      startDate\n      endDate\n    }\n  }\n": types.UpdateSlotQueryDocument,
     "\n  query AllEventsQuery {\n    getEvents {\n      id\n      date\n    }\n  }\n": types.AllEventsQueryDocument,
     "\n  mutation PostEventQuery {\n    createEvent(date: \"2024-10-25T22:49:58.867Z\") {\n      date\n    }\n  }\n": types.PostEventQueryDocument,
     "\n  query GetEventQuery {\n    getEvent(id: \"489769e7-d52b-4ad1-867a-97d5e3128639\") {\n      id\n      date\n    }\n  }\n": types.GetEventQueryDocument,
@@ -25,6 +26,10 @@ const documents = {
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation CreateSlotQuery(\n    $mainTitle: String!\n    $duration: Int\n    $startDate: Date\n    $endDate: Date\n  ) {\n    createSlot(\n      mainTitle: $mainTitle\n      duration: $duration\n      startDate: $startDate\n      endDate: $endDate\n    ) {\n      id\n      mainTitle\n      duration\n      startDate\n      endDate\n    }\n  }\n"): typeof import('./graphql').CreateSlotQueryDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation UpdateSlotQuery(\n    $id: ID!\n    $mainTitle: String!\n    $duration: Int!\n    $startDate: Date!\n    $endDate: Date!\n  ) {\n    updateSlot(\n      id: $id\n      mainTitle: $mainTitle\n      duration: $duration\n      startDate: $startDate\n      endDate: $endDate\n    ) {\n      id\n      mainTitle\n      duration\n      startDate\n      endDate\n    }\n  }\n"): typeof import('./graphql').UpdateSlotQueryDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
