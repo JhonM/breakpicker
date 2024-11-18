@@ -4,16 +4,16 @@ import {
   getMonth,
   getYear,
 } from "../../helpers/dates";
-import { guid } from "../../helpers/random";
+// import { guid } from "../../helpers/random";
 import type { EventType, Model } from "../../types";
 
 const today = new Date();
 
-function addDaysToDate(date: Date, days: number) {
-  let new_date = new Date(date);
-  new_date.setDate(new_date.getDate() + days);
-  return new_date;
-}
+// function addDaysToDate(date: Date, days: number) {
+//   let new_date = new Date(date);
+//   new_date.setDate(new_date.getDate() + days);
+//   return new_date;
+// }
 
 const initModel: Model = {
   month: getMonth(today),
@@ -29,60 +29,60 @@ const initModel: Model = {
   eventId: null,
   currentSlotId: null,
   events: [
-    {
-      id: guid(),
-      date: addDaysToDate(today, 3),
-      slots: [
-        {
-          id: guid(),
-          mainTitle: "slot mainTitle",
-          duration: 4,
-          startDate: new Date(),
-          endDate: new Date(),
-        },
-        {
-          id: guid(),
-          mainTitle: "slot mainTitle two",
-          duration: 3,
-          startDate: new Date(),
-          endDate: new Date(),
-        },
-        {
-          id: guid(),
-          mainTitle: "slot mainTitle three",
-          duration: 1,
-          startDate: new Date(),
-          endDate: new Date(),
-        },
-      ],
-    },
-    {
-      id: guid(),
-      date: addDaysToDate(today, 7),
-      slots: [
-        {
-          id: guid(),
-          mainTitle: "slot two mainTitle",
-          duration: 4,
-          startDate: new Date(),
-          endDate: new Date(),
-        },
-        {
-          id: guid(),
-          mainTitle: "slot two mainTitle two",
-          duration: 3,
-          startDate: new Date(),
-          endDate: new Date(),
-        },
-        {
-          id: guid(),
-          mainTitle: "slot two mainTitle three",
-          duration: 1,
-          startDate: new Date(),
-          endDate: new Date(),
-        },
-      ],
-    },
+    // {
+    //   id: guid(),
+    //   date: addDaysToDate(today, 3),
+    //   slots: [
+    //     {
+    //       id: guid(),
+    //       mainTitle: "slot mainTitle",
+    //       duration: 4,
+    //       startDate: new Date(),
+    //       endDate: new Date(),
+    //     },
+    //     {
+    //       id: guid(),
+    //       mainTitle: "slot mainTitle two",
+    //       duration: 3,
+    //       startDate: new Date(),
+    //       endDate: new Date(),
+    //     },
+    //     {
+    //       id: guid(),
+    //       mainTitle: "slot mainTitle three",
+    //       duration: 1,
+    //       startDate: new Date(),
+    //       endDate: new Date(),
+    //     },
+    //   ],
+    // },
+    // {
+    //   id: guid(),
+    //   date: addDaysToDate(today, 7),
+    //   slots: [
+    //     {
+    //       id: guid(),
+    //       mainTitle: "slot two mainTitle",
+    //       duration: 4,
+    //       startDate: new Date(),
+    //       endDate: new Date(),
+    //     },
+    //     {
+    //       id: guid(),
+    //       mainTitle: "slot two mainTitle two",
+    //       duration: 3,
+    //       startDate: new Date(),
+    //       endDate: new Date(),
+    //     },
+    //     {
+    //       id: guid(),
+    //       mainTitle: "slot two mainTitle three",
+    //       duration: 1,
+    //       startDate: new Date(),
+    //       endDate: new Date(),
+    //     },
+    //   ],
+    // },
   ] as EventType[],
 };
 
