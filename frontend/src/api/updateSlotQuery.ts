@@ -25,6 +25,18 @@ export const UpdateSlotQuery = graphql(`
   }
 `);
 
+interface UpdateSlotResponse {
+  data: {
+    updateSlot: {
+      id: string;
+      mainTitle: string;
+      duration: number;
+      startDate: string;
+      endDate: string;
+    };
+  };
+}
+
 export const updateSlotQuery = async (variables: {
   id: string;
   mainTitle: string;
@@ -33,11 +45,12 @@ export const updateSlotQuery = async (variables: {
   endDate: Date;
 }) => {
   try {
-    const {
-      data: { updateSlot },
-    } = await fetchData(UpdateSlotQuery, variables);
-
-    return { data: updateSlot };
+    const response = await fetchData<UpdateSlotResponse>(
+      UpdateSlotQuery,
+      variables
+    );
+    console.info(response, "response update slot");
+    return { data: response.data.updateSlot };
   } catch (error) {
     console.error(error);
   }

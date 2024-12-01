@@ -1,3 +1,4 @@
+import { createEventQuery } from "../../../api/createEventQuery";
 import { createSlotQuery } from "../../../api/createSlotQuery";
 import { updateSlotQuery } from "../../../api/updateSlotQuery";
 import {
@@ -22,22 +23,26 @@ export async function onSubmitMsg(
 
   try {
     let data;
+    let id;
 
-    if (eventId) {
+    if (eventId && submitData.slotId) {
       const response = await updateSlotQuery({
         ...variables,
-        id: eventId,
+        id: submitData.slotId,
       });
       data = response?.data;
-      console.info({ data }, "data");
+      id = eventId;
     } else {
       const response = await createSlotQuery(variables);
+      const newEventId = await createEventQuery({ date: submitData.startDate });
+
+      id = newEventId?.data.id;
       data = response?.data;
     }
 
     return {
       type: MSGS.ON_SUBMIT,
-      submitData: { ...data },
+      submitData: { ...data, eventId: id },
     };
   } catch (error) {
     return {

@@ -1,5 +1,9 @@
 default: clean_frontend install_frontend
 
+start:
+	make dev_backend &
+	make dev_frontend
+
 build:
 	make build_frontend	
 

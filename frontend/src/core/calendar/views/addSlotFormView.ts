@@ -54,7 +54,7 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
               {
                 mainTitle: target?.mainTitle.value,
                 duration: target?.duration.value,
-                slotId: model.currentSlotId || null,
+                slotId: model.editId || null,
                 startDate: date,
                 endDate: date,
               },
@@ -89,7 +89,7 @@ export function addSlotFormView(dispatch: DispatchType, model: Model) {
             {
               mainTitle: target?.mainTitle.value,
               duration: target?.duration.value,
-              slotId: model.currentSlotId || null,
+              slotId: model.editId || null,
               startDate: date,
               endDate: date,
             },

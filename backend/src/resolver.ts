@@ -76,7 +76,6 @@ const updateSlot = (args: {
   if (args.startDate) slot.startDate = args.startDate;
   if (args.endDate) slot.endDate = args.endDate;
 
-  console.info(slot, "slot updated");
   return slot;
 };
 

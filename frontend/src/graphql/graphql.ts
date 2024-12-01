@@ -17,6 +17,13 @@ export type Scalars = {
   Date: { input: any; output: any; }
 };
 
+export type CreateEventQueryMutationVariables = Exact<{
+  date: Scalars['Date']['input'];
+}>;
+
+
+export type CreateEventQueryMutation = { __typename?: 'Mutation', createEvent: { __typename?: 'Event', id?: string | null, date?: any | null } };
+
 export type CreateSlotQueryMutationVariables = Exact<{
   mainTitle: Scalars['String']['input'];
   duration?: InputMaybe<Scalars['Int']['input']>;
@@ -68,6 +75,14 @@ export class TypedDocumentString<TResult, TVariables>
   }
 }
 
+export const CreateEventQueryDocument = new TypedDocumentString(`
+    mutation CreateEventQuery($date: Date!) {
+  createEvent(date: $date) {
+    id
+    date
+  }
+}
+    `) as unknown as TypedDocumentString<CreateEventQueryMutation, CreateEventQueryMutationVariables>;
 export const CreateSlotQueryDocument = new TypedDocumentString(`
     mutation CreateSlotQuery($mainTitle: String!, $duration: Int, $startDate: Date, $endDate: Date) {
   createSlot(

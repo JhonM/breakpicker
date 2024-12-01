@@ -56,11 +56,10 @@ export const addSlotCommand = (model: Model, msg: any) => {
       );
 
       const newEvent: EventType = {
-        id: guid(),
+        id: msg.submitData.eventId,
         date,
         slots: [
           {
-            id: guid(),
             ...msg.submitData,
           },
         ],
