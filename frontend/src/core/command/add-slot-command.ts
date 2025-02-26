@@ -74,7 +74,8 @@ export const addSlotCommand = (model: Model, msg: any) => {
 
       model.nextId = model.nextId + 1;
       model.showForm = false;
-      model.showToast = true;
+      // model.showToast = true;
+      model.showToast = msg.submitData.showToast;
       model.events = newModel.events;
     },
 

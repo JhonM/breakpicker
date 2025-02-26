@@ -30,7 +30,7 @@ export const editSlotCommand = (model: Model, msg: any) => {
       };
 
       model.showForm = false;
-      model.showToast = true;
+      model.showToast = msg.submitData.showToast;
       model.editMode = false;
       model.events = newModel.events;
     },

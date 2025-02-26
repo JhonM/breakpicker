@@ -24,30 +24,34 @@ export async function onSubmitMsg(
   try {
     let data;
     let id;
+    let type;
 
     if (eventId && submitData.slotId) {
       const response = await updateSlotQuery({
         ...variables,
         id: submitData.slotId,
       });
+
       data = response?.data;
       id = eventId;
+      type = MSGS.ON_EDIT_SUBMIT;
     } else {
       const response = await createSlotQuery(variables);
       const newEventId = await createEventQuery({ date: submitData.startDate });
 
       id = newEventId?.data.id;
       data = response?.data;
+      type = MSGS.ON_SUBMIT;
     }
 
     return {
-      type: MSGS.ON_SUBMIT,
-      submitData: { ...data, eventId: id },
+      type,
+      submitData: { ...data, eventId: id, showToast: true },
     };
   } catch (error) {
     return {
       type: MSGS.ON_SUBMIT_ERROR,
-      submitData: {},
+      submitData: { showToast: true },
     };
   }
 }
@@ -64,6 +68,8 @@ export const updateOnSubmit = ({
     ? ["EDIT_SLOT"]
     : ["ADD_SLOT"];
   const manager = commandManager({ model: newModel, msg });
+
+  console.info("hit before execute");
 
   commands.forEach((command) => manager.doCommand(command));
 
